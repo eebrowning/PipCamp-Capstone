@@ -1,5 +1,0 @@
-CREATE USER pipcamp
-WITH CREATEDB PASSWORD 'password';
-
-CREATE DATABASE pipcamp_dev
-WITH OWNER pipcamp;
