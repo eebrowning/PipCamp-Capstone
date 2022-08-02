@@ -9,6 +9,7 @@ import UsersList from './components/UsersList';
 import User from './components/User';
 import { authenticate } from './store/session';
 import LocationForm from './components/locations/LocationForm';
+import Locations from './components/locations/Locations'
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -45,7 +46,7 @@ function App() {
           <User />
         </ProtectedRoute>
         <Route path='/' exact={true} >
-          <h1>PipCamp Home</h1>
+          <Locations />
         </Route>
       </Switch>
     </BrowserRouter>

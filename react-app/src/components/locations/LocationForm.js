@@ -12,6 +12,7 @@ function LocationForm() {
     const [name, setName] = useState('')
     const [image_1_url, setImage_1_url] = useState('')
     const [image_2_url, setImage_2_url] = useState('')
+    const [description, setDescription] = useState('')
     // const [campsite_info, setCampsite_info] = useState('')
     // const [essential_info, setEssential_info] = useState('')
     // const [amenities_info, setAmenities_info] = useState('')
@@ -58,12 +59,13 @@ function LocationForm() {
             name,
             image_1_url,
             image_2_url,
+            description,
             campsite_info: camp_info_string,
             essential_info: essential_info_string,
             amenities_info: amenities_info_string,
             details_info: details_info_string
         }
-        console.log('>> Submitted location information:', location)
+        console.log('>> Submitted location information:', location);
         const newLocation = await dispatch(CreateLocationThunk(location))
         if (!newLocation) {
             history.push('/')
@@ -79,9 +81,10 @@ function LocationForm() {
                 {errors.length > 0 && errors.map(error =>
                     <div key={error} className="location-error">{error}</div>
                 )}
-                <input type='text' className='location-field' name='name' placeholder='Location Name' onChange={e => setName(e.target.value)}></input>
-                <input type='text' className='location-field' name='image_1_url' placeholder='Main Image' onChange={e => setImage_1_url(e.target.value)}></input>
-                <input type='text' className='location-field' name='image_2_url' placeholder='Secondary Image(optional)' onChange={e => setImage_2_url(e.target.value)}></input>
+                <input type='text' name='name' placeholder='Location Name' onChange={e => setName(e.target.value)}></input>
+                <input type='text' name='image_1_url' placeholder='Main Image' onChange={e => setImage_1_url(e.target.value)}></input>
+                <input type='text' name='image_2_url' placeholder='Secondary Image(optional)' onChange={e => setImage_2_url(e.target.value)}></input>
+                <textarea placeholder='Location Description' onChange={e => setDescription(e.target.value)}></textarea>
                 {/* fill this with sub-forms */}
 
                 <label>

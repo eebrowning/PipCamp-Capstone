@@ -27,6 +27,7 @@ def newLocationForm():
             name = form.data['name'],
             image_1_url = form.data['image_1_url'],
             image_2_url = form.data['image_2_url'],
+            description= form.data['description'],
             campsite_info = form.data['campsite_info'],
             essential_info = form.data['essential_info'],
             amenities_info = form.data['amenities_info'],

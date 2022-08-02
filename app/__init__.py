@@ -74,3 +74,19 @@ def react_root(path):
     if path == 'favicon.ico':
         return app.send_static_file('favicon.ico')
     return app.send_static_file('index.html')
+
+@app.route('/all/locations')
+def getAllLocations():
+    locations= Location.query.all()
+    locationsObj= [{
+        'id': location.id,
+        'name': location.name,
+        'image_1_url':location.image_1_url,
+        'image_2_url':location.image_2_url,
+        'description':location.description,
+        'campsite_info': location.campsite_info,
+        'essential_info':location.essential_info,
+        'amenities_info': location.amenities_info,
+        'details_info': location.details_info
+    }for location in locations]
+    return {'locations':locationsObj}
