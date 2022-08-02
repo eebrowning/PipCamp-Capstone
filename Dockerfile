@@ -3,7 +3,7 @@
 # Set the following enviroment variables
 #
 
-ENV REACT_APP_BASE_URL=#herokuUrl#
+ENV REACT_APP_BASE_URL=ENV REACT_APP_BASE_URL=https://pip-camp.herokuapp.com/
 ENV FLASK_APP=app
 ENV FLASK_ENV=production
 ENV SQLALCHEMY_ECHO=True
