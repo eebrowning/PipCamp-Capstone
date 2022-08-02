@@ -7,6 +7,7 @@ def seed_locations():
     name='Joe\'s', 
     image_1_url = 'nothing',
     image_2_url = 'nothing',
+    description= 'heres a description',
     campsite_info = 'campsite',
     essential_info = 'essential',
     amenities_info = 'amenities',

@@ -9,6 +9,7 @@ class Location(db.Model):
     name = db.Column(db.String, nullable=False)
     image_1_url = db.Column(db.String, nullable=False)
     image_2_url = db.Column(db.String)
+    description= db.Column(db.String)
     campsite_info = db.Column(db.String, nullable=False)
     essential_info = db.Column(db.String, nullable=False)
     amenities_info = db.Column(db.String, nullable=False)
@@ -28,6 +29,7 @@ class Location(db.Model):
             'name': self.name,
             'image_1_url': self.image_1_url,
             'image_2_url': self.image_2_url,
+            'description': self.description,
             'campsite_info': self.campsite_info,
             'essential_info': self.essential_info,
             'amenities_info': self.amenities_info,

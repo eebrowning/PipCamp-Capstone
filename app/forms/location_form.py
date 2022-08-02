@@ -1,7 +1,8 @@
 
+from typing import Text
 from flask_wtf import FlaskForm
 from sqlalchemy import Integer
-from wtforms import StringField, IntegerField, SubmitField, TimeField, SelectField
+from wtforms import StringField, IntegerField, SubmitField, TimeField, SelectField, TextAreaField
 from wtforms.validators import DataRequired, Regexp, ValidationError
 
 # EXAMPLE VALIDATION
@@ -41,9 +42,9 @@ DETAILS_ARRIVAL=['Meet and greet', 'Make yourself at home']
 class NewLocationForm(FlaskForm):
     user_id = IntegerField('userId')
     name = StringField('Name', validators=[DataRequired(message="Please provide name of the restaurant.")])
-    image_1_url = StringField('Main image', validators=[DataRequired(message="Please an image link.")])
+    image_1_url = StringField('Main image', validators=[DataRequired(message="Please provide an image link.")])
     image_2_url = StringField('Secondary image')
-    
+    description= TextAreaField('Description', validators=[DataRequired(message="Please provide a description.")])
     campsite_info = StringField('Campsite info', validators=[DataRequired(message="Please provide complete Campsite info form.")])
     essential_info = StringField('Essential info', validators=[DataRequired(message="Please provide complete Essential info form.")])
     amenities_info = StringField('Campsite info', validators=[DataRequired(message="Please provide complete Amenities info form.")])
