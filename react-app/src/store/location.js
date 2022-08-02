@@ -56,7 +56,8 @@ export const GetLocationDetailThunk = (id) => async (dispatch) => {
 
 }
 export const CreateLocationThunk = (location) => async (dispatch) => {
-    const response = await fetch(`/api/locations/newLocation`, {
+    console.log('>>> entered Create Location Thunk <<<')
+    const response = await fetch(`/api/locations/new_location`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(location)
@@ -71,7 +72,6 @@ export const CreateLocationThunk = (location) => async (dispatch) => {
             return data.errors;
         }
     }
-
 }
 export const EditLocationThunk = (location) => async (dispatch) => {
     const response = await fetch(`/api/locations/${location.id}/edit`, {

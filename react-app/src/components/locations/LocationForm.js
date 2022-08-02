@@ -15,7 +15,7 @@ function LocationForm() {
     // const [campsite_info, setCampsite_info] = useState('')
     // const [essential_info, setEssential_info] = useState('')
     // const [amenities_info, setAmenities_info] = useState('')
-    const [details_info, setDetails_info] = useState('')
+    // const [details_info, setDetails_info] = useState('')
     const [errors, setErrors] = useState([])
 
     //Camp info form
@@ -63,7 +63,7 @@ function LocationForm() {
             amenities_info: amenities_info_string,
             details_info: details_info_string
         }
-        console.log('xxxxxx', camp_info_string, essential_info_string, amenities_info_string, details_info_string)
+        console.log('>> Submitted location information:', location)
         const newLocation = await dispatch(CreateLocationThunk(location))
         if (!newLocation) {
             history.push('/')
