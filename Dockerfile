@@ -1,5 +1,5 @@
 # Start with the python:3.9 image
-
+FROM python:3.9
 # Set the following enviroment variables
 #
 
