@@ -12,7 +12,7 @@ class Review(db.Model):
     recommends = db.Column(db.Boolean, nullable=False)
 
     user = db.relationship('User', back_populates='reviews')
-    restaurant = db.relationship('Location', back_populates='reviews')
+    location = db.relationship('Location', back_populates='reviews')
 
     def to_dict(self):
         return {

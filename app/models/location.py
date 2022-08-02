@@ -17,10 +17,10 @@ class Location(db.Model):
     users = db.relationship('User', back_populates='locations')
     reviews = db.relationship(
         'Review', back_populates='location', cascade='all, delete')
-    bookings = db.relationship(
-        'Booking', back_populates='location', cascade='all, delete')
+    # bookings = db.relationship( #worry about this later, get your pass first.
+    #     'Booking', back_populates='location', cascade='all, delete')
 
-    # Class method that converts Class Obj to JSON-able dictionary
+
     def to_dict(self):
         return {
             'id': self.id,
