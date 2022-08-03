@@ -164,9 +164,9 @@ function LocationForm() {
                             <option key={option} value={option}>{option}</option>
                         ))}
                     </select>
-                    <input type='number' min='14' max='20' placeholder='Check in time' onChange={e => setCheckin(e.target.value)}></input>
-                    <input placeholder='Check out time' type='number' min='8' max='12' onChange={e => setCheckout(e.target.value)}></input>
-                    <input placeholder='Miniumum Nights' type='number' min='1' onChange={e => setMinNights(e.target.value)}></input>
+                    <input type='text' placeholder='Check in time' onChange={e => setCheckin(`After ${e.target.value}`)}></input>
+                    <input placeholder='Check out time' type='text' onChange={e => setCheckout(`Before ${e.target.value}`)}></input>
+                    <input placeholder='Miniumum Nights' type='number' onChange={e => setMinNights(e.target.value)}></input>
 
                 </label>
 

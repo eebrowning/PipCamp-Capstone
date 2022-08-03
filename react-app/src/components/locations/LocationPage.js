@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, Redirect, useHistory, useParams } from 'react-router-dom';
 import { DeleteLocationThunk, EditLocationThunk, GetLocationDetailThunk, GetLocationsThunk } from '../../store/location';
-import './locations-home.css'
+import './location-page.css'
 
 function LocationPage() {
     const dispatch = useDispatch()
@@ -11,12 +11,16 @@ function LocationPage() {
     const userId = useSelector(state => state.session.user?.id)
     const location = locations?.find(location => location.id == +locationId)
     const campsite = location?.campsite_info.split('-')
+    const campsite_labels = ['Shelter Type', "Available Sites", 'Max Guests', 'Max Vehicles', 'Disabled Accessible']
     const essential = location?.essential_info.split('-')
+    const essential_labels = ["Fires Allowed", 'Bathrooms Available', "Pets Allowed"]
     const amenities = location?.amenities_info.split('-')
+    const amenities_labels = ["Tables Available", 'Wifi Available', "Bins Available", "Kitchen Available", 'Water Available', 'Showers Available']
     const details = location?.details_info.split('-')
+    const details_labels = ['On Arrival', 'Check In', 'Check Out', 'Minimum Nights']
     const history = useHistory()
 
-    console.log(location?.user_id, userId, 'pages creator and visiting user')
+    // console.log(location?.user_id, userId, 'pages creator and visiting user')
 
     useEffect(() => {
         dispatch(GetLocationDetailThunk(locationId))
@@ -54,33 +58,42 @@ function LocationPage() {
             <span id='campsite'>
                 <h2>Campsite Area</h2>
                 {campsite.map((item, ind) => (
-                    <div key={ind}>{item}</div>
-
+                    <div key={ind} id='info-attribute'>
+                        <div>{campsite_labels[ind]}:</div>
+                        <div >{item}</div>
+                    </div>
                 ))}
             </span>
             <span id='essentials'>
                 <h2>Essentials</h2>
 
                 {essential.map((item, ind) => (
-                    <div key={ind}>{item}</div>
-
+                    <div key={ind} id='info-attribute'>
+                        <div>{essential_labels[ind]}:</div>
+                        <div >{item}</div>
+                    </div>
                 ))}
             </span>
             <span id='amenities'>
-                <h2>amenities</h2>
+                <h2>Amenities</h2>
 
                 {amenities.map((item, ind) => (
-                    <div key={ind}>{item}</div>
-
+                    <div key={ind} id='info-attribute'>
+                        <div>{amenities_labels[ind]}:</div>
+                        <div >{item}</div>
+                    </div>
                 ))}
             </span>
-            <span id='location-details'>
+            <span id='location-details-outer'>
                 <h2>Details</h2>
-
-                {details.map((item, ind) => (
-                    <div key={ind}>{item}</div>
-
-                ))}
+                <div id='location-details'>
+                    {details.map((item, ind) => (
+                        <div key={ind} id='info-attribute'>
+                            <div>{details_labels[ind]}:</div>
+                            <div >{item}</div>
+                        </div>
+                    ))}
+                </div>
             </span>
 
         </div>
