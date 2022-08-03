@@ -7,11 +7,11 @@ def seed_locations():
     name='Joe\'s', 
     image_1_url = 'nothing',
     image_2_url = 'nothing',
-    description= 'heres a description',
-    campsite_info = 'campsite',
-    essential_info = 'essential',
-    amenities_info = 'amenities',
-    details_info = 'details'
+    campsite_info = 'Tent-1-2-3-true',
+    essential_info = 'false-true-false',
+    amenities_info = 'true-false-true-false-true-false',
+    details_info = 'Make yourself at home-14-8-1',
+    description= "new joe\'s who dis?"
     )
     db.session.add(demo)
     db.session.commit()
