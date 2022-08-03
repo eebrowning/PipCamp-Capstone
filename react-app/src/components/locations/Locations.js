@@ -14,16 +14,16 @@ function Locations() {
     }, [dispatch])
 
 
-    return (<h1>
+    return (<div>
         {locations && locations.map(location => (
             <div key={location.id}>
-                <div>{location.name}</div>
+                <h1>{location.name}</h1>
                 <div>{location.description}</div>
             </div>
         )
 
         )}
 
-    </h1>)
+    </div>)
 }
 export default Locations

@@ -53,9 +53,10 @@ function App() {
         <Route path='/locations/:locationId' exact={true} >
           <LocationPage />
         </Route>
-        <Route path='/locations/:locationId/edit'>
+        <ProtectedRoute path='/locations/:locationId/edit'>
           <EditLocationForm />
-        </Route>
+        </ProtectedRoute>
+        <Route><h1>404 Page Not Found</h1></Route>
       </Switch>
     </BrowserRouter>
   );

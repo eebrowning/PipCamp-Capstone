@@ -80,6 +80,7 @@ def getAllLocations():
     locations= Location.query.all()
     locationsObj= [{
         'id': location.id,
+        'user_id':location.user_id,
         'name': location.name,
         'image_1_url':location.image_1_url,
         'image_2_url':location.image_2_url,
