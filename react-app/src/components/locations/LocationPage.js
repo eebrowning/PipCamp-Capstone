@@ -8,13 +8,15 @@ function LocationPage() {
     const dispatch = useDispatch()
     const locations = useSelector(state => Object.values(state.locations))
     const { locationId } = useParams()
-    const userId = useSelector(state => state.user?.id)
-    const location = locations.find(location => location.id == +locationId)
+    const userId = useSelector(state => state.session.user?.id)
+    const location = locations?.find(location => location.id == +locationId)
     const campsite = location?.campsite_info.split('-')
     const essential = location?.essential_info.split('-')
     const amenities = location?.amenities_info.split('-')
     const details = location?.details_info.split('-')
     const history = useHistory()
+
+    console.log(location?.user_id, userId, 'pages creator and visiting user')
 
     useEffect(() => {
         dispatch(GetLocationDetailThunk(locationId))
@@ -36,7 +38,7 @@ function LocationPage() {
     }
 
     if (location) return (<span>
-        {userId === location.user_id && (
+        {+userId === +location.user_id && (
             <div id='user-owned-buttons'>
                 <button id='edit-location' onClick={handleEdit}>Edit</button>
                 <button id='delete-location' onClick={handleDelete}>Delete</button>
@@ -47,33 +49,37 @@ function LocationPage() {
 
 
         <div id='location-information'>
-            <div>{location.name}</div>
+            <h1>{location.name}</h1>
             <div>{location.description}</div>
             <span id='campsite'>
                 <h2>Campsite Area</h2>
-                {campsite.map(item => (
-                    <div>item</div>
+                {campsite.map((item, ind) => (
+                    <div key={ind}>{item}</div>
+
                 ))}
             </span>
             <span id='essentials'>
                 <h2>Essentials</h2>
 
-                {essential.map(item => (
-                    <div>item</div>
+                {essential.map((item, ind) => (
+                    <div key={ind}>{item}</div>
+
                 ))}
             </span>
             <span id='amenities'>
                 <h2>amenities</h2>
 
-                {amenities.map(item => (
-                    <div>item</div>
+                {amenities.map((item, ind) => (
+                    <div key={ind}>{item}</div>
+
                 ))}
             </span>
             <span id='location-details'>
                 <h2>Details</h2>
 
-                {details.map(item => (
-                    <div>item</div>
+                {details.map((item, ind) => (
+                    <div key={ind}>{item}</div>
+
                 ))}
             </span>
 

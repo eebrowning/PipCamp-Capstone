@@ -77,7 +77,7 @@ export const CreateLocationThunk = (location) => async (dispatch) => {
     }
 }
 
-//need to test
+//Works!
 export const EditLocationThunk = (location) => async (dispatch) => {
     const response = await fetch(`/api/locations/${location.id}/edit`, {
         method: "PUT",
