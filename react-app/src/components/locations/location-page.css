@@ -1,0 +1,56 @@
+label {
+    width: 100px;
+}
+
+#campsite,
+#essentials,
+#amenities {
+    width: 20rem;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid lightgray;
+}
+
+
+#location-details-outer {
+    display: flex;
+    flex-direction: row;
+    width: 30rem;
+    height: 5rem;
+    border-top: 1px solid lightgray;
+    margin-top: 15px;
+    border-bottom: 1px solid lightgray;
+
+}
+
+
+#location-details {
+
+    width: 100%;
+    height: 5rem;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: row;
+    flex-wrap: wrap;
+    /* padding: 15px; */
+    margin: 0;
+    padding: 0;
+}
+
+#location-details>div {
+    height: 0;
+}
+
+#info-attribute {
+    margin: 0;
+    padding: 0;
+    width: 75%;
+    display: flex;
+    justify-content: space-between;
+
+}
+
+#info-attribute>div {
+    margin: 0;
+    padding: 0;
+}
