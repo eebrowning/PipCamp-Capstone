@@ -10,6 +10,8 @@ import User from './components/User';
 import { authenticate } from './store/session';
 import LocationForm from './components/locations/LocationForm';
 import Locations from './components/locations/Locations'
+import LocationPage from './components/locations/LocationPage';
+import EditLocationForm from './components/locations/EditLocationForm';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -47,6 +49,12 @@ function App() {
         </ProtectedRoute>
         <Route path='/' exact={true} >
           <Locations />
+        </Route>
+        <Route path='/locations/:locationId' exact={true} >
+          <LocationPage />
+        </Route>
+        <Route path='/locations/:locationId/edit'>
+          <EditLocationForm />
         </Route>
       </Switch>
     </BrowserRouter>
