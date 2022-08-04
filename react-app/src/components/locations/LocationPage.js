@@ -7,6 +7,7 @@ import './location-page.css'
 function LocationPage() {
     const dispatch = useDispatch()
     const locations = useSelector(state => Object.values(state.locations))
+
     const { locationId } = useParams()
     const userId = useSelector(state => state.session.user?.id)
     const location = locations?.find(location => location.id == +locationId)
@@ -23,8 +24,9 @@ function LocationPage() {
     // console.log(location?.user_id, userId, 'pages creator and visiting user')
 
     useEffect(() => {
+        console.log('dispatched to GetLocationDetailThunk')
         dispatch(GetLocationDetailThunk(locationId))
-        dispatch(GetLocationsThunk())
+        // dispatch(GetLocationsThunk())
     }, [dispatch])
 
     function handleDelete(e) {
@@ -37,6 +39,7 @@ function LocationPage() {
 
     function handleEdit(e) {
         e.preventDefault()
+        dispatch(GetLocationDetailThunk(locationId))
 
         history.push(`/locations/${locationId}/edit`)
     }
@@ -97,7 +100,7 @@ function LocationPage() {
             </span>
 
         </div>
-
+        {/* reviews component will render here */}
     </span>)
     else return (<h1>404 Not Found...</h1>)
 }

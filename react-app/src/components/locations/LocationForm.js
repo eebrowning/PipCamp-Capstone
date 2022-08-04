@@ -73,6 +73,9 @@ function LocationForm() {
             setErrors(newLocation)
         }
     }
+
+
+
     return (
         <div id='location-form-container'>
             <h2 id='location-form-title'>Add a Location</h2>

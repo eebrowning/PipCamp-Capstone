@@ -15,6 +15,12 @@ def validation_to_error_messages(validation_errors):
     return errorMessages
 
 
+@locations_routes.route('/<locationId>')
+def singleRestaurant(locationId):
+    location= Location.query.get(locationId)
+    return location.to_dict()
+
+
 @locations_routes.route('/new_location', methods=['GET','POST'])
 # @login_required
 def newLocationForm():
@@ -65,10 +71,6 @@ def editRestaurant(locationId):
     db.session.commit()
 
     return location.to_dict()
-
-
-
-
 
 #Delete a location
 @locations_routes.route('/<locationId>/delete', methods=['DELETE'])
