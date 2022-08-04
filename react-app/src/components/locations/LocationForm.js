@@ -101,7 +101,6 @@ function LocationForm() {
         //Details errors: arrival, checkin, checkout, minNights
         arr = []
         if (!arrival) { arr.push("Select Arrival.") };
-        if (checkin >= checkout) { arr.push('Check-Out must be before Check-In') }
         if (!checkin) { arr.push("Enter Earliest Check-In.") };
         if (!checkout) { arr.push('Enter Latest Check-Out.'); };
         if (!minNights) { arr.push('Select Minimum Nights.'); };

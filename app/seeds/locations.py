@@ -10,7 +10,7 @@ def seed_locations():
     campsite_info = 'Tent-1-2-3-true',
     essential_info = 'false-true-false',
     amenities_info = 'true-false-true-false-true-false',
-    details_info = 'Make yourself at home-14-8-1',
+    details_info = 'Make yourself at home-After 1PM-Before 12PM-1',
     description= "new joe\'s who dis?"
     )
     db.session.add(demo)
