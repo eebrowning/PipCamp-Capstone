@@ -17,7 +17,7 @@ function LocationForm() {
     // const [essential_info, setEssential_info] = useState('')
     // const [amenities_info, setAmenities_info] = useState('')
     // const [details_info, setDetails_info] = useState('')
-    const [errors, setErrors] = useState([])
+    const [errorsMain, setErrorsMain] = useState([])
 
     //Camp info form
     const shelters = ['Tent', "Recreational Vehicle", 'Lodge']
@@ -27,6 +27,8 @@ function LocationForm() {
     const [vehicles, setVehicles] = useState('')
     const [accessible, setAccessible] = useState('')
     const camp_info_string = `${shelter}-${sites}-${guests}-${vehicles}-${accessible}`
+    const [errorsCamp, setErrorsCamp] = useState([])
+
 
     //Essentials info form
     const [fires, setFires] = useState()
@@ -51,20 +53,47 @@ function LocationForm() {
     const [minNights, setMinNights] = useState()
     const details_info_string = `${arrival}-${checkin}-${checkout}-${minNights}`
 
-    useEffect(() => {
-        const arr = []
+
+    const validateForm = () => {
+        // errorsMain: Name, Image, Description
+        let arr = []
         if (!name) {
             arr.push("Please enter a name.");
         };
-        if (sites < 1) {
-            arr.push('Please provide number of available sites.');
+        if (!image_1_url) {
+            arr.push("Please enter an image URL.");
         };
-        setErrors(arr);
-    }, [shelter, sites, guests, vehicles, accessible]);
+        if (!image_2_url) {
+            //enter a default second image here, as second is optional
+        };
+        if (description.length < 10) {
+            arr.push('Please provide a description over 10 characters.');
+        };
+        setErrorsMain(arr);
+        // errorsCamp: shelter, sites, guests, vehicles, accessible
+        arr = []
+        if (!shelter) {
+            arr.push("Please Select Shelter Type.");
+        };
+        if (!sites) {
+            arr.push("Please Enter Number of Sites.");
+        };
+        if (!vehicles) {
+            arr.push('Please Enter Max Vehicles.');
+        };
+        if (!accessible) {
+            arr.push('Please Select Accessiblility.');
+        };
+        setErrorsCamp(arr)
+
+    }
 
 
     async function onSubmit(e) {
         e.preventDefault();
+
+        validateForm()
+
         const location = {
             user_id: userId,
             name,
@@ -81,10 +110,19 @@ function LocationForm() {
         if (!newLocation) {
             // history.push('/')
         } else {
-            setErrors(newLocation)
+            setErrorsMain(newLocation)
         }
     }
-
+    // useEffect(() => {
+    //     const arr = []
+    //     if (!name) {
+    //         arr.push("Please enter a name.");
+    //     };
+    //     if (sites < 1) {
+    //         arr.push('Please provide number of available sites.');
+    //     };
+    //     setErrors(arr);
+    // }, [setName]);
 
 
     return (
@@ -92,7 +130,7 @@ function LocationForm() {
             <h2 id='location-form-title'>Add a Location</h2>
 
             <form id='location-form' onSubmit={onSubmit}>
-                {errors.length > 0 && errors.map(error =>
+                {errorsMain.length > 0 && errorsMain.map(error =>
                     <div key={error} className="location-error">{error}</div>
                 )}
                 <input type='text' name='name' placeholder='Location Name' onChange={e => setName(e.target.value)}></input>
@@ -103,6 +141,9 @@ function LocationForm() {
 
                 <label>
                     Campsite Information
+                    {errorsCamp.length > 0 && errorsCamp.map(error =>
+                        <div key={error} className="location-error">{error}</div>
+                    )}
                     <select id='camp-shelter' onChange={e => setShelter(e.target.value)}>
                         <option value=''>--Select Shelter--</option>
                         {shelters.map(shelter => (

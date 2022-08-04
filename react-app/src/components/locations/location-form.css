@@ -2,3 +2,8 @@
     display: flex;
     flex-direction: column;
 }
+
+.location-error {
+    color: red;
+    width: 200px;
+}
