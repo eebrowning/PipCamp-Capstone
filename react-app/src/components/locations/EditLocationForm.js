@@ -116,7 +116,7 @@ export function EditLocationForm() {
         }
     })
 
-    useEffect(() => {
+    useEffect(() => { //frontend error messages
         const arr = []
         if (!shelter) {
             arr.push("Please select a shelter type.");
@@ -128,7 +128,7 @@ export function EditLocationForm() {
     }, [shelter, sites, guests, vehicles, accessible]);
 
 
-    if (location) return (
+    if (location && name) return (
         <div id='location-form-container'>
             <h2 id='location-form-title'>Edit {location.name}:</h2>
 
@@ -136,10 +136,10 @@ export function EditLocationForm() {
                 {errors.length > 0 && errors.map(error =>
                     <div key={error} className="location-error">{error}</div>
                 )}
-                <input type='text' name='name' value={name} placeholder='Location Name' onChange={e => setName(e.target.value)}></input>
-                <input type='text' name='image_1_url' value={image_1_url} placeholder='Main Image' onChange={e => setImage_1_url(e.target.value)}></input>
-                <input type='text' name='image_2_url' value={image_2_url} placeholder='Secondary Image(optional)' onChange={e => setImage_2_url(e.target.value)}></input>
-                <textarea placeholder='Location Description' value={description} onChange={e => setDescription(e.target.value)} />
+                <input type='text' onClick={e => e.target.select()} name='name' value={name} placeholder='Location Name' onChange={e => setName(e.target.value)}></input>
+                <input type='text' onClick={e => e.target.select()} name='image_1_url' value={image_1_url} placeholder='Main Image' onChange={e => setImage_1_url(e.target.value)}></input>
+                <input type='text' onClick={e => e.target.select()} name='image_2_url' value={image_2_url} placeholder='Secondary Image(optional)' onChange={e => setImage_2_url(e.target.value)}></input>
+                <textarea onClick={e => e.target.select()} placeholder='Location Description' value={description} onChange={e => setDescription(e.target.value)} />
                 {/* fill this with sub-forms */}
 
                 <label>
@@ -220,7 +220,7 @@ export function EditLocationForm() {
                     </select>
                     <input defaultValue={checkin} type='number' min='14' max='20' placeholder='Check in time' onChange={e => setCheckin(e.target.value)}></input>
                     <input defaultValue={checkout} placeholder='Check out time' type='number' min='8' max='12' onChange={e => setCheckout(e.target.value)}></input>
-                    <input defaultValue={minNights} placeholder='Miniumum Nights' type='number' min='1' value={minNights} onChange={e => setMinNights(e.target.value)}></input>
+                    <input defaultValue={minNights} placeholder='Miniumum Nights' type='number' min='1' onChange={e => setMinNights(e.target.value)}></input>
 
                 </label>
 
