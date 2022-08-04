@@ -10,12 +10,12 @@ export function EditLocationForm() {
 
     useEffect(() => {
         dispatch(GetLocationDetailThunk(locationId))
-    }, [dispatch])
+    }, [])
 
     const history = useHistory()
     const userId = useSelector(state => state.session.user?.id)
     const location = useSelector(state => state.locations[locationId])
-
+    if (!location) GetLocationDetailThunk(locationId)
     const [name, setName] = useState(location?.name)
     const [image_1_url, setImage_1_url] = useState(location?.image_1_url)
     const [image_2_url, setImage_2_url] = useState(location?.image_2_url)
@@ -30,37 +30,37 @@ export function EditLocationForm() {
     const shelters = ['Tent', "Recreational Vehicle", 'Lodge']
     const camp_array = location?.campsite_info.split('-')
     const [shelter, setShelter] = useState(camp_array ? camp_array[0] : '')
-    const [sites, setSites] = useState(camp_array ? camp_array[0] : '')
-    const [guests, setGuests] = useState(camp_array ? camp_array[0] : '')
-    const [vehicles, setVehicles] = useState(camp_array ? camp_array[0] : '')
-    const [accessible, setAccessible] = useState(camp_array ? camp_array[0] : '')
+    const [sites, setSites] = useState(camp_array ? camp_array[1] : '')
+    const [guests, setGuests] = useState(camp_array ? camp_array[2] : '')
+    const [vehicles, setVehicles] = useState(camp_array ? camp_array[3] : '')
+    const [accessible, setAccessible] = useState(camp_array ? camp_array[4] : '')
     const camp_info_string = `${shelter}-${sites}-${guests}-${vehicles}-${accessible}`
     // console.log(camp_array, 'checkout the camp array')
 
     //Essentials info form
     const essential_array = location?.essential_info.split('-')
-    const [fires, setFires] = useState(camp_array ? camp_array[0] : '')
-    const [bathrooms, setBathrooms] = useState(camp_array ? camp_array[0] : '')
-    const [pets, setPets] = useState(camp_array ? camp_array[0] : '')
+    const [fires, setFires] = useState(essential_array ? essential_array[0] : '')
+    const [bathrooms, setBathrooms] = useState(essential_array ? essential_array[1] : '')
+    const [pets, setPets] = useState(essential_array ? essential_array[2] : '')
     const essential_info_string = `${fires}-${bathrooms}-${pets}`
 
     //Amenities info form
     const amenities_array = location?.amenities_info.split('-')
-    const [tables, setTables] = useState(camp_array ? camp_array[0] : '')
-    const [wifi, setWifi] = useState(camp_array ? camp_array[0] : '')
-    const [bins, setBins] = useState(camp_array ? camp_array[0] : '')
-    const [water, setWater] = useState(camp_array ? camp_array[0] : '')
-    const [kitchen, setKitchen] = useState(camp_array ? camp_array[0] : '')
-    const [showers, setShowers] = useState(camp_array ? camp_array[0] : '')
+    const [tables, setTables] = useState(amenities_array ? amenities_array[0] : '')
+    const [wifi, setWifi] = useState(amenities_array ? amenities_array[1] : '')
+    const [bins, setBins] = useState(amenities_array ? amenities_array[2] : '')
+    const [water, setWater] = useState(amenities_array ? amenities_array[3] : '')
+    const [kitchen, setKitchen] = useState(amenities_array ? amenities_array[4] : '')
+    const [showers, setShowers] = useState(amenities_array ? amenities_array[5] : '')
     const amenities_info_string = `${tables}-${wifi}-${bins}-${water}-${kitchen}-${showers}`
 
     //Details info form
     const arrivalOptions = ['Meet and greet', 'Make yourself at home']
     const details_array = location?.details_info.split('-')
-    const [arrival, setArrival] = useState(camp_array ? camp_array[0] : '')
-    const [checkin, setCheckin] = useState(camp_array ? camp_array[0] : '')
-    const [checkout, setCheckout] = useState(camp_array ? camp_array[0] : '')
-    const [minNights, setMinNights] = useState(camp_array ? camp_array[0] : '')
+    const [arrival, setArrival] = useState(details_array ? details_array[0] : '')
+    const [checkin, setCheckin] = useState(details_array ? details_array[1] : '')
+    const [checkout, setCheckout] = useState(details_array ? details_array[2] : '')
+    const [minNights, setMinNights] = useState(details_array ? details_array[3] : '')
     const details_info_string = `${arrival}-${checkin}-${checkout}-${minNights}`
 
 
