@@ -1,51 +1,47 @@
 
 from typing import Text
 from flask_wtf import FlaskForm
+from jinja2 import Undefined
 from sqlalchemy import Integer
 from wtforms import StringField, IntegerField, SubmitField, TimeField, SelectField, TextAreaField
 from wtforms.validators import DataRequired, Regexp, ValidationError
 
 # EXAMPLE VALIDATION
-# def validate_close(form, open_hours):
-#     # print('form data >>>>>>', form.data['open_hours'])
-#     if form.data['open_hours']==form.data['close_hours']:
-#         raise ValidationError('Open must be before close')
+def validate_description(form, d):
+    if not form.data['description'] or len(form.data['description']) <10:
+        raise ValidationError('Description must be more than 10 characters')
+
+def validate_campsite_info(form, d):
+    for item in form.data['campsite_info'].split('-'):
+        if item == 'undefined' or item == '':
+            raise ValidationError('Missing info in Campsite Info')
 
 
-#pseudoforms for _info sections
-# campsite_info(lodging, sites, max-guests, max-vehicles, disabled-accessible),  
-CAMPSITE_LODGING= ['Tent',"Cabin", 'Recreational Vehicle']
-# CAMPSITE_SITES= max
-# CAMPSITE_GUESTS= max
-# CAMPSITE_VEHICLES= max
-# CAMPSITE_ACCESSIBLE= bool
+def validate_essential_info(form, d):
+    for item in form.data['essential_info'].split('-'):
+        if item == 'undefined' or item == '':
+            raise ValidationError('Missing info in Essential Info')
 
-# essentials_info(fires, bathrooms, pets), 
-# ESSENTIALS_FIRES= bool
-# ESSENTIALS_BATHROOMS= bool
-# ESSENTIALS_PETS= bool
+def validate_amenities_info(form, d):
+    for item in form.data['amenities_info'].split('-'):
+        print('>>>>', item, ' entry in amenities info')
+        if item == 'undefined' or item == '':
+            raise ValidationError('Missing info in Amenities Info')
 
-# amenities(tables, wifi, bins, water, kitchen, showers), 
-# AMENITIES_TABLES= bool
-# AMENITIES_WIFI= bool
-# AMENITIES_BINS= bool
-# AMENITIES_WATER= bool
-# AMENITIES_KITCHEN= bool
-# AMENITIES_SHOWERS= bool
+def validate_details_info(form, d):
+    for item in form.data['details_info'].split('-'):
+        if item == 'undefined' or item == '':
+            raise ValidationError('Missing info in Details Info')
 
-# Details(check-in, check-out, arrival, min nights)
-# DETAILS_CHECKIN= Integer
-# DETAILS_CHECKOUT= Integer
-DETAILS_ARRIVAL=['Meet and greet', 'Make yourself at home']
-# DETAILS_MIN_NIGHTS=Integer
+
 
 class NewLocationForm(FlaskForm):
     user_id = IntegerField('userId')
     name = StringField('Name', validators=[DataRequired(message="Please provide name of the restaurant.")])
     image_1_url = StringField('Main image', validators=[DataRequired(message="Please provide an image link.")])
     image_2_url = StringField('Secondary image')
-    description= TextAreaField('Description', validators=[DataRequired(message="Please provide a description.")])
-    campsite_info = StringField('Campsite info', validators=[DataRequired(message="Please provide complete Campsite info form.")])
-    essential_info = StringField('Essential info', validators=[DataRequired(message="Please provide complete Essential info form.")])
-    amenities_info = StringField('Campsite info', validators=[DataRequired(message="Please provide complete Amenities info form.")])
-    details_info = StringField('Essential info', validators=[DataRequired(message="Please provide complete Details info form.")])
+    description= TextAreaField('Description', validators=[DataRequired(message="Please provide a description."), validate_description])
+    campsite_info = StringField('Campsite info', validators=[DataRequired(message="Please provide complete Campsite info form."), validate_campsite_info])
+    essential_info = StringField('Essential info', validators=[DataRequired(message="Please provide complete Essential info form."), validate_essential_info])
+    amenities_info = StringField('Amenities info', validators=[DataRequired(message="Please provide complete Amenities info form."), validate_amenities_info])
+    details_info = StringField('Essential info', validators=[DataRequired(message="Please provide complete Details info form."), validate_details_info])

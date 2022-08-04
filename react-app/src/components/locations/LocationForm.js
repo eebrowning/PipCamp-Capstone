@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { CreateLocationThunk } from '../../store/location';
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
@@ -8,6 +8,7 @@ function LocationForm() {
     const dispatch = useDispatch()
     const history = useHistory()
     const userId = useSelector(state => state.session.user?.id)
+    const [errors, setErrors] = useState([])
 
     const [name, setName] = useState('')
     const [image_1_url, setImage_1_url] = useState('')
@@ -29,12 +30,12 @@ function LocationForm() {
     const camp_info_string = `${shelter}-${sites}-${guests}-${vehicles}-${accessible}`
     const [errorsCamp, setErrorsCamp] = useState([])
 
-
     //Essentials info form
     const [fires, setFires] = useState()
     const [bathrooms, setBathrooms] = useState()
     const [pets, setPets] = useState()
     const essential_info_string = `${fires}-${bathrooms}-${pets}`
+    const [errorsEssential, setErrorsEssential] = useState([]);
 
     //Amenities info form
     const [tables, setTables] = useState()
@@ -44,6 +45,7 @@ function LocationForm() {
     const [kitchen, setKitchen] = useState()
     const [showers, setShowers] = useState()
     const amenities_info_string = `${tables}-${wifi}-${bins}-${water}-${kitchen}-${showers}`
+    const [errorsAmenities, setErrorsAmenities] = useState([]);
 
     //Details info form
     const arrivalOptions = ['Meet and greet', 'Make yourself at home']
@@ -52,48 +54,64 @@ function LocationForm() {
     const [checkout, setCheckout] = useState()
     const [minNights, setMinNights] = useState()
     const details_info_string = `${arrival}-${checkin}-${checkout}-${minNights}`
-
+    const [errorsDetails, setErrorsDetails] = useState([]);
 
     const validateForm = () => {
         // errorsMain: Name, Image, Description
         let arr = []
-        if (!name) {
-            arr.push("Please enter a name.");
-        };
-        if (!image_1_url) {
-            arr.push("Please enter an image URL.");
-        };
+        if (!name) { arr.push("Please enter a name."); };
+        if (!image_1_url) { arr.push("Please enter an image URL."); };
         if (!image_2_url) {
             //enter a default second image here, as second is optional
         };
-        if (description.length < 10) {
-            arr.push('Please provide a description over 10 characters.');
-        };
+        if (description.length < 10) { arr.push('Please provide a description over 10 characters.'); };
         setErrorsMain(arr);
+        // setErrors([...errors, ...arr])
+
         // errorsCamp: shelter, sites, guests, vehicles, accessible
         arr = []
-        if (!shelter) {
-            arr.push("Please Select Shelter Type.");
-        };
-        if (!sites) {
-            arr.push("Please Enter Number of Sites.");
-        };
-        if (!vehicles) {
-            arr.push('Please Enter Max Vehicles.');
-        };
-        if (!accessible) {
-            arr.push('Please Select Accessiblility.');
-        };
+        if (!shelter) { arr.push("Select Shelter Type."); };
+        if (!sites) { arr.push("Enter Number of Sites."); };
+        if (!vehicles) { arr.push('Enter Max Vehicles.'); };
+        if (!accessible) { arr.push('Select Disabled Accessiblility.'); };
         setErrorsCamp(arr)
+        // setErrors([...errors, ...arr])
+
+
+        //Essentials errors: fires, bathrooms, pets
+        arr = []
+        if (!fires) { arr.push("Select if Fires Allowed."); };
+        if (!bathrooms) { arr.push("Select Bathroom availability."); };
+        if (!pets) { arr.push('Select if Pets Allowed.'); };
+        setErrorsEssential(arr)
+        // setErrors([errors, ...arr])
+
+        //tables wifi bins water kitchen showers
+        arr = []
+        if (!tables) { arr.push("Select Table Availability.") };
+        if (!wifi) { arr.push('Select Wifi Availability') };
+        if (!bins) { arr.push('Select Trash Bin Availability'); };
+        if (!water) { arr.push('Select Water Availability'); };
+        if (!kitchen) { arr.push('Select Kitchen Availability'); };
+        if (!showers) { arr.push('Select Shower Availability'); };
+        setErrorsAmenities(arr)
+        // setErrors([...errors, ...arr])
+
+        //Details errors: arrival, checkin, checkout, minNights
+        arr = []
+        if (!arrival) { arr.push("Select Arrival.") };
+        if (checkin >= checkout) { arr.push('Check-Out must be before Check-In') }
+        if (!checkin) { arr.push("Enter Earliest Check-In.") };
+        if (!checkout) { arr.push('Enter Latest Check-Out.'); };
+        if (!minNights) { arr.push('Select Minimum Nights.'); };
+        setErrorsDetails(arr)
+        // setErrors([...errors, ...arr])
 
     }
 
-
     async function onSubmit(e) {
+        validateForm();
         e.preventDefault();
-
-        validateForm()
-
         const location = {
             user_id: userId,
             name,
@@ -106,23 +124,20 @@ function LocationForm() {
             details_info: details_info_string
         }
         console.log('>> Submitted location information:', location);
+        console.log('>>> errors in form', errors)
+
         const newLocation = await dispatch(CreateLocationThunk(location))
-        if (!newLocation) {
-            // history.push('/')
-        } else {
-            setErrorsMain(newLocation)
+        if (!newLocation) { history.push('/') }
+        else {
+            setErrors(newLocation)
         }
+
+        // if (newLocation) {
+        //     history.push('/')
+        // } else {
+        // }
+
     }
-    // useEffect(() => {
-    //     const arr = []
-    //     if (!name) {
-    //         arr.push("Please enter a name.");
-    //     };
-    //     if (sites < 1) {
-    //         arr.push('Please provide number of available sites.');
-    //     };
-    //     setErrors(arr);
-    // }, [setName]);
 
 
     return (
@@ -130,7 +145,10 @@ function LocationForm() {
             <h2 id='location-form-title'>Add a Location</h2>
 
             <form id='location-form' onSubmit={onSubmit}>
-                {errorsMain.length > 0 && errorsMain.map(error =>
+                {errorsMain && errorsMain.length > 0 && errorsMain.map(error =>
+                    <div key={error} className="location-error">{error}</div>
+                )}
+                {errors.length > 0 && errors.map(error =>
                     <div key={error} className="location-error">{error}</div>
                 )}
                 <input type='text' name='name' placeholder='Location Name' onChange={e => setName(e.target.value)}></input>
@@ -162,6 +180,9 @@ function LocationForm() {
                 </label>
                 <label>
                     Essential Information
+                    {errorsEssential.length > 0 && errorsEssential.map(error =>
+                        <div key={error} className="location-error">{error}</div>
+                    )}
                     <select id='fires-allowed' onChange={e => setFires(e.target.value)}>
                         <option> --Fires Allowed--</option>
                         <option value={true}>True</option>
@@ -180,6 +201,9 @@ function LocationForm() {
                 </label>
                 <label>
                     Amenities Information
+                    {errorsAmenities.length > 0 && errorsAmenities.map(error =>
+                        <div key={error} className="location-error">{error}</div>
+                    )}
                     <select id='tables-available' onChange={e => setTables(e.target.value)}>
                         <option> --Tables Available--</option>
                         <option value={true}>True</option>
@@ -213,14 +237,17 @@ function LocationForm() {
                 </label>
                 <label>
                     Detail Information
+                    {errorsDetails.length > 0 && errorsDetails.map(error =>
+                        <div key={error} className="location-error">{error}</div>
+                    )}
                     <select id='arrival-method' onChange={e => setArrival(e.target.value)}>
                         <option value=''>--Select Arrival--</option>
                         {arrivalOptions.map(option => (
                             <option key={option} value={option}>{option}</option>
                         ))}
                     </select>
-                    <input type='text' placeholder='Check in time' onChange={e => setCheckin(`After ${e.target.value}`)}></input>
-                    <input placeholder='Check out time' type='text' onChange={e => setCheckout(`Before ${e.target.value}`)}></input>
+                    <input type='text' placeholder='Check in time' min='8' max='20' onChange={e => setCheckin(`After ${e.target.value}`)}></input>
+                    <input placeholder='Check out time' type='text' min='8' max='20' onChange={e => setCheckout(`Before ${e.target.value}`)}></input>
                     <input placeholder='Miniumum Nights' type='number' onChange={e => setMinNights(e.target.value)}></input>
 
                 </label>

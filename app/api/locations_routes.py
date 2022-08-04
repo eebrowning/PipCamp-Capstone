@@ -11,7 +11,7 @@ def validation_to_error_messages(validation_errors):
     errorMessages = []
     for field in validation_errors:
         for error in validation_errors[field]:
-            errorMessages.append(f'{field} : {error}')
+            errorMessages.append(f'{error}')
     return errorMessages
 
 
@@ -41,7 +41,7 @@ def newLocationForm():
         )
     if form.errors:
         print('ERRORS >>>>', form.errors)
-        return{"errors": validation_to_error_messages}
+        return{"errors": validation_to_error_messages(form.errors)}, 400
     db.session.add(location)
     db.session.commit()
     return location.to_dict()
@@ -65,7 +65,7 @@ def editRestaurant(locationId):
         location.description = form.data['description']
 
     if form.errors:
-        print(form.errors)
+        print('>>>>',form.errors, '<<<<')
         return {'errors': validation_to_error_messages(form.errors)}, 400
 
     db.session.commit()
