@@ -16,7 +16,7 @@ export function EditLocationForm() {
     const [image_1_url, setImage_1_url] = useState()
     const [image_2_url, setImage_2_url] = useState()
     const [description, setDescription] = useState()
-    const [errors, setErrors] = useState([])
+
 
     //Camp info form
     const shelters = ['Tent', "Recreational Vehicle", 'Lodge']
@@ -55,9 +55,61 @@ export function EditLocationForm() {
     const [minNights, setMinNights] = useState()
     const details_info_string = `${arrival}-${checkin}-${checkout}-${minNights}`
 
+    const [errorsMain, setErrorsMain] = useState([])
+    const [errorsCamp, setErrorsCamp] = useState([])
+    const [errorsEssential, setErrorsEssential] = useState([]);
+    const [errorsAmenities, setErrorsAmenities] = useState([]);
+    const [errorsDetails, setErrorsDetails] = useState([]);
 
+    const validateForm = () => {
+        // errorsMain: Name, Image, Description
+        let arr = []
+        if (!name) { arr.push("Please enter a name."); };
+        if (!image_1_url) { arr.push("Please enter an image URL."); };
+        if (!image_2_url) {
+            //enter a default second image here, as second is optional
+        };
+        // if (description.length < 10) { arr.push('Please provide a description over 10 characters.'); };
+        setErrorsMain(arr);
+
+        // errorsCamp: shelter, sites, guests, vehicles, accessible
+        arr = []
+        if (!shelter) { arr.push("Select Shelter Type."); };
+        if (!sites) { arr.push("Enter Number of Sites."); };
+        if (!vehicles) { arr.push('Enter Max Vehicles.'); };
+        if (!accessible) { arr.push('Select Disabled Accessiblility.'); };
+        setErrorsCamp(arr)
+
+        //Essentials errors: fires, bathrooms, pets
+        arr = []
+        if (!fires) { arr.push("Select if Fires Allowed."); };
+        if (!bathrooms) { arr.push("Select Bathroom availability."); };
+        if (!pets) { arr.push('Select if Pets Allowed.'); };
+        setErrorsEssential(arr)
+        //tables wifi bins water kitchen showers
+        arr = []
+        if (!tables) { arr.push("Select Table Availability.") };
+        if (!wifi) { arr.push('Select Wifi Availability') };
+        if (!bins) { arr.push('Select Trash Bin Availability'); };
+        if (!water) { arr.push('Select Water Availability'); };
+        if (!kitchen) { arr.push('Select Kitchen Availability'); };
+        if (!showers) { arr.push('Select Shower Availability'); };
+        setErrorsAmenities(arr)
+        //Details errors: arrival, checkin, checkout, minNights
+        arr = []
+        if (!arrival) { arr.push("Select Arrival.") };
+        if (checkin <= checkout) { arr.push('Check-Out must be before Check-In') }
+        if (!checkin) { arr.push("Enter Earliest Check-In.") };
+        if (!checkout) { arr.push('Enter Latest Check-Out.'); };
+        if (!minNights) { arr.push('Select Minimum Nights.'); };
+        setErrorsDetails(arr)
+    }
+    // const errors = [...errorsMain, ...errorsEssential, ...errorsCamp, ...errorsAmenities, ...errorsDetails]
+    // console.log(errors)
     async function onSubmit(e) {
         e.preventDefault();
+        validateForm()
+        // if (errors.length === 0) {
         const updatedLocation = {
             id: locationId,
             user_id: userId,
@@ -75,9 +127,10 @@ export function EditLocationForm() {
         if (!editedLocation) {
             history.push(`/locations/${locationId}`)
         } else {
-            setErrors(editedLocation)
+            setErrorsMain(editedLocation)
         }
         return editedLocation
+        // } else { return errors }
     }
 
     useEffect(() => {
@@ -116,24 +169,12 @@ export function EditLocationForm() {
         }
     })
 
-    useEffect(() => { //frontend error messages
-        const arr = []
-        if (!shelter) {
-            arr.push("Please select a shelter type.");
-        };
-        if (sites < 1) {
-            arr.push('Please provide number of available sites.');
-        };
-        setErrors(arr);
-    }, [shelter, sites, guests, vehicles, accessible]);
-
-
     if (location && name) return (
         <div id='location-form-container'>
             <h2 id='location-form-title'>Edit {location.name}:</h2>
 
             <form id='location-form' onSubmit={onSubmit}>
-                {errors.length > 0 && errors.map(error =>
+                {errorsMain.length > 0 && errorsMain.map(error =>
                     <div key={error} className="location-error">{error}</div>
                 )}
                 <input type='text' onClick={e => e.target.select()} name='name' value={name} placeholder='Location Name' onChange={e => setName(e.target.value)}></input>
@@ -144,6 +185,9 @@ export function EditLocationForm() {
 
                 <label>
                     Campsite Information
+                    {errorsCamp.length > 0 && errorsCamp.map(error =>
+                        <div key={error} className="location-error">{error}</div>
+                    )}
                     <select id='camp-shelter' value={shelter} onChange={e => setShelter(e.target.value)}>
                         <option disabled value=''>--Select Shelter--</option>
                         {shelters.map(shelter => (
@@ -162,6 +206,9 @@ export function EditLocationForm() {
                 </label>
                 <label>
                     Essential Information
+                    {errorsEssential.length > 0 && errorsEssential.map(error =>
+                        <div key={error} className="location-error">{error}</div>
+                    )}
                     <select id='fires-allowed' value={fires} onChange={e => setFires(e.target.value)}>
                         <option> --Fires Allowed--</option>
                         <option value={true} readOnly>True</option>
@@ -180,6 +227,9 @@ export function EditLocationForm() {
                 </label>
                 <label>
                     Amenities Information
+                    {errorsAmenities.length > 0 && errorsAmenities.map(error =>
+                        <div key={error} className="location-error">{error}</div>
+                    )}
                     <select id='tables-available' value={tables} onChange={e => setTables(e.target.value)}>
                         <option disabled> --Tables Available--</option>
                         <option value={true} readOnly>True</option>
@@ -213,12 +263,15 @@ export function EditLocationForm() {
                 </label>
                 <label>
                     Detail Information
+                    {errorsDetails.length > 0 && errorsDetails.map(error =>
+                        <div key={error} className="location-error">{error}</div>
+                    )}
                     <select id='arrival-method' defaultValue={arrival} onChange={e => setArrival(e.target.value)}>
                         <option disabled value=''>--Select Arrival--</option>
                         <option value='Make yourself at home'>Make yourself at home</option>
                         <option value='Meet and greet'>Meet and greet</option>
                     </select>
-                    <input defaultValue={checkin} type='number' min='14' max='20' placeholder='Check in time' onChange={e => setCheckin(e.target.value)}></input>
+                    <input defaultValue={checkin} type='number' min='8' max='20' placeholder='Check in time' onChange={e => setCheckin(e.target.value)}></input>
                     <input defaultValue={checkout} placeholder='Check out time' type='number' min='8' max='12' onChange={e => setCheckout(e.target.value)}></input>
                     <input defaultValue={minNights} placeholder='Miniumum Nights' type='number' min='1' onChange={e => setMinNights(e.target.value)}></input>
 
