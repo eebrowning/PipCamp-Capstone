@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { CreateLocationThunk } from '../../store/location';
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
@@ -51,6 +51,17 @@ function LocationForm() {
     const [minNights, setMinNights] = useState()
     const details_info_string = `${arrival}-${checkin}-${checkout}-${minNights}`
 
+    useEffect(() => {
+        const arr = []
+        if (!name) {
+            arr.push("Please enter a name.");
+        };
+        if (sites < 1) {
+            arr.push('Please provide number of available sites.');
+        };
+        setErrors(arr);
+    }, [shelter, sites, guests, vehicles, accessible]);
+
 
     async function onSubmit(e) {
         e.preventDefault();
@@ -68,7 +79,7 @@ function LocationForm() {
         console.log('>> Submitted location information:', location);
         const newLocation = await dispatch(CreateLocationThunk(location))
         if (!newLocation) {
-            history.push('/')
+            // history.push('/')
         } else {
             setErrors(newLocation)
         }
