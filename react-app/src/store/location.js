@@ -48,6 +48,8 @@ export const GetLocationsThunk = () => async (dispatch) => {
 
 //need to test
 export const GetLocationDetailThunk = (id) => async (dispatch) => {
+    console.log('in GetLocationDetailThunk')
+
     const response = await fetch(`/api/locations/${id}`)
     if (response.ok) {
         const data = await response.json()
@@ -79,6 +81,7 @@ export const CreateLocationThunk = (location) => async (dispatch) => {
 
 //Works!
 export const EditLocationThunk = (location) => async (dispatch) => {
+    console.log(location, 'in EditLocationThunk')
     const response = await fetch(`/api/locations/${location.id}/edit`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
@@ -99,6 +102,7 @@ export const EditLocationThunk = (location) => async (dispatch) => {
 
 //works, needs route
 export const DeleteLocationThunk = (id) => async (dispatch) => {
+    console.log('>>> in DeleteLocationThunk <<<')
     const response = await fetch(`/api/locations/${id}/delete`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" }
@@ -140,6 +144,7 @@ export const locationReducer = (state = initialState, action) => {
             return newState;
 
         case GET_LOCATION:
+            console.log('in get_location reducer')
             let get_loc_state = {}
             get_loc_state[action.location.id] = action.location
             return get_loc_state;
@@ -149,6 +154,8 @@ export const locationReducer = (state = initialState, action) => {
             return newState;
 
         case EDIT_LOCATION:
+            console.log(action.location, "action...EDIT_LOCATION... in locationReducer")
+
             newState[action.location.id] = action.location
             return newState
         case DELETE_LOCATION:

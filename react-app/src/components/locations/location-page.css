@@ -9,13 +9,14 @@ label {
     display: flex;
     flex-direction: column;
     border: 1px solid lightgray;
+    margin: 20px;
 }
 
 
 #location-details-outer {
     display: flex;
     flex-direction: row;
-    width: 30rem;
+    width: 25rem;
     height: 5rem;
     border-top: 1px solid lightgray;
     margin-top: 15px;
