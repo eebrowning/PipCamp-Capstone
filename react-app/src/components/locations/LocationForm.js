@@ -3,6 +3,7 @@ import { CreateLocationThunk } from '../../store/location';
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import './location-form.css'
+import { timeConverter } from '../utils';
 
 function LocationForm() {
     const dispatch = useDispatch()
@@ -246,8 +247,8 @@ function LocationForm() {
                             <option key={option} value={option}>{option}</option>
                         ))}
                     </select>
-                    <input type='text' placeholder='Check in time' min='8' max='20' onChange={e => setCheckin(`After ${e.target.value}`)}></input>
-                    <input placeholder='Check out time' type='text' min='8' max='20' onChange={e => setCheckout(`Before ${e.target.value}`)}></input>
+                    <input placeholder='Check in time' type='time' onChange={e => setCheckin(`After ${timeConverter(e.target.value)}`)}></input>
+                    <input placeholder='Check out time' type='time' onChange={e => setCheckout(`Before ${timeConverter(e.target.value)}`)}></input>
                     <input placeholder='Miniumum Nights' type='number' onChange={e => setMinNights(e.target.value)}></input>
 
                 </label>

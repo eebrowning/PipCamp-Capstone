@@ -43,6 +43,16 @@ function LocationPage() {
 
         history.push(`/locations/${locationId}/edit`)
     }
+    const timeConverter = (time) => {
+        let hours = time.split(':')[0];
+        if (+hours > 12) {
+            hours = `${((+hours + 11) % 12 + 1)}PM`;
+        }
+        else {
+            hours = `${((+hours + 11) % 12 + 1)}AM`;
+        }
+        return hours;
+    }
 
     if (location) return (<span>
         {+userId === +location.user_id && (

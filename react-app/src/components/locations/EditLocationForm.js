@@ -3,6 +3,7 @@ import { EditLocationThunk, GetLocationDetailThunk, GetLocationsThunk } from '..
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory, useParams } from 'react-router-dom'
 import './location-form.css'
+import { timeConverter } from '../utils';
 
 export function EditLocationForm() {
     const { locationId } = useParams()
@@ -271,9 +272,9 @@ export function EditLocationForm() {
                         <option value='Make yourself at home'>Make yourself at home</option>
                         <option value='Meet and greet'>Meet and greet</option>
                     </select>
-                    <input defaultValue={checkin} type='number' min='8' max='20' placeholder='Check in time' onChange={e => setCheckin(e.target.value)}></input>
-                    <input defaultValue={checkout} placeholder='Check out time' type='number' min='8' max='12' onChange={e => setCheckout(e.target.value)}></input>
-                    <input defaultValue={minNights} placeholder='Miniumum Nights' type='number' min='1' onChange={e => setMinNights(e.target.value)}></input>
+                    <input value={checkin} placeholder='Check in time' type='text' onChange={e => setCheckin(`After ${e.target.value}`)}></input>
+                    <input value={checkout} placeholder='Check out time' type='text' onChange={e => setCheckout(`Before ${timeConverter(e.target.value)}`)}></input>
+                    <input value={minNights} placeholder='Miniumum Nights' type='number' min='1' onChange={e => setMinNights(e.target.value)}></input>
 
                 </label>
 
