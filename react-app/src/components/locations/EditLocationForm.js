@@ -17,7 +17,7 @@ export function EditLocationForm() {
 
     const [name, setName] = useState(location?.name)
     const [image_1_url, setImage_1_url] = useState()
-    const [image_2_url, setImage_2_url] = useState()
+    const [image_2_url, setImage_2_url] = useState(location?.image_2_url)
     const [description, setDescription] = useState()
 
 
@@ -68,9 +68,9 @@ export function EditLocationForm() {
         // errorsMain: Name, Image, Description
         let arr = []
         if (!name) { arr.push("Please enter a name."); };
-        if (!image_1_url) { arr.push("Please enter an image URL."); };
-        if (!image_2_url) {
-            //enter a default second image here, as second is optional
+        if (!image_1_url) { arr.push("Image 1 requires a valid image URL."); };
+        if (image_2_url && !image_2_url.includes('http')) {
+            setImage_2_url('')
         };
         // if (description.length < 10) { arr.push('Please provide a description over 10 characters.'); };
         setErrorsMain(arr);
@@ -145,7 +145,7 @@ export function EditLocationForm() {
 
             if (!name) setName(location.name)
             if (!image_1_url) setImage_1_url(location.image_1_url)
-            if (!image_2_url) setImage_2_url(location.image_2_url)
+            // if (!image_2_url) setImage_2_url(location.image_2_url)
             if (!description) setDescription(location.description)
 
             if (!shelter) setShelter(camp_array ? camp_array[0] : '')
@@ -185,7 +185,7 @@ export function EditLocationForm() {
                 )}
                 <input type='text' onClick={e => e.target.select()} name='name' value={name} placeholder='Location Name' onChange={e => setName(e.target.value)}></input>
                 <input type='text' onClick={e => e.target.select()} name='image_1_url' value={image_1_url} placeholder='Main Image' onChange={e => setImage_1_url(e.target.value)}></input>
-                <input type='text' onClick={e => e.target.select()} name='image_2_url' DefaultValue={image_2_url} placeholder='Secondary Image(optional)' onChange={e => setImage_2_url(e.target.value)}></input>
+                <input type='text' onClick={e => e.target.select()} name='image_2_url' defaultValue={image_2_url} placeholder='Secondary Image(optional)' onChange={e => setImage_2_url(e.target.value)}></input>
                 <textarea onClick={e => e.target.select()} placeholder='Location Description' value={description} onChange={e => setDescription(e.target.value)} />
                 {/* fill this with sub-forms */}
 

@@ -48,8 +48,7 @@ export const GetLocationsThunk = () => async (dispatch) => {
 
 //need to test
 export const GetLocationDetailThunk = (id) => async (dispatch) => {
-    console.log('in GetLocationDetailThunk')
-
+    // console.log('in GetLocationDetailThunk')
     const response = await fetch(`/api/locations/${id}`)
     if (response.ok) {
         const data = await response.json()
@@ -127,7 +126,7 @@ export const DeleteLocationThunk = (id) => async (dispatch) => {
 //     });
 //     if (response.ok) {
 //         const data = await response.json();
-//         dispatch(searchRestaurants(data.restaurants));
+//         dispatch(searchRestaurants(data.locations));
 //         return data;
 //     } else {
 //         return { "Message": "Unsuccessful" }
@@ -137,7 +136,7 @@ export const DeleteLocationThunk = (id) => async (dispatch) => {
 
 // REDUCER--- CREATE EXPORT AND ADD TO index.js
 let initialState = {}
-export const locationReducer = (state = initialState, action) => {
+const locationReducer = (state = initialState, action) => {
     let newState = { ...state }
     switch (action.type) {
         case GET_LOCATIONS:
@@ -166,3 +165,4 @@ export const locationReducer = (state = initialState, action) => {
             return state
     }
 }
+export default locationReducer

@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, Redirect, useHistory, useParams } from 'react-router-dom';
 import { DeleteLocationThunk, EditLocationThunk, GetLocationDetailThunk, GetLocationsThunk } from '../../store/location';
+import { GetReviewsThunk } from '../../store/review';
+import Reviews from '../reviews/Reviews';
 import './location-page.css'
 
 function LocationPage() {
@@ -40,7 +42,6 @@ function LocationPage() {
     function handleEdit(e) {
         e.preventDefault()
         dispatch(GetLocationDetailThunk(locationId))
-
         history.push(`/locations/${locationId}/edit`)
     }
 
@@ -56,7 +57,7 @@ function LocationPage() {
             <img id='main-image' src={location.image_1_url} alt='image 1' />
 
             {location.image_2_url.length <= 8 && (
-                <img id='second-image' src='https://i.imgur.com/9H2OQft.png' alt="default restaurant"></img>
+                <img id='second-image' src='https://i.imgur.com/9H2OQft.png' alt="default second-image"></img>
             )}
             {location.image_2_url.length > 8 && (
                 <img src={location.image_2_url} alt='image 2' />
@@ -108,7 +109,7 @@ function LocationPage() {
             </span>
 
         </div>
-        {/* reviews component will render here */}
+        <Reviews location={locationId} />
     </span>)
     else return (<h1>404 Not Found...</h1>)
 }
