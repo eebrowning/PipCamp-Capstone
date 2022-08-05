@@ -2,6 +2,16 @@ label {
     width: 100px;
 }
 
+#main-image {
+    height: auto;
+    width: 400px;
+}
+
+#second-image {
+    height: auto;
+    width: 400px;
+}
+
 #campsite,
 #essentials,
 #amenities {
@@ -23,7 +33,6 @@ label {
     border-bottom: 1px solid lightgray;
 
 }
-
 
 #location-details {
 
