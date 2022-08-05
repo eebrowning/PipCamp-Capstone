@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { DeleteReviewThunk, GetReviewsThunk } from '../../store/review';
+import ReviewForm from './ReviewForm';
 import './reviews.css'
 
 function Reviews({ locationId }) {
@@ -8,6 +9,7 @@ function Reviews({ locationId }) {
     const dispatch = useDispatch()
     const reviews = useSelector(state => Object.values(state.reviews))
     const locationReviews = reviews.filter(review => review.location_id === +locationId)
+    const [review, setReview] = useState(false)
 
     useEffect(() => {
         console.log('dispatched to GetReviewsThunk')
@@ -26,6 +28,7 @@ function Reviews({ locationId }) {
     return (
         <div id='review-component'>
             {/* add-review button goes here, will be conditionally available if no reviews by user*/}
+            {<ReviewForm locationId={locationId} hide={() => setReview(false)} />}
             {locationReviews && locationReviews.map(review => (
                 <div key={review.id}>
                     <div>{review.user_id}</div>

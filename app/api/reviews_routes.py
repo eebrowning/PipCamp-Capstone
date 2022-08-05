@@ -8,8 +8,8 @@ reviews_routes = Blueprint('reviews',__name__)
 @reviews_routes.route('/all')
 def get_reviews():
     reviews = Review.query.all()
-    print(">>>", reviews, '<<<')
-    print("-------------------")
+    # print(">>>", reviews, '<<<')
+    # print("-------------------")
 
     all_reviews = [review.to_dict() for review in reviews]
     return {'reviews': all_reviews}
@@ -27,6 +27,10 @@ def create_review():
             content = form.data['content'],
             recommends = form.data['recommends']
         )
+        print('----------')
+        print('>>>',review)
+        print('----------')
+
         db.session.add(review)
         db.session.commit()
         return review.to_dict()

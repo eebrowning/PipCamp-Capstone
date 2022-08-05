@@ -34,6 +34,7 @@ export const GetReviewsThunk = () => async (dispatch) => {
 }
 
 export const CreateReviewsThunk = (review) => async (dispatch) => {
+    console.log('>>>', 'in CreateReviewsThunk')
     const response = await fetch('/api/reviews/new', {
         headers: { 'content-type': 'application/json' },
         method: 'POST',
@@ -81,6 +82,8 @@ const reviewReducer = (state = initialState, action) => {
             return newState
 
         case CREATE_REVIEWS:
+            console.log('>>>>>in CREATE_REVIEWS reducer')
+
             newState[action.review.id] = action.review
             return newState;
 
