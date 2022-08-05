@@ -33,21 +33,28 @@ def validate_details_info(form, d):
         if item == 'undefined' or item == '':
             raise ValidationError('Missing info in Details Info')
 
-def validate_image(form, d):
+def validate_main_image(form, d):
     url =form.data['image_1_url']
+    if not url.__contains__('http'):
+        raise ValidationError('Image 1: Invalid link')
     if url.__contains__('jpg') or url.__contains__('png') or url.__contains__('jpeg') or url.__contains__('gif'):
         return None
     else:
-        raise ValidationError('Incorrect Image Format: try a .png or .jpg link')
+        raise ValidationError('Image 1: provide a \'.png\' or \'.jpg\' link')
         
-
-
+#optional image, doesn't need backend validation.
+# def validate_second_image(form, d):
+#     url =form.data['image_2_url']
+#     if len(url) > 0 and not url.__contains__('http'):
+#         raise ValidationError('Image 2: Invalid link')
+#     else:
+#         pass
 
 class NewLocationForm(FlaskForm):
     user_id = IntegerField('userId')
-    name = StringField('Name', validators=[DataRequired(message="Please provide name of the restaurant.")])
-    image_1_url = StringField('Main image', validators=[DataRequired(message="Please provide an image link."), validate_image])
-    image_2_url = StringField('Secondary image')
+    name = StringField('Name', validators=[DataRequired(message="Please provide name of the location.")])
+    image_1_url = StringField('Main image', validators=[DataRequired(message="Please provide an image link."), validate_main_image])
+    image_2_url = StringField('Secondary image')#, validators=[validate_second_image])
     description= TextAreaField('Description', validators=[DataRequired(message="Please provide a description."), validate_description])
     campsite_info = StringField('Campsite info', validators=[DataRequired(message="Please provide complete Campsite info form."), validate_campsite_info])
     essential_info = StringField('Essential info', validators=[DataRequired(message="Please provide complete Essential info form."), validate_essential_info])

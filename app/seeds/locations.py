@@ -5,8 +5,8 @@ def seed_locations():
     demo = Location(
     user_id=1, 
     name='Joe\'s', 
-    image_1_url = 'nothing',
-    image_2_url = 'nothing',
+    image_1_url = 'https://i.imgur.com/9H2OQft.png',
+    image_2_url = '',
     campsite_info = 'Tent-1-2-3-true',
     essential_info = 'false-true-false',
     amenities_info = 'true-false-true-false-true-false',
