@@ -8,6 +8,8 @@ import { timeConverter } from '../utils';
 export function EditLocationForm() {
     const { locationId } = useParams()
     const dispatch = useDispatch()
+    const [errors, setErrors] = useState([])
+
 
     const history = useHistory()
     const userId = useSelector(state => state.session.user?.id)
@@ -99,7 +101,7 @@ export function EditLocationForm() {
         //Details errors: arrival, checkin, checkout, minNights
         arr = []
         if (!arrival) { arr.push("Select Arrival.") };
-        if (checkin <= checkout) { arr.push('Check-Out must be before Check-In') }
+        // if (checkin <= checkout) { arr.push('Check-Out must be before Check-In') }
         if (!checkin) { arr.push("Enter Earliest Check-In.") };
         if (!checkout) { arr.push('Enter Latest Check-Out.'); };
         if (!minNights) { arr.push('Select Minimum Nights.'); };
@@ -128,7 +130,7 @@ export function EditLocationForm() {
         if (!editedLocation) {
             history.push(`/locations/${locationId}`)
         } else {
-            setErrorsMain(editedLocation)
+            setErrors(editedLocation)
         }
         return editedLocation
         // } else { return errors }
@@ -175,12 +177,15 @@ export function EditLocationForm() {
             <h2 id='location-form-title'>Edit {location.name}:</h2>
 
             <form id='location-form' onSubmit={onSubmit}>
+                {errors.length > 0 && errors.map(error =>
+                    <div key={error} className="location-error">{error}</div>
+                )}
                 {errorsMain.length > 0 && errorsMain.map(error =>
                     <div key={error} className="location-error">{error}</div>
                 )}
                 <input type='text' onClick={e => e.target.select()} name='name' value={name} placeholder='Location Name' onChange={e => setName(e.target.value)}></input>
                 <input type='text' onClick={e => e.target.select()} name='image_1_url' value={image_1_url} placeholder='Main Image' onChange={e => setImage_1_url(e.target.value)}></input>
-                <input type='text' onClick={e => e.target.select()} name='image_2_url' value={image_2_url} placeholder='Secondary Image(optional)' onChange={e => setImage_2_url(e.target.value)}></input>
+                <input type='text' onClick={e => e.target.select()} name='image_2_url' DefaultValue={image_2_url} placeholder='Secondary Image(optional)' onChange={e => setImage_2_url(e.target.value)}></input>
                 <textarea onClick={e => e.target.select()} placeholder='Location Description' value={description} onChange={e => setDescription(e.target.value)} />
                 {/* fill this with sub-forms */}
 

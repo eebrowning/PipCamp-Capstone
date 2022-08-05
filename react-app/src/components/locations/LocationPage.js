@@ -43,16 +43,7 @@ function LocationPage() {
 
         history.push(`/locations/${locationId}/edit`)
     }
-    const timeConverter = (time) => {
-        let hours = time.split(':')[0];
-        if (+hours > 12) {
-            hours = `${((+hours + 11) % 12 + 1)}PM`;
-        }
-        else {
-            hours = `${((+hours + 11) % 12 + 1)}AM`;
-        }
-        return hours;
-    }
+
 
     if (location) return (<span>
         {+userId === +location.user_id && (
@@ -61,9 +52,16 @@ function LocationPage() {
                 <button id='delete-location' onClick={handleDelete}>Delete</button>
             </div>
         )}
-        <img src={location.image_1_url} alt='image 1' />
-        <img src={location.image_2_url} alt='image 2' />
+        <div id='image-box'>
+            <img id='main-image' src={location.image_1_url} alt='image 1' />
 
+            {location.image_2_url.length <= 8 && (
+                <img id='second-image' src='https://i.imgur.com/9H2OQft.png' alt="default restaurant"></img>
+            )}
+            {location.image_2_url.length > 8 && (
+                <img src={location.image_2_url} alt='image 2' />
+            )}
+        </div>
 
         <div id='location-information'>
             <h1>{location.name}</h1>
