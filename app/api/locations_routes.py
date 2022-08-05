@@ -53,7 +53,7 @@ def editRestaurant(locationId):
     location= Location.query.get(locationId)
     form= NewLocationForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    print(form.data['name'])
+    # print(form.data['name'])
     if(form.validate_on_submit()):
         location.name= form.data['name']
         location.image_1_url = form.data['image_1_url']

@@ -50,6 +50,27 @@ def create_review():
     #     return {'message': 'reponse bad'}
 
 
+@reviews_routes.route('/<reviewId>/edit', methods=['PUT'])
+def update_review(reviewId):
+    print('>>>>--------<<<<')
+    print('>>>>',reviewId, '<<<<')
+    print('>>>>--------<<<<')
+
+    form= ReviewForm()
+    review= Review.query.get(reviewId)
+    form['csrf_token'].data = request.cookies['csrf_token']
+   
+    if form.validate_on_submit() :
+        review.user_id=form.data['user_id']
+        review.location_id=form.data['location_id']
+        review.content= form.data['content']
+        review.recommends= form.data['recommends']
+    if form.errors:
+        print('>>>>',form.errors, '<<<<')
+        return {'errors': validation_to_error_messages(form.errors)}, 400
+    db.session.commit()
+    return review.to_dict()
+
 @reviews_routes.route('/<reviewId>/delete', methods=["DELETE"])
 def delete_review(reviewId):
     review= Review.query.get(reviewId)

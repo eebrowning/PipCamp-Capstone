@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { DeleteReviewThunk, GetReviewsThunk } from '../../store/review';
+import EditReviewForm from './EditReviewForm';
 import ReviewForm from './ReviewForm';
 import './reviews.css'
 
@@ -9,7 +10,8 @@ function Reviews({ locationId }) {
     const dispatch = useDispatch()
     const reviews = useSelector(state => Object.values(state.reviews))
     const locationReviews = reviews.filter(review => review.location_id === +locationId)
-    const [reviewed, setReviewed] = useState(false)
+    // const [reviewed, setReviewed] = useState(false)
+    const [editing, setEditing] = useState(false)
     let userReview;
     locationReviews.forEach(review => {
         if (review.user_id == user.id) {
@@ -40,10 +42,10 @@ function Reviews({ locationId }) {
                     <div>{review.content}</div>
                     <div>{review.recommends ? 'Recommended' : 'Not Recommended'}</div>
                     {/* user-owned-review buttons go here */}
+                    {userReview === review && editing && (<EditReviewForm review={review} locationId={locationId} hide={() => setEditing(false)} />)}
                     {user && user.id === review.user_id && (
-
                         <div className='owned-review-buttons'>
-                            <button className={`edit-${review.id}`}>Edit</button>
+                            <button className={`edit-${review.id}`} onClick={() => setEditing(true)}>Edit</button>
                             <button className={`delete-${review.id}`} onClick={handleDelete}>Delete</button>
                         </div>
                     )}
