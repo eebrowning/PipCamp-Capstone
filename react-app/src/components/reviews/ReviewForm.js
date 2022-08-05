@@ -14,33 +14,29 @@ function ReviewForm({ locationId, hide }) {
     function onClick() {
         hide()
     }
-
     async function onSubmit(e) {
         e.preventDefault();
-
         const review = {
             user_id: +user.id,
             location_id: +locationId,
             content,
             recommends
         }
-        // console.log('this is the review you want', review)
+        console.log('>> Submitted location information:', review);
         const newReview = await dispatch(CreateReviewsThunk(review))
-        if (newReview) {
+        if (!newReview) {
             hide()
+        } else {
+            setErrors(newReview)
+            console.log('>>> errors in form', errors)
         }
         return newReview
     }
-    useEffect(() => {
-        const arr = []
-
-        setErrors(arr)
-    }, [content]);
 
     return (
-        <div className='review-form'>
+        <div className='review-form' >
             <form onSubmit={onSubmit}>
-                <div>
+                <div id='review-errors'>
                     {errors.length > 0 && errors.map(error =>
                         <div key={error} className="review-error">{error}</div>
                     )}
@@ -48,14 +44,14 @@ function ReviewForm({ locationId, hide }) {
                 <div>
                     <textarea className='review-content' name='content' value={content} placeholder="Leave your review here!" onChange={e => setContent(e.target.value)}></textarea>
                 </div>
-                <div className='review-rating'>
+                <div id='recommend-box'>
                     <p>Recommended: </p><select required type='bool' className='review-recommends' name='recommends' onChange={e => setRecommends(e.target.value)}>
-                        <option>Yes</option>
-                        <option>No</option>
+                        <option value={true}>Yes</option>
+                        <option value={false}>No</option>
                     </select>
                 </div>
                 <div className='review-actions'>
-                    <button type='submit' disabled={errors.length === 0 ? false : true}>Submit</button>
+                    <button type='submit' >Submit</button>
                     <button onClick={onClick}>Cancel</button>
                 </div>
             </form>

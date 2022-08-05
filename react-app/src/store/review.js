@@ -44,6 +44,11 @@ export const CreateReviewsThunk = (review) => async (dispatch) => {
         const data = await response.json()
         dispatch(createReview(data))
         return data;
+    } else if (response.status < 500) {
+        const data = await response.json();
+        if (data.errors) {
+            return data.errors;
+        }
     }
 }
 
