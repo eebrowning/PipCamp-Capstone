@@ -34,6 +34,7 @@ export const GetReviewsThunk = () => async (dispatch) => {
 }
 
 export const CreateReviewsThunk = (review) => async (dispatch) => {
+    console.log('>>>', 'in CreateReviewsThunk')
     const response = await fetch('/api/reviews/new', {
         headers: { 'content-type': 'application/json' },
         method: 'POST',
@@ -60,6 +61,7 @@ export const EditReviewsThunk = (review) => async (dispatch) => {
 }
 
 export const DeleteReviewThunk = (id) => async (dispatch) => {
+    console.log('>>> in DeleteReviewThunk')
     const response = await fetch(`/api/reviews/${id}/delete`, {
         headers: { 'content-type': 'application/json' },
         method: 'DELETE',
@@ -80,6 +82,8 @@ const reviewReducer = (state = initialState, action) => {
             return newState
 
         case CREATE_REVIEWS:
+            console.log('>>>>>in CREATE_REVIEWS reducer')
+
             newState[action.review.id] = action.review
             return newState;
 
@@ -88,6 +92,7 @@ const reviewReducer = (state = initialState, action) => {
             return newState;
 
         case DELETE_REVIEW:
+            console.log('>>>>>in DELETE_REVIEW reducer')
             delete newState[action.review.id];
             return newState;
 

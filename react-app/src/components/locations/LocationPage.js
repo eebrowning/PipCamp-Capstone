@@ -109,7 +109,7 @@ function LocationPage() {
             </span>
 
         </div>
-        <Reviews location={locationId} />
+        <Reviews locationId={locationId} />
     </span>)
     else return (<h1>404 Not Found...</h1>)
 }
