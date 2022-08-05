@@ -30,3 +30,11 @@ def create_review():
         db.session.add(review)
         db.session.commit()
         return review.to_dict()
+
+
+@reviews_routes.route('/<reviewId>/delete', methods=["DELETE"])
+def delete_review(reviewId):
+    review= Review.query.get(reviewId)
+    db.session.delete(review)
+    db.session.commit()
+    return review.to_dict()

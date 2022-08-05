@@ -60,6 +60,7 @@ export const EditReviewsThunk = (review) => async (dispatch) => {
 }
 
 export const DeleteReviewThunk = (id) => async (dispatch) => {
+    console.log('>>> in DeleteReviewThunk')
     const response = await fetch(`/api/reviews/${id}/delete`, {
         headers: { 'content-type': 'application/json' },
         method: 'DELETE',
@@ -88,6 +89,7 @@ const reviewReducer = (state = initialState, action) => {
             return newState;
 
         case DELETE_REVIEW:
+            console.log('>>>>>in DELETE_REVIEW reducer')
             delete newState[action.review.id];
             return newState;
 
