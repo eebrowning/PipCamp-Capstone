@@ -53,6 +53,7 @@ export const CreateReviewsThunk = (review) => async (dispatch) => {
 }
 
 export const EditReviewsThunk = (review) => async (dispatch) => {
+    console.log('>>>> in EditReviewThunk:', review)
     const response = await fetch(`/api/reviews/${review.id}/edit`, {
         headers: { 'content-type': 'application/json' },
         method: 'PUT',
@@ -62,6 +63,11 @@ export const EditReviewsThunk = (review) => async (dispatch) => {
         const data = await response.json()
         dispatch(editReview(data))
         return data;
+    } else if (response.status < 500) {
+        const data = await response.json();
+        if (data.errors) {
+            return data.errors;
+        }
     }
 }
 
@@ -93,6 +99,8 @@ const reviewReducer = (state = initialState, action) => {
             return newState;
 
         case EDIT_REVIEWS:
+            console.log('>>>>>in EDIT_REVIEWS reducer')
+
             newState[action.review.id] = action.review
             return newState;
 
