@@ -9,7 +9,14 @@ function Reviews({ locationId }) {
     const dispatch = useDispatch()
     const reviews = useSelector(state => Object.values(state.reviews))
     const locationReviews = reviews.filter(review => review.location_id === +locationId)
-    const [review, setReview] = useState(false)
+    const [reviewed, setReviewed] = useState(false)
+    let userReview;
+    locationReviews.forEach(review => {
+        if (review.user_id == user.id) {
+            userReview = review
+        }
+    })
+
 
     useEffect(() => {
         console.log('dispatched to GetReviewsThunk')
@@ -17,18 +24,16 @@ function Reviews({ locationId }) {
     }, [dispatch])
 
 
-
     function handleDelete(e) {
         e.preventDefault();
         let id = e.target.className.split('-')[1]
-
         dispatch(DeleteReviewThunk(id))
     }
 
     return (
         <div id='review-component'>
             {/* add-review button goes here, will be conditionally available if no reviews by user*/}
-            {<ReviewForm locationId={locationId} hide={() => setReview(false)} />}
+            {!userReview && (<ReviewForm locationId={locationId} />)}
             {locationReviews && locationReviews.map(review => (
                 <div key={review.id}>
                     <div>{review.user_id}</div>

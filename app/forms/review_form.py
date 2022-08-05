@@ -7,4 +7,4 @@ class ReviewForm(FlaskForm):
     user_id = IntegerField('userId')
     location_id = IntegerField('locationId')
     content = StringField('Review',validators=[DataRequired(message="Content required for review submission")])
-    reccomends = BooleanField('Recommended')
+    recommends = BooleanField('Recommended')

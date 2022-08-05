@@ -57,10 +57,10 @@ function LocationPage() {
             <img id='main-image' src={location.image_1_url} alt='image 1' />
 
             {location.image_2_url.length <= 8 && (
-                <img id='second-image' src='https://i.imgur.com/9H2OQft.png' alt="default second-image"></img>
+                <img id='second-image' src='https://i.imgur.com/9H2OQft.png' alt="default second"></img>
             )}
             {location.image_2_url.length > 8 && (
-                <img src={location.image_2_url} alt='image 2' />
+                <img src={location.image_2_url} alt="second" />
             )}
         </div>
 
