@@ -56,7 +56,10 @@ function App() {
         <ProtectedRoute path='/locations/:locationId/edit'>
           <EditLocationForm />
         </ProtectedRoute>
-        <Route><h1>404 Page Not Found</h1></Route>
+        <Route><span id='box-404'>
+          <img src='https://www.pngmart.com/files/15/Fallout-Pip-Boy-PNG-Pic.png' alt='404' />
+          <h1>404 Page Not Found</h1>
+        </span></Route>
       </Switch>
     </BrowserRouter>
   );

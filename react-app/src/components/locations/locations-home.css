@@ -1,0 +1,40 @@
+#home-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    justify-content: space-between;
+    /* align-items: ; */
+}
+
+#splash-welcome {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 250px;
+    width: 100%;
+}
+
+#home-search {
+    width: 60%;
+    z-index: 1;
+
+}
+
+#splash-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 250px;
+    width: 100%;
+}
+
+#locations-box {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+#location-card {
+    border: 1px solid red;
+}

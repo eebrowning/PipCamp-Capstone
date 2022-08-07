@@ -1,0 +1,109 @@
+#nav-box {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    height: 70px;
+    /* border: 1px solid rebeccapurple; */
+    margin: 0;
+    padding: 0;
+}
+
+* {
+    margin: 0;
+}
+
+#nav-ul {
+    align-items: center;
+    height: 70px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+    padding: 0;
+}
+
+.navlink {
+    text-decoration: none;
+
+}
+
+#logo-nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: baseline;
+    width: 160px;
+}
+
+#logo {
+    height: 45px;
+    width: auto;
+}
+
+#logo-name {
+    height: 45px;
+    width: auto;
+}
+
+.hide-search {
+    display: none;
+}
+
+.users-mock-search {
+    border: .5px solid lightgray;
+    border-radius: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    width: 325px;
+    padding: 5px;
+    list-style: none;
+}
+
+#nav-users-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 80%;
+}
+
+#left-nav-span {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 45%;
+    margin: 0;
+    padding: 0;
+    padding-left: 15px
+}
+
+#right-nav-span {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 200px;
+}
+
+#mock-search-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 30px;
+    height: 30px;
+    width: 30px;
+    border: none;
+    background-color: white;
+}
+
+#mock-search-button:hover {
+    box-shadow: 1px 1.5px 1px gray;
+    background-color: red;
+}
+
+#search-icon {
+    height: 30px;
+    border-radius: 50px;
+    /* height: 50px; */
+    width: auto;
+    object-fit: fill;
+}
