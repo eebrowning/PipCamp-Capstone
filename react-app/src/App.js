@@ -48,7 +48,7 @@ function App() {
           <User />
         </ProtectedRoute>
         <Route path='/' exact={true} >
-          <Locations />
+          <Locations id='locations-component' />
         </Route>
         <Route path='/locations/:locationId' exact={true} >
           <LocationPage />
