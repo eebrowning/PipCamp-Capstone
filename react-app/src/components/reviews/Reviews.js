@@ -14,7 +14,7 @@ function Reviews({ locationId }) {
     const [editing, setEditing] = useState(false)
     let userReview;
     locationReviews.forEach(review => {
-        if (review.user_id == user.id) {
+        if (user && review.user_id == user.id) {
             userReview = review
         }
     })
