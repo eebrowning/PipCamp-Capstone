@@ -15,7 +15,13 @@ function Locations() {
 
 
     return (<div id='home-page'>
-        <div id='splash-welcome'>SPLASH WELCOME</div>
+        <div id='splash-welcome'>
+            <h2>Find yourself inside.</h2>
+            <p>Discover and book spawn camping, RPG maps, shacks, fortresses, and landscapes.</p>
+
+
+
+        </div>
         <span id='home-search' className={'users-mock-search'}>
             <div id='nav-users-buttons'>
                 <li>
@@ -37,7 +43,7 @@ function Locations() {
                 </li>
             </div>
             <button id="mock-search-button">
-                <img id='search-icon'
+                <img id='search-icon-home'
                     src="https://i.pinimg.com/originals/b8/19/89/b81989d219b76f2e5073af1b95c63a63.png" alt="" />
                 {/*  src="https://i.imgur.com/YYjb0K6.png" alt="" /> */}
 
@@ -45,19 +51,20 @@ function Locations() {
             </button>
         </span>
         <div id='splash-image'> IMAGE</div>
-
         <span id='locations-box'>
 
             {locations && locations.map(location => (
-                <NavLink key={location.id} id='location-card' to={`/locations/${location.id}`}>
+                <NavLink key={location.id} className='location-card' to={`/locations/${location.id}`}>
 
-                    <div key={location.id}>
+                    <img className={'card-image'} src={location.image_1_url}></img>
+                    <div className={'card-details'} key={location.id}>
                         <h1>{location.name}</h1>
-                        <div>{location.description}</div>
+                        <div>{'recommendation rate?'}</div>
                     </div>
                 </NavLink>
             ))}
         </span>
+        <div id='splash-image'> IMAGE</div>
 
     </div>)
 }

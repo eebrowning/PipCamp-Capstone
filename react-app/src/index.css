@@ -3,3 +3,8 @@
     height: 500px;
     width: auto;
 }
+
+* {
+    margin: 0;
+    font-family: Helvetica, Arial, sans-serif;
+}
