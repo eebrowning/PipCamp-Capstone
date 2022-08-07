@@ -17,38 +17,40 @@ function Locations() {
     return (<div id='home-page'>
         <div id='splash-welcome'>
             <h2>Find yourself inside.</h2>
-            <p>Discover and book spawn camping, RPG maps, shacks, fortresses, and landscapes.</p>
+            <p>Discover and review spawn camping, RPG maps, shacks, fortresses, and rad sickness.</p>
 
-
+            {/* <img id='rad-sick' src='https://gamepedia.cursecdn.com/fallout_gamepedia/2/20/F76_Perk_Rad_Resistant.png?version=5cfd181d90853b0044e42a208fc452fe'></img> */}
 
         </div>
         <span id='home-search' className={'users-mock-search'}>
-            <div id='nav-users-buttons'>
-                <li>
-                    <NavLink className={'navlink'} to='/login' exact={true} activeClassName='active'>
+            <div id='home-nav-users-buttons'>
+                <li id='search-field-1'>
+                    Load Save
+                    <NavLink className={'home-navlink'} to='/login' exact={true} activeClassName='active'>
                         Login
                     </NavLink>
                 </li>
-                <div className='spacer'>·</div>
-                <li>
-                    <NavLink className={'navlink'} to='/sign-up' exact={true} activeClassName='active'>
+                <li id='search-field-2'>
+                    New Game
+                    <NavLink className={'home-navlink'} to='/sign-up' exact={true} activeClassName='active'>
                         Sign Up
                     </NavLink>
                 </li>
-                <div className='spacer'>·</div>
-                <li>
-                    <NavLink className={'navlink'} to='/login' exact={true} activeClassName='active'>
+                <li id='search-field-3'>
+                    Quick Start
+                    <NavLink className={'home-navlink'} to='/login' exact={true} activeClassName='active'>
                         Demo
                     </NavLink>
                 </li>
+                <li id="home-search-button">
+                    <div>
+                        Click me!
+                    </div>
+                    <img id='search-icon-home'
+                        src="https://i.pinimg.com/originals/b8/19/89/b81989d219b76f2e5073af1b95c63a63.png" alt="" />
+                    {/*  src="https://i.imgur.com/YYjb0K6.png" alt="" /> */}
+                </li>
             </div>
-            <button id="mock-search-button">
-                <img id='search-icon-home'
-                    src="https://i.pinimg.com/originals/b8/19/89/b81989d219b76f2e5073af1b95c63a63.png" alt="" />
-                {/*  src="https://i.imgur.com/YYjb0K6.png" alt="" /> */}
-
-
-            </button>
         </span>
         <div id='splash-image'> IMAGE</div>
         <span id='locations-box'>
@@ -65,7 +67,7 @@ function Locations() {
             ))}
         </span>
         <div id='splash-image'> IMAGE</div>
-
+        {/* footer component here */}
     </div>)
 }
 
