@@ -6,11 +6,10 @@
     /* border: 1px solid rebeccapurple; */
     margin: 0;
     padding: 0;
+    background-color: #fdf6ec;
+
 }
 
-* {
-    margin: 0;
-}
 
 #nav-ul {
     align-items: center;
@@ -73,7 +72,8 @@
     justify-content: space-between;
     width: 45%;
     margin: 0;
-    padding: 0;
+    padding-top: 0;
+    padding-bottom: 0;
     padding-left: 15px
 }
 
@@ -82,6 +82,7 @@
     flex-direction: row;
     justify-content: space-evenly;
     width: 200px;
+    padding-right: 20px;
 }
 
 #mock-search-button {
@@ -93,6 +94,7 @@
     width: 30px;
     border: none;
     background-color: white;
+
 }
 
 #mock-search-button:hover {
