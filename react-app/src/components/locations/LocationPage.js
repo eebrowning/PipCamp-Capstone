@@ -111,6 +111,9 @@ function LocationPage() {
         </div>
         <Reviews locationId={locationId} />
     </span>)
-    else return (<h1>404 Not Found...</h1>)
+    else return (<span id='box-404'>
+        <img src='https://www.pngmart.com/files/15/Fallout-Pip-Boy-PNG-Pic.png' alt='404' />
+        <h1>404 Page Not Found</h1>
+    </span>)
 }
 export default LocationPage
