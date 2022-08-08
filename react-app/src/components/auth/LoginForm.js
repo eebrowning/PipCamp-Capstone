@@ -18,12 +18,15 @@ const LoginForm = () => {
     if (navBox) { navBox.id = 'nav-box-other' }
   }, [])
 
+
+
   const onLogin = async (e) => {
     e.preventDefault();
     const data = await dispatch(login(email, password));
     if (data) {
       setErrors(data);
     }
+    console.log('errors', errors)
   };
 
   const updateEmail = (e) => {
@@ -41,13 +44,17 @@ const LoginForm = () => {
   return (
     <div id='login-form-box'>
       <form id='login-form' onSubmit={onLogin}>
-        <h2>
-          Welcome back!
-        </h2>
-        <div>
-          Let's get you inside.
+        <div id='login-form-top'>
+          <h2>
+            Welcome back!
+          </h2>
+          <div>
+            Let's get you inside.
+          </div>
         </div>
-        <div>
+        <img id='login-image' src='https://pngimg.com/uploads/fallout/fallout_PNG45.png' />
+
+        <div id='login-errors'>
           {errors.map((error) => (
             <div key={error}>{error}</div>
           ))}
@@ -77,7 +84,6 @@ const LoginForm = () => {
         <button type='submit'>Login</button>
 
       </form>
-      <img id='login-image' src='https://pngimg.com/uploads/fallout/fallout_PNG45.png' />
     </div>
   );
 };

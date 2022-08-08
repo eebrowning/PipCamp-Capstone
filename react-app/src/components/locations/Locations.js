@@ -37,46 +37,68 @@ function Locations() {
             <p>Discover and review spawn camping, RPG maps, shacks, fortresses, and rad sickness.</p>
         </div>
         <span id='home-search' className={'users-mock-search'}>
-            <div id='home-nav-users-buttons'>
-                <li id='search-field-1'>
-                    Load Save
-                    <NavLink className={'home-navlink'} to='/login' exact={true} activeClassName='active'>
-                        Login
-                    </NavLink>
-                </li>
-                <li id='search-field-2'>
-                    New Game
-                    <NavLink className={'home-navlink'} to='/sign-up' exact={true} activeClassName='active'>
-                        Sign Up
-                    </NavLink>
-                </li>
-                <div id='search-field-3'>
-                    Quick Start
-                    {/* <NavLink className={'home-navlink'} to='/login' exact={true} activeClassName='active'>
+            {!state.session.user && (
+                <div id='home-nav-users-buttons'>
+                    <li id='search-field-1'>
+                        Load Save
+                        <NavLink className={'home-navlink'} to='/login' exact={true} activeClassName='active'>
+                            Login
+                        </NavLink>
+                    </li>
+                    <li id='search-field-2'>
+                        New Game
+                        <NavLink className={'home-navlink'} to='/sign-up' exact={true} activeClassName='active'>
+                            Sign Up
+                        </NavLink>
+                    </li>
+                    <div id='search-field-3'>
+                        Quick Start
+                        {/* <NavLink className={'home-navlink'} to='/login' exact={true} activeClassName='active'>
                         Demo
                     </NavLink> */}
-                    {!state.session.user && (
-                        <li className={'home-navlink'} id={'demo-login'} onClick={handleClick}>
-                            Demo
-                        </li>
-                    )}
-                    {state.session.user && (
+                        {!state.session.user && (
+                            <li className={'home-navlink'} id={'demo-login'} onClick={handleClick}>
+                                Demo
+                            </li>
+                        )}
+                        {state.session.user && (
+                            <li className={'home-navlink'}>
+                                <LogoutButton />
+                            </li>
+                        )}
+                    </div>
+                    <li id="home-search-button">
+                        <div>
+                            Random!
+                        </div>
+                        <NavLink to={randLocation ? `/locations/${randLocation.id}` : '/'}>
+                            <img id='search-icon-home'
+                                src="https://i.pinimg.com/originals/b8/19/89/b81989d219b76f2e5073af1b95c63a63.png" alt="" />
+                            {/*  src="https://i.imgur.com/YYjb0K6.png" alt="" /> */}
+                        </NavLink>
+                    </li>
+                </div>)}
+            {state.session.user && (
+                <div id='home-nav-users-buttons'>
+
+                    <li id='search-field-1'>
+                        Exit Game
                         <li className={'home-navlink'}>
                             <LogoutButton />
                         </li>
-                    )}
+                    </li>
+                    <li id="home-search-button">
+                        <div>
+                            Random!
+                        </div>
+                        <NavLink to={randLocation ? `/locations/${randLocation.id}` : '/'}>
+                            <img id='search-icon-home'
+                                src="https://i.pinimg.com/originals/b8/19/89/b81989d219b76f2e5073af1b95c63a63.png" alt="" />
+                            {/*  src="https://i.imgur.com/YYjb0K6.png" alt="" /> */}
+                        </NavLink>
+                    </li>
                 </div>
-                <li id="home-search-button">
-                    <div>
-                        Random!
-                    </div>
-                    <NavLink to={randLocation ? `/locations/${randLocation.id}` : '/'}>
-                        <img id='search-icon-home'
-                            src="https://i.pinimg.com/originals/b8/19/89/b81989d219b76f2e5073af1b95c63a63.png" alt="" />
-                        {/*  src="https://i.imgur.com/YYjb0K6.png" alt="" /> */}
-                    </NavLink>
-                </li>
-            </div>
+            )}
         </span>
         {/* <div id='splash-image'> */}
         <img id='splash-image' src='https://i.imgur.com/ggDpArP.jpg'></img>
