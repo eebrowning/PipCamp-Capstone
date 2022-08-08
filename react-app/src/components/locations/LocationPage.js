@@ -52,7 +52,7 @@ function LocationPage() {
     }
 
 
-    if (location) return (<span>
+    if (location) return (<span id='location-page'>
         {+userId === +location.user_id && (
             <div id='user-owned-buttons'>
                 <button id='edit-location' onClick={handleEdit}>Edit</button>
@@ -62,63 +62,70 @@ function LocationPage() {
         <div id='image-box'>
             <img id='main-image' src={location.image_1_url} alt='image 1' />
 
-            {location.image_2_url.length <= 8 && (
+            {!location.image_2_url && (
                 <img id='second-image' src='https://i.imgur.com/9H2OQft.png' alt="default second"></img>
             )}
-            {location.image_2_url.length > 8 && (
+            {location.image_2_url.length > 0 && (
                 <img src={location.image_2_url} alt="second" />
             )}
         </div>
+        <span id='sans-images'>
 
-        <div id='location-information'>
-            <div>{location.name}</div>
-            <div>{location.description}</div>
-            <span id='campsite'>
-                <h2>Campsite Area</h2>
-                {campsite.map((item, ind) => (
-                    <div key={ind} id='info-attribute'>
-                        <div>{campsite_labels[ind]}:</div>
-                        <div >{item}</div>
-                    </div>
-                ))}
-            </span>
-            <span id='essentials'>
-                <h2>Essentials</h2>
+            <div id='location-information-box'>
 
-                {essential.map((item, ind) => (
-                    <div key={ind} id='info-attribute'>
-                        <div>{essential_labels[ind]}:</div>
-                        <div >{item}</div>
-                    </div>
-                ))}
-            </span>
-            <span id='amenities'>
-                <h2>Amenities</h2>
+                <div id='location-information'>
+                    <h1>{location.name}</h1>
+                    <div>{location.description}</div>
+                    <span id='campsite'>
+                        <h2>Campsite Area</h2>
+                        {campsite.map((item, ind) => (
+                            <div key={ind} id='info-attribute'>
+                                <div>{campsite_labels[ind]}:</div>
+                                <div >{item}</div>
+                            </div>
+                        ))}
+                    </span>
+                    <span id='essentials'>
+                        <h2>Essentials</h2>
 
-                {amenities.map((item, ind) => (
-                    <div key={ind} id='info-attribute'>
-                        <div>{amenities_labels[ind]}:</div>
-                        <div >{item}</div>
-                    </div>
-                ))}
-            </span>
-            <span id='location-details-outer'>
-                <h2>Details</h2>
-                <div id='location-details'>
-                    {details.map((item, ind) => (
-                        <div key={ind} id='info-attribute'>
-                            <div>{details_labels[ind]}:</div>
-                            <div >{item}</div>
+                        {essential.map((item, ind) => (
+                            <div key={ind} id='info-attribute'>
+                                <div>{essential_labels[ind]}:</div>
+                                <div >{item}</div>
+                            </div>
+                        ))}
+                    </span>
+                    <span id='amenities'>
+                        <h2>Amenities</h2>
+
+                        {amenities.map((item, ind) => (
+                            <div key={ind} id='info-attribute'>
+                                <div>{amenities_labels[ind]}:</div>
+                                <div >{item}</div>
+                            </div>
+                        ))}
+                    </span>
+                    <span id='location-details-outer'>
+                        <h2>Details</h2>
+                        <div id='location-details'>
+                            {details.map((item, ind) => (
+                                <div key={ind} id='info-attribute'>
+                                    <div>{details_labels[ind]}:</div>
+                                    <div >{item}</div>
+                                </div>
+                            ))}
                         </div>
-                    ))}
+                    </span>
+
                 </div>
-            </span>
+                {userId && (
+                    <Reviews locationId={locationId} />
 
-        </div>
-        {userId && (
-            <Reviews locationId={locationId} />
+                )}
+            </div>
+            <div id='reservation-box'></div>
+        </span>
 
-        )}
     </span>)
     else return (<span id='box-404'>
         <img src='https://www.pngmart.com/files/15/Fallout-Pip-Boy-PNG-Pic.png' alt='404' />

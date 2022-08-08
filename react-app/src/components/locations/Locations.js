@@ -81,12 +81,12 @@ function Locations() {
             {state.session.user && (
                 <div id='home-nav-users-buttons'>
 
-                    <li id='search-field-1'>
+                    <div id='search-field-1'>
                         Exit Game
                         <li className={'home-navlink'}>
                             <LogoutButton />
                         </li>
-                    </li>
+                    </div>
                     <li id="home-search-button">
                         <div>
                             Random!
