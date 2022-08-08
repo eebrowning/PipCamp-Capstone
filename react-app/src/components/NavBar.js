@@ -19,6 +19,7 @@ const NavBar = () => {
   const [randLocation, setRandLocation] = useState(locations ? locations[Math.floor(Math.random() * locations.length)] : 1)
 
 
+
   const dispatch = useDispatch();
   function handleClick(e) {
     e.preventDefault();
@@ -26,12 +27,21 @@ const NavBar = () => {
     return dispatch(demoLogin())
   }
 
+  // useEffect(() => {
+  //   setHome(window.location.pathname == '/' ? true : false)
+  // }, [])
+
   useEffect(() => {
     setHome(window.location.pathname == '/' ? true : false)
   }, [window.location.pathname])
 
   if (locations) return (
     <nav id={home ? 'nav-box' : 'nav-box-other'}>
+
+      {window.scrollTo({
+        top: 0,
+        left: 0,
+      })}
       <ul id='nav-ul'>
         <span id='left-nav-span'>
 
