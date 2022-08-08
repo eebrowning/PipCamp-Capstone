@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { CreateLocationThunk } from '../../store/location';
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
@@ -138,8 +138,10 @@ function LocationForm() {
         // }
 
     }
-
-
+    useEffect(() => {
+        const navBox = document.getElementById('nav-box');
+        if (navBox) { navBox.id = 'nav-box-other' }
+    }, [])
     return (
         <div id='location-form-container'>
             <h2 id='location-form-title'>Add a Location</h2>
@@ -246,8 +248,16 @@ function LocationForm() {
                             <option key={option} value={option}>{option}</option>
                         ))}
                     </select>
-                    <input placeholder='Check in time' type='time' onChange={e => setCheckin(`After ${timeConverter(e.target.value)}`)}></input>
-                    <input placeholder='Check out time' type='time' onChange={e => setCheckout(`Before ${timeConverter(e.target.value)}`)}></input>
+                    <div>
+                        Checkin
+                        <input placeholder='Check in time' type='time' onChange={e => setCheckin(`${`After ${timeConverter(e.target.value)}`}`)}></input>
+
+                    </div>
+                    <div>
+                        Checkout
+                        <input placeholder='Check out time' type='time' onChange={e => setCheckout(`${`Before ${timeConverter(e.target.value)}`}`)}></input>
+
+                    </div>
                     <input placeholder='Miniumum Nights' type='number' onChange={e => setMinNights(e.target.value)}></input>
 
                 </label>
