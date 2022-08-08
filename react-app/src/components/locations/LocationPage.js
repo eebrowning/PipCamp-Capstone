@@ -28,6 +28,8 @@ function LocationPage() {
         console.log('dispatched to GetLocationDetailThunk')
         dispatch(GetLocationDetailThunk(locationId))
         dispatch(GetLocationsThunk())
+        const navBox = document.getElementById('nav-box');
+        if (navBox) { navBox.id = 'nav-box-other' }
         window.scrollTo({
             top: 0,
             left: 0,

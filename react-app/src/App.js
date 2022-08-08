@@ -36,6 +36,9 @@ function App() {
     <BrowserRouter>
       <NavBar />
       <Switch>
+        <Route path='/' exact={true} >
+          <Locations id='locations-component' />
+        </Route>
         <Route path='/login' exact={true}>
           <LoginForm />
         </Route>
@@ -51,9 +54,7 @@ function App() {
         <ProtectedRoute path='/users/:userId' exact={true} >
           <User />
         </ProtectedRoute>
-        <Route path='/' exact={true} >
-          <Locations id='locations-component' />
-        </Route>
+
         <Route path='/locations/:locationId' exact={true} >
           <LocationPage />
         </Route>
