@@ -19,6 +19,8 @@ function Locations() {
         return tagColors[Math.floor(Math.random() * tagColors.length)]
     }
     useEffect(() => {
+        const navBox = document.getElementById('nav-box-other');
+        if (navBox) { navBox.id = 'nav-box' }
         dispatch(GetLocationsThunk())
     }, [dispatch])
 

@@ -14,7 +14,8 @@ const LoginForm = () => {
   const state = useSelector(state => state)
   console.log('>>>>> state;', state)
   useEffect(() => {
-    console.log(window.location.pathname)
+    const navBox = document.getElementById('nav-box');
+    if (navBox) { navBox.id = 'nav-box-other' }
   }, [])
 
   const onLogin = async (e) => {
@@ -39,35 +40,44 @@ const LoginForm = () => {
 
   return (
     <div id='login-form-box'>
-
       <form id='login-form' onSubmit={onLogin}>
+        <h2>
+          Welcome back!
+        </h2>
+        <div>
+          Let's get you inside.
+        </div>
         <div>
           {errors.map((error) => (
             <div key={error}>{error}</div>
           ))}
         </div>
         <div>
-          <label htmlFor='email'>Email</label>
+          {/* <label htmlFor='email'>Email</label> */}
           <input
+            id='login-email'
             name='email'
             type='text'
-            placeholder='Email'
+            placeholder='Email address...'
             value={email}
             onChange={updateEmail}
           />
         </div>
         <div>
-          <label htmlFor='password'>Password</label>
+          {/* <label htmlFor='password'>Password</label> */}
           <input
+            id='login-password'
             name='password'
             type='password'
-            placeholder='Password'
+            placeholder='Password...'
             value={password}
             onChange={updatePassword}
           />
-          <button type='submit'>Login</button>
         </div>
+        <button type='submit'>Login</button>
+
       </form>
+      <img id='login-image' src='https://pngimg.com/uploads/fallout/fallout_PNG45.png' />
     </div>
   );
 };
