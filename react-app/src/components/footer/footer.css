@@ -1,0 +1,82 @@
+footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-size: 20px;
+    height: 750px;
+    width: 90%;
+    border-radius: 50px;
+    margin: 35px;
+}
+
+.pre-footer {
+    height: 500px;
+    display: flex;
+    flex-direction: row;
+}
+
+.hosting,
+.about-us {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.hosting a,
+.about-us a {
+    text-decoration: none;
+    color: rgb(153, 153, 153)
+}
+
+.title {
+    font-weight: bold;
+}
+
+footer .nav-logo {
+    margin-bottom: 45px;
+}
+
+footer h2 {
+    font-size: 20px;
+}
+
+footer p {
+    font-size: 16px;
+    color: rgb(153, 153, 153)
+}
+
+.hosting {
+    width: 25%;
+    height: 250px;
+}
+
+.about-us {
+    width: 25%;
+    height: 250px;
+}
+
+footer .tagline {
+    height: 250px;
+    width: 50%;
+}
+
+
+.stores {
+    height: 250px;
+    border-bottom: 1px gray solid;
+}
+
+.copyright {
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.copyright a {
+    padding-top: 5px;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: rgb(153, 153, 153);
+}

@@ -28,6 +28,10 @@ function App() {
     return null;
   }
 
+  window.scrollTo({
+    top: 0,
+    left: 0,
+  });
   return (
     <BrowserRouter>
       <NavBar />

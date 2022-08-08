@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink, Redirect, useHistory, useParams } from 'react-router-dom';
-import { DeleteLocationThunk, EditLocationThunk, GetLocationDetailThunk, GetLocationsThunk } from '../../store/location';
-import { GetReviewsThunk } from '../../store/review';
+import { useHistory, useParams } from 'react-router-dom';
+import { DeleteLocationThunk, GetLocationDetailThunk, GetLocationsThunk } from '../../store/location';
 import Reviews from '../reviews/Reviews';
 import './location-page.css'
 
@@ -29,6 +28,10 @@ function LocationPage() {
         console.log('dispatched to GetLocationDetailThunk')
         dispatch(GetLocationDetailThunk(locationId))
         dispatch(GetLocationsThunk())
+        window.scrollTo({
+            top: 0,
+            left: 0,
+        });
     }, [dispatch])
 
     function handleDelete(e) {
@@ -66,7 +69,7 @@ function LocationPage() {
         </div>
 
         <div id='location-information'>
-            <h1>{location.name}</h1>
+            <div>{location.name}</div>
             <div>{location.description}</div>
             <span id='campsite'>
                 <h2>Campsite Area</h2>

@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { GetLocationsThunk } from '../../store/location';
 import { demoLogin } from '../../store/session';
 import LogoutButton from '../auth/LogoutButton';
+import Footer from '../footer/Footer';
 import './locations-home.css'
 
 
@@ -13,7 +14,10 @@ function Locations() {
     const locations = useSelector(state => Object.values(state.locations))
     const randLocation = locations ? locations[Math.floor(Math.random() * locations.length)] : null
     // console.log(randLocation.id, randLocation.name, 'here random')
-
+    const tagColors = ['#325886', '#447AB9', '#82A7D6', '#e3d4bc', '#34a4d4', "#dfb387", '#0b89d5', '#504455']
+    const randColor = () => {
+        return tagColors[Math.floor(Math.random() * tagColors.length)]
+    }
     useEffect(() => {
         dispatch(GetLocationsThunk())
     }, [dispatch])
@@ -44,7 +48,7 @@ function Locations() {
                         Sign Up
                     </NavLink>
                 </li>
-                <li id='search-field-3'>
+                <div id='search-field-3'>
                     Quick Start
                     {/* <NavLink className={'home-navlink'} to='/login' exact={true} activeClassName='active'>
                         Demo
@@ -59,7 +63,7 @@ function Locations() {
                             <LogoutButton />
                         </li>
                     )}
-                </li>
+                </div>
                 <li id="home-search-button">
                     <div>
                         Random!
@@ -72,23 +76,29 @@ function Locations() {
                 </li>
             </div>
         </span>
-        <div id='splash-image'> IMAGE</div>
+        {/* <div id='splash-image'> */}
+        <img id='splash-image' src='https://i.imgur.com/ggDpArP.jpg'></img>
+        {/* </div> */}
         <span id='locations-box'>
 
             {locations && locations.map(location => (
                 <NavLink key={location.id} className='location-card' to={`/locations/${location.id}`}>
 
                     <img className={'card-image'} src={location.image_1_url}></img>
-                    <div className={'card-details'} key={location.id}>
-                        <h1>{location.name}</h1>
-                        <div>{'recommendation rate?'}</div>
+                    <div id='align-details'>
+                        <div className={'card-details'} style={{ backgroundColor: randColor() }} key={location.id}>
+                            Available to check out
+                            {/* <h1>{location.name}</h1>
+                            <div>{'recommendation rate?'}</div> */}
+                        </div>
+
                     </div>
                 </NavLink>
             ))}
         </span>
-        <div id='splash-image'> IMAGE</div>
-        {/* footer component here */}
-    </div>)
+        {/* <div id='splash-image'> IMAGE</div> */}
+        <Footer />
+    </div >)
 }
 
 export default Locations
