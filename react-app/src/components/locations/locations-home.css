@@ -9,8 +9,8 @@
     height: 100%;
     justify-content: space-between;
     background-color: #fdf6ec;
-    padding-left: 20px;
-    padding-right: 20px
+    /* padding-left: 20px;
+    padding-right: 20px */
 }
 
 #splash-image {
@@ -18,7 +18,7 @@
     border-radius: 25px;
     background-color: #447AB9;
     height: 500px;
-    width: 99%;
+    width: 90%;
     display: flex;
 
     justify-content: center;
@@ -32,7 +32,7 @@
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    height: 300px;
+    height: 370px;
     width: 99%;
     /* border: 1px solid red; */
     /* background-color: #447AB9; */
@@ -61,9 +61,9 @@
 
     height: 120px;
     /* width: 88%; */
-    width: 89%;
+    width: 82%;
     font-family: Helvetica, Arial, sans-serif;
-    z-index: 1;
+    /* z-index: 1; */
     position: absolute;
     top: 320px;
     padding-top: 0;
@@ -120,7 +120,7 @@
     width: 100%;
     position: relative;
     padding-left: 30px;
-    border: 1px solid red;
+    /* border: 1px solid red; */
     /* height: 60%; */
     /* align-items: baseline; */
 }

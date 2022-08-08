@@ -8,13 +8,26 @@
     margin: 0;
     padding: 0;
     background-color: #fdf6ec;
+    position: fixed;
+    z-index: 10;
+}
 
+#nav-box-other {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 70px;
+    /* border: 1px solid rebeccapurple; */
+    margin: 0;
+    padding: 0;
+    /* background-color: #fdf6ec; */
 }
 
 
 #nav-ul {
     max-width: 1300px;
-
+    color: #447AB9;
     align-items: center;
     height: 70px;
     width: 100%;
@@ -33,6 +46,7 @@
     flex-direction: row;
     justify-content: baseline;
     width: 160px;
+    padding-left: 10px;
 }
 
 #logo {
@@ -97,6 +111,10 @@
     border: none;
     background-color: white;
 
+}
+
+#demo-login:hover {
+    cursor: pointer;
 }
 
 #mock-search-button:hover {
