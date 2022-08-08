@@ -1,26 +1,34 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { GetLocationsThunk } from '../../store/location';
+import { demoLogin } from '../../store/session';
+import LogoutButton from '../auth/LogoutButton';
 import './locations-home.css'
+
 
 function Locations() {
     const dispatch = useDispatch()
+    const state = useSelector(state => state)
     const locations = useSelector(state => Object.values(state.locations))
+    const randLocation = locations ? locations[Math.floor(Math.random() * locations.length)] : null
+    // console.log(randLocation.id, randLocation.name, 'here random')
 
-    console.log(locations, 'here are locations')
     useEffect(() => {
         dispatch(GetLocationsThunk())
     }, [dispatch])
 
 
-    return (<div id='home-page'>
+    function handleClick(e) {
+        e.preventDefault();
+
+        return dispatch(demoLogin())
+    }
+
+    if (randLocation !== null) return (<div id='home-page'>
         <div id='splash-welcome'>
             <h2>Find yourself inside.</h2>
             <p>Discover and review spawn camping, RPG maps, shacks, fortresses, and rad sickness.</p>
-
-            {/* <img id='rad-sick' src='https://gamepedia.cursecdn.com/fallout_gamepedia/2/20/F76_Perk_Rad_Resistant.png?version=5cfd181d90853b0044e42a208fc452fe'></img> */}
-
         </div>
         <span id='home-search' className={'users-mock-search'}>
             <div id='home-nav-users-buttons'>
@@ -38,17 +46,29 @@ function Locations() {
                 </li>
                 <li id='search-field-3'>
                     Quick Start
-                    <NavLink className={'home-navlink'} to='/login' exact={true} activeClassName='active'>
+                    {/* <NavLink className={'home-navlink'} to='/login' exact={true} activeClassName='active'>
                         Demo
-                    </NavLink>
+                    </NavLink> */}
+                    {!state.session.user && (
+                        <li className={'home-navlink'} id={'demo-login'} onClick={handleClick}>
+                            Demo
+                        </li>
+                    )}
+                    {state.session.user && (
+                        <li className={'home-navlink'}>
+                            <LogoutButton />
+                        </li>
+                    )}
                 </li>
                 <li id="home-search-button">
                     <div>
-                        Click me!
+                        Random!
                     </div>
-                    <img id='search-icon-home'
-                        src="https://i.pinimg.com/originals/b8/19/89/b81989d219b76f2e5073af1b95c63a63.png" alt="" />
-                    {/*  src="https://i.imgur.com/YYjb0K6.png" alt="" /> */}
+                    <NavLink to={randLocation ? `/locations/${randLocation.id}` : '/'}>
+                        <img id='search-icon-home'
+                            src="https://i.pinimg.com/originals/b8/19/89/b81989d219b76f2e5073af1b95c63a63.png" alt="" />
+                        {/*  src="https://i.imgur.com/YYjb0K6.png" alt="" /> */}
+                    </NavLink>
                 </li>
             </div>
         </span>

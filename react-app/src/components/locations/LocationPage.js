@@ -28,7 +28,7 @@ function LocationPage() {
     useEffect(() => {
         console.log('dispatched to GetLocationDetailThunk')
         dispatch(GetLocationDetailThunk(locationId))
-        // dispatch(GetLocationsThunk())
+        dispatch(GetLocationsThunk())
     }, [dispatch])
 
     function handleDelete(e) {
@@ -42,6 +42,7 @@ function LocationPage() {
     function handleEdit(e) {
         e.preventDefault()
         dispatch(GetLocationDetailThunk(locationId))
+
         history.push(`/locations/${locationId}/edit`)
     }
 
@@ -109,7 +110,10 @@ function LocationPage() {
             </span>
 
         </div>
-        <Reviews locationId={locationId} />
+        {userId && (
+            <Reviews locationId={locationId} />
+
+        )}
     </span>)
     else return (<span id='box-404'>
         <img src='https://www.pngmart.com/files/15/Fallout-Pip-Boy-PNG-Pic.png' alt='404' />

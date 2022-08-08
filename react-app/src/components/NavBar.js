@@ -1,10 +1,10 @@
 
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { NavLink, useParams } from 'react-router-dom';
+import { demoLogin } from '../store/session';
 import LogoutButton from './auth/LogoutButton';
 import './nav-bar.css'
-
 
 
 const NavBar = () => {
@@ -13,16 +13,25 @@ const NavBar = () => {
   const state = useSelector(state => state)
   // const location = useSelector(state => Object.values(state.location))
   const [home, setHome] = useState(window.location.pathname == '/' ? true : false)
-  console.log(home, 'home')
-  console.log(window.location.pathname, 'home')
 
+  const locations = useSelector(state => Object.values(state.locations))
+  // const randLocation = locations ? locations[Math.floor(Math.random() * locations.length)] : null;
+  const [randLocation, setRandLocation] = useState(locations ? locations[Math.floor(Math.random() * locations.length)] : 1)
+
+
+  const dispatch = useDispatch();
+  function handleClick(e) {
+    e.preventDefault();
+
+    return dispatch(demoLogin())
+  }
 
   useEffect(() => {
     setHome(window.location.pathname == '/' ? true : false)
   }, [window.location.pathname])
 
-  return (
-    <nav id='nav-box'>
+  if (locations) return (
+    <nav id={home ? 'nav-box' : 'nav-box-other'}>
       <ul id='nav-ul'>
         <span id='left-nav-span'>
 
@@ -47,26 +56,40 @@ const NavBar = () => {
                 </NavLink>
               </li>
               <div className='spacer'>·</div>
-              <li>
+              {/* <li>
                 <NavLink className={'navlink'} to='/login' exact={true} activeClassName='active'>
                   Demo
                 </NavLink>
-              </li>
+              </li> */}
+              {!state.session.user && (
+                <li id={'demo-login'} onClick={handleClick}>
+                  Demo
+                </li>
+              )}
+              {state.session.user && (
+                <li>
+                  <LogoutButton />
+                </li>
+              )}
             </div>
-
+            {/* 
             <button id="mock-search-button">
               <img id='search-icon'
                 src="https://i.pinimg.com/originals/b8/19/89/b81989d219b76f2e5073af1b95c63a63.png" alt="" />
+            </button> */}
+
+            <NavLink onClick={() => setRandLocation(locations ? locations[Math.floor(Math.random() * locations.length)] : 1)} to={randLocation ? `/locations/${randLocation.id}` : '/locations/1'}>
+              <img id='search-icon'
+                src="https://i.pinimg.com/originals/b8/19/89/b81989d219b76f2e5073af1b95c63a63.png" alt="" />
               {/*  src="https://i.imgur.com/YYjb0K6.png" alt="" /> */}
+            </NavLink>
 
-
-            </button>
           </span>
         </span>
 
         <span id='right-nav-span'>
           <li>
-            <LogoutButton />
+            {state.session.user && (<LogoutButton />)}
           </li>
           <li>
             <NavLink className={'navlink'} to='/new-location' exact={true} activeClassName='active'>

@@ -38,6 +38,7 @@ const deleteLocation = (location) => ({
 
 //works!!
 export const GetLocationsThunk = () => async (dispatch) => {
+    console.log('in GetLocationsThunk')
     const response = await fetch('/all/locations')
     if (response.ok) {
         const data = await response.json()
