@@ -6,6 +6,8 @@ import Images from '../image-carousel/Images';
 import Reviews from '../reviews/Reviews';
 import './location-page.css'
 
+
+
 function LocationPage() {
     const dispatch = useDispatch()
     const locations = useSelector(state => Object.values(state.locations))
@@ -14,11 +16,40 @@ function LocationPage() {
     const userId = useSelector(state => state.session.user?.id)
     const location = locations?.find(location => location.id == +locationId)
     const campsite = location?.campsite_info.split('-')
-    const campsite_labels = ['Shelter Type', "Available Sites", 'Max Guests', 'Max Vehicles', 'Disabled Accessible']
+    // const campsite_labels = ['Shelter Type', "Available Sites", 'Max Guests', 'Max Vehicles', 'Disabled Accessible']
+    const campsite_icons = [
+        'https://cdn-icons.flaticon.com/png/512/4469/premium/4469267.png?token=exp=1660080678~hmac=bc5f415ffa531b2a73d7e2432b6756a3',
+        "https://cdn-icons-png.flaticon.com/512/684/684809.png",
+        'https://cdn-icons.flaticon.com/png/512/2963/premium/2963363.png?token=exp=1660081314~hmac=4ab12bffd78a9e331fab07400dbe01ac',
+        'https://cdn-icons-png.flaticon.com/512/6917/6917269.png',
+        'https://cdn-icons-png.flaticon.com/512/1467/1467267.png']
+    const campsite_details = campsite ? [`${campsite[0]} sites`, `${campsite[1]} sites`, `Up to${campsite[2]} guests per site`, `Up to ${campsite[3]} vehicles`, `${campsite[4] == 'true' ? 'Wheelchair access' : 'Not accessible'}`] : [];
     const essential = location?.essential_info.split('-')
     const essential_labels = ["Fires Allowed", 'Bathrooms Available', "Pets Allowed"]
+    const essential_icons = [
+        "https://i.imgur.com/kHHRFoy.png",
+        'https://cdn-icons-png.flaticon.com/512/4745/4745263.png',
+        "https://cdn-icons.flaticon.com/png/512/2097/premium/2097773.png?token=exp=1660083689~hmac=5c8c25d93923767041d41765111b21c6"
+    ]
+    const essential_details = essential ? [`${essential[0] ? 'Fires allowed' : 'Fires not allowed'}`, `${essential[1] ? 'Toilet available' : "Toilet not available"}`, `${essential[2] ? 'Pets allowed' : 'Pets not allowed'}`] : [];
     const amenities = location?.amenities_info.split('-')
     const amenities_labels = ["Tables Available", 'Wifi Available', "Bins Available", "Kitchen Available", 'Water Available', 'Showers Available']
+    const amenities_icons = [
+        "https://cdn-icons-png.flaticon.com/512/7627/7627697.png",
+        'https://cdn-icons-png.flaticon.com/512/748/748151.png',
+        "https://cdn-icons-png.flaticon.com/512/484/484662.png",
+        "https://cdn-icons-png.flaticon.com/512/2700/2700546.png",
+        'https://cdn-icons-png.flaticon.com/512/2997/2997155.png',
+        'https://cdn-icons-png.flaticon.com/512/2844/2844030.png'
+    ]
+    const amenities_details = amenities ? [
+        `${amenities[0] ? 'Tables available' : 'Tables not available'}`,
+        `${amenities[1] ? 'Wifi available' : 'Wifi not available'}`,
+        `${amenities[2] ? 'Trash bins available' : 'Trash bins not available'}`,
+        `${amenities[3] ? 'Kitchen available' : 'Kitchen not available'}`,
+        `${amenities[4] ? 'Potable water available' : 'Potable water not available'}`,
+        `${amenities[5] ? 'Showers available' : 'Showers not available'}`
+    ] : [];
     const details = location?.details_info.split('-')
     const details_labels = ['On Arrival', 'Check In', 'Check Out', 'Minimum Nights']
     const history = useHistory()
@@ -91,7 +122,7 @@ function LocationPage() {
                 <img id='second-image' src='https://i.imgur.com/9H2OQft.png' alt="default second"></img>
             )}
             {location.image_2_url.length > 0 && (
-                <img src={location.image_2_url} alt="second" />
+                <img id='second-image' src={location.image_2_url} alt="second" />
             )}
         </Images>
         <span id='sans-images'>
@@ -105,7 +136,9 @@ function LocationPage() {
                 <div id='location-information'>
                     <div id='owner-description'>
                         <div id='owner-card'>
-                            <div id='owner-image'></div>
+                            {/* <img src="https://www.pngmart.com/files/15/Fallout-Pip-Boy-PNG-Picture.png" id='owner-image' /> */}
+                            <img src="https://www.pngmart.com/files/15/Fallout-Pip-Boy-PNG-Transparent.png" id='owner-image' />
+
                             <label>
                                 <p>
                                     Hosted by
@@ -119,9 +152,9 @@ function LocationPage() {
                     </div>
                     <span id='campsite'>
                         <h2>Campsite Area</h2>
-                        {campsite.map((item, ind) => (
-                            <div key={ind} id='info-attribute'>
-                                <div>{campsite_labels[ind]}:</div>
+                        {campsite_details.map((item, ind) => (
+                            <div key={ind} className='info-attribute'>
+                                <img style={{ height: '20px' }} src={campsite_icons[ind]} />
                                 <div >{item}</div>
                             </div>
                         ))}
@@ -129,9 +162,10 @@ function LocationPage() {
                     <span id='essentials'>
                         <h2>Essentials</h2>
 
-                        {essential.map((item, ind) => (
-                            <div key={ind} id='info-attribute'>
-                                <div>{essential_labels[ind]}:</div>
+                        {essential_details.map((item, ind) => (
+                            <div key={ind} className='info-attribute'>
+                                <img style={{ height: '20px' }} src={essential_icons[ind]} />
+
                                 <div >{item}</div>
                             </div>
                         ))}
@@ -139,19 +173,21 @@ function LocationPage() {
                     <span id='amenities'>
                         <h2>Amenities</h2>
 
-                        {amenities.map((item, ind) => (
-                            <div key={ind} id='info-attribute'>
-                                <div>{amenities_labels[ind]}:</div>
+                        {amenities_details.map((item, ind) => (
+                            <div key={ind} className='info-attribute'>
+                                {/* <div>{amenities_labels[ind]}:</div> */}
+                                <img style={{ height: '20px' }} src={amenities_icons[ind]} />
+
                                 <div >{item}</div>
                             </div>
                         ))}
                     </span>
                     <span id='location-details-outer'>
-                        <h2>Details</h2>
+                        <p>Details</p>
                         <div id='location-details'>
                             {details.map((item, ind) => (
-                                <div key={ind} id='info-attribute'>
-                                    <div>{details_labels[ind]}:</div>
+                                <div key={ind} className='info-attribute'>
+                                    <div className='details-label'>{details_labels[ind]}:</div>
                                     <div >{item}</div>
                                 </div>
                             ))}

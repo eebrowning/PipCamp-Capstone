@@ -33,6 +33,7 @@
 #images>img {
     margin: 10px;
     height: auto;
+    max-height: 480px;
     width: 720px;
     object-fit: cover;
 }

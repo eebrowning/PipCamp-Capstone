@@ -12,6 +12,7 @@ import LocationForm from './components/locations/LocationForm';
 import Locations from './components/locations/Locations'
 import LocationPage from './components/locations/LocationPage';
 import EditLocationForm from './components/locations/EditLocationForm';
+import Footer from './components/footer/Footer';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -66,6 +67,7 @@ function App() {
           <h1>404 Page Not Found</h1>
         </span></Route>
       </Switch>
+      <Footer />
     </BrowserRouter>
   );
 }

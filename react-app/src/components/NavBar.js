@@ -98,9 +98,9 @@ const NavBar = () => {
         </span>
 
         <span id='right-nav-span'>
-          <li>
+          {/* <li>
             {state.session.user && (<LogoutButton />)}
-          </li>
+          </li> */}
           <li>
             <NavLink className={'navlink'} to='/new-location' exact={true} activeClassName='active'>
               New Location
