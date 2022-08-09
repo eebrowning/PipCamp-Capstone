@@ -121,7 +121,7 @@ function Locations() {
             ))}
         </span>
         {/* <div id='splash-image'> IMAGE</div> */}
-        <Footer />
+        {/* <Footer /> */}
     </div >)
 }
 
