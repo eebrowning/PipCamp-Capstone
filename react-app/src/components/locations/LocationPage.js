@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { DeleteLocationThunk, GetLocationDetailThunk, GetLocationsThunk } from '../../store/location';
+import Images from '../image-carousel/Images';
 import Reviews from '../reviews/Reviews';
 import './location-page.css'
 
@@ -21,10 +22,19 @@ function LocationPage() {
     const details = location?.details_info.split('-')
     const details_labels = ['On Arrival', 'Check In', 'Check Out', 'Minimum Nights']
     const history = useHistory()
+    const [usersArr, setUsersArr] = useState([]);
+
 
     // console.log(location?.user_id, userId, 'pages creator and visiting user')
 
     useEffect(() => {
+        async function fetchData() {
+            const response = await fetch('/api/users/');
+            const responseData = await response.json();
+            setUsersArr(responseData.users);
+        }
+        fetchData();
+
         console.log('dispatched to GetLocationDetailThunk')
         dispatch(GetLocationDetailThunk(locationId))
         dispatch(GetLocationsThunk())
@@ -36,6 +46,11 @@ function LocationPage() {
         });
     }, [dispatch])
 
+
+    console.log('>>>>>>>>>>>>>> usersArr', usersArr)
+    const matchUser = (userArr, id) => {//swap user_id for username
+        return userArr?.find(user => user.id === id)?.username
+    }
     function handleDelete(e) {
         e.preventDefault()
 
@@ -59,7 +74,7 @@ function LocationPage() {
                 <button id='delete-location' onClick={handleDelete}>Delete</button>
             </div>
         )}
-        <div id='image-box'>
+        {/* <div id='image-box'> 
             <img id='main-image' src={location.image_1_url} alt='image 1' />
 
             {!location.image_2_url && (
@@ -68,14 +83,40 @@ function LocationPage() {
             {location.image_2_url.length > 0 && (
                 <img src={location.image_2_url} alt="second" />
             )}
-        </div>
-        <span id='sans-images'>
+        </div> */}
+        <Images>
+            <img id='main-image' src={location.image_1_url} alt='image 1' />
 
+            {!location.image_2_url && (
+                <img id='second-image' src='https://i.imgur.com/9H2OQft.png' alt="default second"></img>
+            )}
+            {location.image_2_url.length > 0 && (
+                <img src={location.image_2_url} alt="second" />
+            )}
+        </Images>
+        <span id='sans-images'>
             <div id='location-information-box'>
+                <div id='location-banner'>
+                    <h1>{location.name}</h1>
+                    <p>This listing needs a few more reviews;
+                        please scroll down and provide a recommendation</p>
+                </div>
 
                 <div id='location-information'>
-                    <h1>{location.name}</h1>
-                    <div>{location.description}</div>
+                    <div id='owner-description'>
+                        <div id='owner-card'>
+                            <div id='owner-image'></div>
+                            <label>
+                                <p>
+                                    Hosted by
+                                </p>
+                                <div id='owner-name'>{matchUser(usersArr, location.user_id)}</div>
+                            </label>
+
+                        </div>
+
+                        <div id='location-description'>{location.description}</div>
+                    </div>
                     <span id='campsite'>
                         <h2>Campsite Area</h2>
                         {campsite.map((item, ind) => (
@@ -123,7 +164,11 @@ function LocationPage() {
 
                 )}
             </div>
-            <div id='reservation-box'></div>
+            <div id='reservation-box'>
+                <h3>Reservations coming soon!</h3>
+                <img id='reservation-placeholder' src="https://i.imgur.com/9H2OQft.png" />
+
+            </div>
         </span>
 
     </span>)

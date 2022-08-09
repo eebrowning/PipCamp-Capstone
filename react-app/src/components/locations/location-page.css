@@ -17,26 +17,27 @@ label {
     /* align-items: flex-start; */
     justify-content: space-evenly;
     height: 475px;
-    overflow-x: hidden;
+    /* overflow-x:; */
 }
 
 #main-image {
     height: auto;
     width: 600px;
     object-fit: cover;
-
 }
 
 #second-image {
     max-width: 600px;
     height: auto;
-    object-fit: scale-down;
+
 }
 
 #campsite,
 #essentials,
 #amenities {
-    width: 20rem;
+
+    height: 320px;
+    width: 230px;
     display: flex;
     flex-direction: column;
     border: 1px solid lightgray;
@@ -47,7 +48,7 @@ label {
     display: flex;
     flex-direction: row;
     /* border: 1px solid purple; */
-    justify-content: space-evenly;
+    justify-content: center;
     width: 100%;
 
 }
@@ -58,14 +59,84 @@ label {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    /* border: 1px solid blue; */
-    width: 60%;
+    /* align-items: center; */
+    border: 1px solid blue;
+    width: 55%;
+    margin-right: 30px;
+    padding-left: 30px;
 }
 
-#location-information {
-    /* border: 1px solid red; */
-    /* width: 650px; */
+#location-banner {
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    justify-content: space-evenly;
+    height: 150px;
+    width: 100%;
+    border-bottom: 1px solid whitesmoke;
+
+    padding-top: 15px;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+
+
 }
+
+#location-banner>h1 {
+    /* font-size: 14px; */
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#location-banner>p {
+    width: 59%;
+    font-size: 11px;
+    color: slategray;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+#owner-description {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+#location-description {
+    padding-top: 30px;
+    width: 70%;
+    font-size: 14px;
+    word-spacing: 1.5px;
+}
+
+#owner-card {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 200px;
+    height: 100px;
+}
+
+#owner-image {
+    height: 80px;
+    width: 80px;
+    border-radius: 60px;
+    border: 1px solid red;
+}
+
+label {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 40px;
+}
+
+label>p {
+    font-size: 13px;
+}
+
+
 
 #location-details-outer {
     display: flex;
@@ -110,12 +181,23 @@ label {
 }
 
 #reservation-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
     height: 350px;
-    width: 325px;
-    box-shadow: -1px 1px 2px rgb(180, 180, 180);
+    width: 315px;
+    box-shadow: 1px 1px 1px rgb(214, 212, 212);
     z-index: 1;
     position: sticky;
-    top: -20px;
+    top: 0px;
     background-color: white;
-    border: 1px solid rgb(194, 194, 194)
+    border: .5px solid rgb(219, 219, 219)
+}
+
+#reservation-placeholder {
+    height: 150px;
+    /* max-height: 250px; */
+    max-width: 300px;
+    object-fit: cover;
 }
