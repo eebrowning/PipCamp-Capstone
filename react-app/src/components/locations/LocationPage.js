@@ -100,14 +100,13 @@ function LocationPage() {
         history.push(`/locations/${locationId}/edit`)
     }
 
-
     if (location) return (
         <span id='location-page'>
             {+userId === +location.user_id && (
                 <div id='user-owned-buttons'>
                     <button id='edit-location' onClick={handleEdit}>Edit</button>
                     <>
-                        <button onClick={() => setShowModal(true)}>Delete</button>
+                        <button id='open-modal' onClick={() => setShowModal(true)}>Delete</button>
                         {showModal && (
                             <Modal onClose={() => setShowModal(false)}>
                                 <p> Are you sure you want to delete {location.name}?</p>
