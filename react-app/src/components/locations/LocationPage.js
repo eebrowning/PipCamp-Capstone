@@ -18,9 +18,9 @@ function LocationPage() {
     const campsite = location?.campsite_info.split('-')
     // const campsite_labels = ['Shelter Type', "Available Sites", 'Max Guests', 'Max Vehicles', 'Disabled Accessible']
     const campsite_icons = [
-        'https://cdn-icons.flaticon.com/png/512/4469/premium/4469267.png?token=exp=1660080678~hmac=bc5f415ffa531b2a73d7e2432b6756a3',
+        'https://i.imgur.com/x48inrm.png',
         "https://cdn-icons-png.flaticon.com/512/684/684809.png",
-        'https://cdn-icons.flaticon.com/png/512/2963/premium/2963363.png?token=exp=1660081314~hmac=4ab12bffd78a9e331fab07400dbe01ac',
+        'https://i.imgur.com/HXE8yY9.png',
         'https://cdn-icons-png.flaticon.com/512/6917/6917269.png',
         'https://cdn-icons-png.flaticon.com/512/1467/1467267.png']
     const campsite_details = campsite ? [`${campsite[0]} sites`, `${campsite[1]} sites`, `Up to${campsite[2]} guests per site`, `Up to ${campsite[3]} vehicles`, `${campsite[4] == 'true' ? 'Wheelchair access' : 'Not accessible'}`] : [];
@@ -29,7 +29,7 @@ function LocationPage() {
     const essential_icons = [
         "https://i.imgur.com/kHHRFoy.png",
         'https://cdn-icons-png.flaticon.com/512/4745/4745263.png',
-        "https://cdn-icons.flaticon.com/png/512/2097/premium/2097773.png?token=exp=1660083689~hmac=5c8c25d93923767041d41765111b21c6"
+        "https://i.imgur.com/2ysOWVx.png"
     ]
     const essential_details = essential ? [`${essential[0] ? 'Fires allowed' : 'Fires not allowed'}`, `${essential[1] ? 'Toilet available' : "Toilet not available"}`, `${essential[2] ? 'Pets allowed' : 'Pets not allowed'}`] : [];
     const amenities = location?.amenities_info.split('-')
