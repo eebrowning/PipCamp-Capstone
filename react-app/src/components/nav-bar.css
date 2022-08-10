@@ -1,3 +1,15 @@
+.logout-button {
+
+    background-color: #447AB9;
+    width: 80px;
+    height: 20px;
+    color: #FEF265;
+    font-weight: 550;
+    border: 0px;
+    border-radius: 3px;
+    font-size: 14px;
+}
+
 #nav-box {
     width: 100%;
     display: flex;
