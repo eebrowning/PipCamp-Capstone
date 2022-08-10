@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { CreateReviewsThunk } from '../../store/review';
 import { useDispatch, useSelector } from 'react-redux'
 import './review-form.css'
@@ -11,7 +11,7 @@ function ReviewForm({ locationId, hide }) {
     const [recommends, setRecommends] = useState(1);
     const [errors, setErrors] = useState([]);
 
-    async function onSubmit(e) {
+    function onSubmit(e) {
         e.preventDefault();
         const review = {
             user_id: +user.id,
@@ -19,13 +19,13 @@ function ReviewForm({ locationId, hide }) {
             content,
             recommends
         }
-        console.log('>> Submitted location information:', review);
-        const newReview = await dispatch(CreateReviewsThunk(review))
+        // console.log('>> Submitted location information:', review);
+        const newReview = dispatch(CreateReviewsThunk(review))
         if (!newReview) {
             hide()
         } else {
             setErrors(newReview)
-            console.log('>>> errors in form', errors)
+            // console.log('>>> errors in form', errors)
         }
         return newReview
     }

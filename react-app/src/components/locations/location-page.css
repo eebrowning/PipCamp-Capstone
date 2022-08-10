@@ -2,6 +2,20 @@ label {
     width: 100px;
 }
 
+#delete-location,
+#edit-location,
+#close-modal,
+#open-modal {
+    background-color: #447AB9;
+    width: 80px;
+    height: 20px;
+    color: #FEF265;
+    font-weight: 550;
+    border: 0px;
+    border-radius: 3px;
+    font-size: 14px;
+}
+
 #location-page {
     display: flex;
     justify-content: center;
