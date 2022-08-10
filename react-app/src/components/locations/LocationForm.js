@@ -72,8 +72,13 @@ function LocationForm() {
         // errorsCamp: shelter, sites, guests, vehicles, accessible
         arr = []
         if (!shelter) { arr.push("Select Shelter Type."); };
+        if (sites < 0) { arr.push("Sites cannot be negative."); };
         if (!sites) { arr.push("Enter Number of Sites."); };
+
+        if (guests < 0) { arr.push('Sites cannot be negative.') }
         if (!guests) { arr.push('Enter Max Guests') }
+
+        if (vehicles < 0) { arr.push('Vehicles cannot be negative.'); };
         if (!vehicles) { arr.push('Enter Max Vehicles.'); };
         if (!accessible) { arr.push('Select Accessiblility.'); };
         setErrorsCamp(arr)
@@ -105,6 +110,8 @@ function LocationForm() {
         if (!checkin) { arr.push("Enter Earliest Check-In.") };
         if (!checkout) { arr.push('Enter Latest Check-Out.'); };
         if (!minNights) { arr.push('Select Minimum Nights.'); };
+        if (minNights < 0) { arr.push('Time Travel Forbidden.'); };
+
         setErrorsDetails(arr)
         // setErrors([...errors, ...arr])
 
@@ -172,27 +179,26 @@ function LocationForm() {
                     <textarea placeholder='Location Description' onChange={e => setDescription(e.target.value)}></textarea>
 
                 </div>
-                {/* fill this with sub-forms */}
                 <div id='sub-forms'>
                     <div id='campsite-info'>
-
-
-
                         Campsite Information
-                        <select id='camp-shelter' onChange={e => setShelter(e.target.value)}>
-                            <option value=''>--Select Shelter--</option>
-                            {shelters.map(shelter => (
-                                <option key={shelter} value={shelter}>{shelter}</option>
-                            ))}
-                        </select>
-                        <input type='number' id='camp-sites' placeholder='Number of Sites' onChange={e => setSites(e.target.value)}></input>
-                        <input type='number' id='max-guests' placeholder='Max Guests per Site' onChange={e => setGuests(e.target.value)}></input>
-                        <input type='number' id='max-vehicles' placeholder='Max Vehicles per Site' onChange={e => setVehicles(e.target.value)}></input>
-                        <select id='camp-accessible' onChange={e => setAccessible(e.target.value)}>
-                            <option> --Disabled Accessible</option>
-                            <option value={true}>True</option>
-                            <option value={false}>False</option>
-                        </select>
+                        <div className='fields-box'>
+
+                            <select id='camp-shelter' onChange={e => setShelter(e.target.value)}>
+                                <option value=''>--Select Shelter--</option>
+                                {shelters.map(shelter => (
+                                    <option key={shelter} value={shelter}>{shelter}</option>
+                                ))}
+                            </select>
+                            <input type='number' id='camp-sites' placeholder='Number of Sites' onChange={e => setSites(e.target.value)}></input>
+                            <input type='number' id='max-guests' placeholder='Max Guests per Site' onChange={e => setGuests(e.target.value)}></input>
+                            <input type='number' id='max-vehicles' placeholder='Max Vehicles per Site' onChange={e => setVehicles(e.target.value)}></input>
+                            <select id='camp-accessible' onChange={e => setAccessible(e.target.value)}>
+                                <option> --Disabled Accessible</option>
+                                <option value={true}>True</option>
+                                <option value={false}>False</option>
+                            </select>
+                        </div>
 
 
                         <div className='error-block'>
@@ -207,21 +213,24 @@ function LocationForm() {
 
 
                         Essential Information
-                        <select id='fires-allowed' onChange={e => setFires(e.target.value)}>
-                            <option> --Fires Allowed--</option>
-                            <option value={true}>True</option>
-                            <option value={false}>False</option>
-                        </select>
-                        <select id='bathroom-available' onChange={e => setBathrooms(e.target.value)}>
-                            <option> --Bathrooms--</option>
-                            <option value={true}>True</option>
-                            <option value={false}>False</option>
-                        </select>
-                        <select id='pets-allowed' onChange={e => setPets(e.target.value)}>
-                            <option> --Pets Allowed--</option>
-                            <option value={true}>True</option>
-                            <option value={false}>False</option>
-                        </select>
+                        <div className='fields-box'>
+
+                            <select id='fires-allowed' onChange={e => setFires(e.target.value)}>
+                                <option> --Fires Allowed--</option>
+                                <option value={true}>True</option>
+                                <option value={false}>False</option>
+                            </select>
+                            <select id='bathroom-available' onChange={e => setBathrooms(e.target.value)}>
+                                <option> --Bathrooms--</option>
+                                <option value={true}>True</option>
+                                <option value={false}>False</option>
+                            </select>
+                            <select id='pets-allowed' onChange={e => setPets(e.target.value)}>
+                                <option> --Pets Allowed--</option>
+                                <option value={true}>True</option>
+                                <option value={false}>False</option>
+                            </select>
+                        </div>
 
                         <div className='error-block'>
 
@@ -230,10 +239,7 @@ function LocationForm() {
                             )}
                         </div>
                     </div>
-                    <div id='amenities-info'>
-
-
-                        {/* <label> */}
+                    <div id='amenities-info' className='fields-box'>
                         Amenities Information
                         <select id='tables-available' onChange={e => setTables(e.target.value)}>
                             <option> --Tables Available--</option>
@@ -273,7 +279,7 @@ function LocationForm() {
                             )}
                         </div>
                     </div>
-                    <div id='details-info'>
+                    <div id='details-info' className='fields-box'>
 
                         Detail Information
                         <select id='arrival-method' onChange={e => setArrival(e.target.value)}>
@@ -282,13 +288,17 @@ function LocationForm() {
                                 <option key={option} value={option}>{option}</option>
                             ))}
                         </select>
-                        <div>
-                            Checkin
+                        <div className='time-label'>
+                            <label>
+                                Checkin
+                            </label>
                             <input placeholder='Check in time' type='time' onChange={e => setCheckin(`${`After ${timeConverter(e.target.value)}`}`)}></input>
 
                         </div>
-                        <div>
-                            Checkout
+                        <div className='time-label'>
+                            <label>
+                                Checkout
+                            </label>
                             <input placeholder='Check out time' type='time' onChange={e => setCheckout(`${`Before ${timeConverter(e.target.value)}`}`)}></input>
 
                         </div>
@@ -303,7 +313,7 @@ function LocationForm() {
                     </div>
                 </div>
                 <button type='submit' className='location-submit' onClick={onSubmit}>Submit</button>
-            </form>
+            </form >
         </div >
 
     )

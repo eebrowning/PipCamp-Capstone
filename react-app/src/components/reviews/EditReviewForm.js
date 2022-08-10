@@ -35,16 +35,16 @@ function EditReviewForm({ locationId, hide, review }) {
     }
 
     return (
-        <div className='review-form' >
-            <form onSubmit={handleSubmit}>
+        <div  >
+            <form id='review-form' onSubmit={handleSubmit}>
                 <div id='review-errors'>
                     {errors.length > 0 && errors.map(error =>
                         <div key={error} className="review-error">{error}</div>
                     )}
                 </div>
-                <div>
-                    <textarea className='review-content' name='content' value={content} placeholder="Leave your review here!" onChange={e => setContent(e.target.value)}></textarea>
-                </div>
+
+                <textarea className='review-content' name='content' value={content} placeholder="Leave your review here!" onChange={e => setContent(e.target.value)}></textarea>
+
                 <div id='recommend-box'>
                     <p>Recommended: </p><select required type='bool' className='review-recommends' name='recommends' onChange={e => setRecommends(e.target.value)}>
                         <option value={true}>Yes</option>

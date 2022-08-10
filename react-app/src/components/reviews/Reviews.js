@@ -34,15 +34,26 @@ function Reviews({ locationId }) {
 
     return (
         <div id='review-component'>
+
             {/* add-review button goes here, will be conditionally available if no reviews by user*/}
             {!userReview && (<ReviewForm locationId={locationId} />)}
             {locationReviews && locationReviews.map(review => (
-                <div key={review.id}>
-                    <div>{review.user_id}</div>
-                    <div>{review.content}</div>
-                    <div>{review.recommends ? 'Recommended' : 'Not Recommended'}</div>
-                    {/* user-owned-review buttons go here */}
-                    {userReview === review && editing && (<EditReviewForm review={review} locationId={locationId} hide={() => setEditing(false)} />)}
+                <div className='review-box'>
+
+                    <div className='review-content' key={review.id}>
+                        <div className='user-card'>
+                            <img src="https://www.pngmart.com/files/15/Fallout-Pip-Boy-PNG-Transparent.png" className='user-image' />
+                        </div>
+                        <div className='review-card'>
+                            <div className='recommendation'>
+                                <div>User {review.user_id}</div>
+                                <div>{review.recommends ? ' recommends this listing.' : ' does not recommend this listing.'}</div>
+                            </div>
+                            <div>{review.content}</div>
+                        </div>
+                        {/* user-owned-review buttons go here */}
+                        {userReview === review && editing && (<EditReviewForm review={review} locationId={locationId} hide={() => setEditing(false)} />)}
+                    </div>
                     {user && user.id === review.user_id && (
                         <div className='owned-review-buttons'>
                             <button className={`edit-${review.id}`} onClick={() => setEditing(true)}>Edit</button>
@@ -50,8 +61,32 @@ function Reviews({ locationId }) {
                         </div>
                     )}
                 </div>
-            ))}
-        </div>
+            ))
+            }
+
+
+            {/* 
+            <div id='owner-description'>
+                <div id='owner-card'>
+                    <img src="https://www.pngmart.com/files/15/Fallout-Pip-Boy-PNG-Transparent.png" id='owner-image' />
+
+                    <label>
+                        <p>
+                            Hosted by
+                        </p>
+                        <div id='owner-name'>{matchUser(usersArr, location.user_id)}</div>
+                    </label>
+
+                </div>
+
+                <div id='location-description'>{location.description}</div>
+            </div>
+
+ */}
+
+
+
+        </div >
     )
 }
 export default Reviews

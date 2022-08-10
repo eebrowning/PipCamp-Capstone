@@ -17,7 +17,6 @@ label {
     /* align-items: flex-start; */
     justify-content: space-evenly;
     height: 475px;
-    /* overflow-x:; */
 }
 
 
@@ -65,7 +64,8 @@ label {
     /* border: 1px solid purple; */
     justify-content: center;
     width: 100%;
-
+    position: relative;
+    top: -45px;
 }
 
 #location-information-box {
@@ -84,8 +84,6 @@ label {
 #location-banner {
     display: flex;
     flex-direction: column;
-    /* align-items: center; */
-    /* justify-content: space-evenly; */
     height: 100px;
     width: 100%;
     border-bottom: 1px solid whitesmoke;
@@ -93,7 +91,6 @@ label {
     padding-top: 15px;
     padding-bottom: 15px;
     margin-bottom: 15px;
-
 
 }
 
@@ -204,7 +201,9 @@ label>p {
     position: sticky;
     top: 0px;
     background-color: white;
-    border: .5px solid rgb(219, 219, 219)
+    border: .5px solid rgb(219, 219, 219);
+    /* margin-top: 30px; */
+
 }
 
 #reservation-placeholder {
