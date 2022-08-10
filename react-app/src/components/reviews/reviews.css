@@ -14,11 +14,14 @@
     /* border: 1px solid brown; */
 }
 
-.review-box {
-    /* border: 1px solid palegreen; */
+.review-card {
+    width: 100%;
+    border-bottom: 2px solid whitesmoke;
 }
 
 .review-content {
+    font-family: Arial, Helvetica, sans-serif;
+    padding-top: 20px;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -40,6 +43,11 @@
 .recommendation div {
     padding: 2.5px;
 }
+
+.user-name {
+    font-weight: bold;
+}
+
 
 .user-card {
     display: flex;

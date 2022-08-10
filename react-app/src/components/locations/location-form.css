@@ -11,7 +11,7 @@
     flex-direction: column;
     justify-content: space-evenly;
     /* max-height: 1000px; */
-    border: 1px solid purple;
+    /* border: 1px solid purple; */
 }
 
 .location-error {
@@ -30,7 +30,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-    border: 1px solid chartreuse;
+    /* border: 1px solid chartreuse; */
 }
 
 #sub-forms>div {
@@ -41,7 +41,7 @@
     display: flex;
     flex-direction: column;
     /* flex-wrap: wrap; */
-    border: 1px solid red;
+    /* border: 1px solid red; */
 }
 
 #campsite-info,
@@ -49,7 +49,7 @@
 #amenities-info,
 #details-info {
     padding: 5px;
-    border: 1px solid blue;
+    /* border: 1px solid blue; */
     /* height: 350px; */
     display: flex;
     flex-direction: column;
@@ -84,4 +84,37 @@ label {
     border: 0px;
     border-radius: 3px;
     font-size: 20px;
+}
+
+#github-button {
+    display: flex;
+    align-items: center;
+    height: 60px;
+    width: 180px;
+    background-color: black;
+    border-radius: 8px;
+}
+
+#github-logo {
+    padding-left: 20px;
+    padding-right: 10px;
+
+    height: 50px;
+    width: 50px;
+}
+
+.github-text-1 {
+    color: white;
+    font-size: 12px;
+}
+
+.github-text-2 {
+    color: white;
+    font-size: 24px;
+}
+
+#text-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }

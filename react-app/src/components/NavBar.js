@@ -106,11 +106,11 @@ const NavBar = () => {
               New Location
             </NavLink>
           </li>
-          <li>
+          {/* <li>
             <NavLink className={'navlink'} to='/users' exact={true} activeClassName='active'>
               Users
             </NavLink>
-          </li>
+          </li> */}
         </span>
       </ul>
     </nav >
