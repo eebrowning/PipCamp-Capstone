@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Modal } from '../../context/Modal';
 import { DeleteReviewThunk, GetReviewsThunk } from '../../store/review';
 import EditReviewForm from './EditReviewForm';
 import ReviewForm from './ReviewForm';
 import './reviews.css'
 
 function Reviews({ locationId }) {
+    const [showModal, setShowModal] = useState(false);
+
     const user = useSelector(state => state.session.user)
     const dispatch = useDispatch()
     const reviews = useSelector(state => Object.values(state.reviews))
@@ -44,6 +47,9 @@ function Reviews({ locationId }) {
         e.preventDefault();
         let id = e.target.className.split('-')[1]
         dispatch(DeleteReviewThunk(id))
+        dispatch(GetReviewsThunk())
+        setShowModal(false)
+
     }
 
     return (
@@ -78,7 +84,20 @@ function Reviews({ locationId }) {
                     {user && user.id === review.user_id && (
                         <div className='owned-review-buttons'>
                             <button className={`edit-${review.id}`} onClick={() => setEditing(true)}>Edit</button>
-                            <button className={`delete-${review.id}`} onClick={handleDelete}>Delete</button>
+
+                            {/* <button className={`delete-${review.id}`} onClick={handleDelete}>Delete</button> */}
+                            <button onClick={() => setShowModal(true)}>Delete</button>
+
+                            {showModal && (
+                                <Modal onClose={() => setShowModal(false)}>
+                                    <p> Are you sure you want to delete your review?</p>
+                                    <>
+                                        <button className={`delete-${review.id}`} id='delete-location' onClick={handleDelete}>Delete</button>
+                                        <button id='close-modal' onClick={() => setShowModal(false)}>Cancel</button>
+                                    </>
+
+                                </Modal>
+                            )}
                         </div>
                     )}
                 </div>

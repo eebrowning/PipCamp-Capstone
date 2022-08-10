@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
+import { Modal } from '../../context/Modal';
 import { DeleteLocationThunk, GetLocationDetailThunk, GetLocationsThunk } from '../../store/location';
 import Images from '../image-carousel/Images';
 import Reviews from '../reviews/Reviews';
@@ -9,6 +10,8 @@ import './location-page.css'
 
 
 function LocationPage() {
+    const [showModal, setShowModal] = useState(false);
+
     const dispatch = useDispatch()
     const locations = useSelector(state => Object.values(state.locations))
 
@@ -103,8 +106,21 @@ function LocationPage() {
             {+userId === +location.user_id && (
                 <div id='user-owned-buttons'>
                     <button id='edit-location' onClick={handleEdit}>Edit</button>
-                    <button id='delete-location' onClick={handleDelete}>Delete</button>
+                    <>
+                        <button onClick={() => setShowModal(true)}>Delete</button>
+                        {showModal && (
+                            <Modal onClose={() => setShowModal(false)}>
+                                <p> Are you sure you want to delete {location.name}?</p>
+                                <>
+                                    <button id='delete-location' onClick={handleDelete}>Delete</button>
+                                    <button id='close-modal' onClick={() => setShowModal(false)}>Cancel</button>
+                                </>
+
+                            </Modal>
+                        )}
+                    </>
                 </div>
+
             )}
 
             <Images>

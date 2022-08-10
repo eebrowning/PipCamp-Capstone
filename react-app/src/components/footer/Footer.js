@@ -17,7 +17,7 @@ function Footer() {
 
                 <ul className="about-us">
                     <div className="title">
-                        About Us --- you need to set up these links
+                        About Us
                     </div>
                     <a href="https://www.linkedin.com/in/ethan-browning-42a032118/">Linkedin</a>
                     <a href="https://github.com/eebrowning">Github</a>

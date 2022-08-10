@@ -19,11 +19,12 @@ footer {
 .about-us {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    /* justify-content: space-between; */
 }
 
-.hosting a,
+.hosting p,
 .about-us a {
+    padding: 10px;
     text-decoration: none;
     color: rgb(153, 153, 153)
 }
