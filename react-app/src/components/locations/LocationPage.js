@@ -98,119 +98,113 @@ function LocationPage() {
     }
 
 
-    if (location) return (<span id='location-page'>
-        {+userId === +location.user_id && (
-            <div id='user-owned-buttons'>
-                <button id='edit-location' onClick={handleEdit}>Edit</button>
-                <button id='delete-location' onClick={handleDelete}>Delete</button>
-            </div>
-        )}
-        {/* <div id='image-box'> 
-            <img id='main-image' src={location.image_1_url} alt='image 1' />
-
-            {!location.image_2_url && (
-                <img id='second-image' src='https://i.imgur.com/9H2OQft.png' alt="default second"></img>
-            )}
-            {location.image_2_url.length > 0 && (
-                <img src={location.image_2_url} alt="second" />
-            )}
-        </div> */}
-        <Images>
-            <img id='main-image' src={location.image_1_url} alt='image 1' />
-
-            {!location.image_2_url && (
-                <img id='second-image' src='https://i.imgur.com/9H2OQft.png' alt="default second"></img>
-            )}
-            {location.image_2_url.length > 0 && (
-                <img id='second-image' src={location.image_2_url} alt="second" />
-            )}
-        </Images>
-        <span id='sans-images'>
-            <div id='location-information-box'>
-                <div id='location-banner'>
-                    <h1>{location.name}</h1>
-                    <p>This listing needs a few more reviews;
-                        please scroll down and provide a recommendation</p>
+    if (location) return (
+        <span id='location-page'>
+            {+userId === +location.user_id && (
+                <div id='user-owned-buttons'>
+                    <button id='edit-location' onClick={handleEdit}>Edit</button>
+                    <button id='delete-location' onClick={handleDelete}>Delete</button>
                 </div>
+            )}
 
-                <div id='location-information'>
-                    <div id='owner-description'>
-                        <div id='owner-card'>
-                            {/* <img src="https://www.pngmart.com/files/15/Fallout-Pip-Boy-PNG-Picture.png" id='owner-image' /> */}
-                            <img src="https://www.pngmart.com/files/15/Fallout-Pip-Boy-PNG-Transparent.png" id='owner-image' />
+            <Images>
+                <img id='main-image' src={location.image_1_url} alt='image 1' />
 
-                            <label>
-                                <p>
-                                    Hosted by
-                                </p>
-                                <div id='owner-name'>{matchUser(usersArr, location.user_id)}</div>
-                            </label>
-
-                        </div>
-
-                        <div id='location-description'>{location.description}</div>
+                {!location.image_2_url && (
+                    <img id='second-image' src='https://i.imgur.com/Q9rHlY5.png' alt="default second"></img>
+                )}
+                {location.image_2_url.length > 0 && (
+                    <img id='second-image' src={location.image_2_url} alt="second" />
+                )}
+            </Images>
+            <span id='sans-images'>
+                <div id='location-information-box'>
+                    <div id='location-banner'>
+                        <h1>{location.name}</h1>
+                        <p>This listing needs a few more reviews;
+                            please scroll down and provide a recommendation</p>
                     </div>
-                    <span id='campsite'>
-                        <h2>Campsite Area</h2>
-                        {campsite_details.map((item, ind) => (
-                            <div key={ind} className='info-attribute'>
-                                <img style={{ height: '20px' }} src={campsite_icons[ind]} />
-                                <div >{item}</div>
+
+                    <div id='location-information'>
+                        <div id='owner-description'>
+                            <div id='owner-card'>
+                                {/* <img src="https://www.pngmart.com/files/15/Fallout-Pip-Boy-PNG-Picture.png" id='owner-image' /> */}
+                                <img src="https://www.pngmart.com/files/15/Fallout-Pip-Boy-PNG-Transparent.png" id='owner-image' />
+
+                                <label>
+                                    <p>
+                                        Hosted by
+                                    </p>
+                                    <div id='owner-name'>{matchUser(usersArr, location.user_id)}</div>
+                                </label>
+
                             </div>
-                        ))}
-                    </span>
-                    <span id='essentials'>
-                        <h2>Essentials</h2>
 
-                        {essential_details.map((item, ind) => (
-                            <div key={ind} className='info-attribute'>
-                                <img style={{ height: '20px' }} src={essential_icons[ind]} />
-
-                                <div >{item}</div>
-                            </div>
-                        ))}
-                    </span>
-                    <span id='amenities'>
-                        <h2>Amenities</h2>
-
-                        {amenities_details.map((item, ind) => (
-                            <div key={ind} className='info-attribute'>
-                                {/* <div>{amenities_labels[ind]}:</div> */}
-                                <img style={{ height: '20px' }} src={amenities_icons[ind]} />
-
-                                <div >{item}</div>
-                            </div>
-                        ))}
-                    </span>
-                    <span id='location-details-outer'>
-                        <p>Details</p>
-                        <div id='location-details'>
-                            {details.map((item, ind) => (
+                            <div id='location-description'>{location.description}</div>
+                        </div>
+                        <span id='campsite'>
+                            <h2>Campsite Area</h2>
+                            {campsite_details.map((item, ind) => (
                                 <div key={ind} className='info-attribute'>
-                                    <div className='details-label'>{details_labels[ind]}:</div>
+                                    <img style={{ height: '20px' }} src={campsite_icons[ind]} />
                                     <div >{item}</div>
                                 </div>
                             ))}
-                        </div>
-                    </span>
+                        </span>
+                        <span id='essentials'>
+                            <h2>Essentials</h2>
+
+                            {essential_details.map((item, ind) => (
+                                <div key={ind} className='info-attribute'>
+                                    <img style={{ height: '20px' }} src={essential_icons[ind]} />
+
+                                    <div >{item}</div>
+                                </div>
+                            ))}
+                        </span>
+                        <span id='amenities'>
+                            <h2>Amenities</h2>
+
+                            {amenities_details.map((item, ind) => (
+                                <div key={ind} className='info-attribute'>
+                                    {/* <div>{amenities_labels[ind]}:</div> */}
+                                    <img style={{ height: '20px' }} src={amenities_icons[ind]} />
+
+                                    <div >{item}</div>
+                                </div>
+                            ))}
+                        </span>
+                        <span id='location-details-outer'>
+                            <p>Details</p>
+                            <div id='location-details'>
+                                {details.map((item, ind) => (
+                                    <div key={ind} className='info-attribute'>
+                                        <div className='details-label'>{details_labels[ind]}:</div>
+                                        <div >{item}</div>
+                                    </div>
+                                ))}
+                            </div>
+                        </span>
+
+                    </div>
+                    {userId && (
+                        <Reviews locationId={locationId} />
+
+                    )}
+                </div>
+                <div id='reservation-box'>
+                    <h3>Reservations coming soon!</h3>
+                    <img id='reservation-placeholder' src="https://i.imgur.com/9H2OQft.png" />
 
                 </div>
-                {userId && (
-                    <Reviews locationId={locationId} />
+            </span>
 
-                )}
-            </div>
-            <div id='reservation-box'>
-                <h3>Reservations coming soon!</h3>
-                <img id='reservation-placeholder' src="https://i.imgur.com/9H2OQft.png" />
-
-            </div>
-        </span>
-
-    </span>)
+        </span>)
     else return (<span id='box-404'>
-        <img src='https://www.pngmart.com/files/15/Fallout-Pip-Boy-PNG-Pic.png' alt='404' />
-        <h1>404 Page Not Found</h1>
+        {/* <img src='https://www.pngmart.com/files/15/Fallout-Pip-Boy-PNG-Pic.png' alt='404' />
+        <h1>404 Page Not Found</h1> */}
+        <img src='https://i.imgur.com/1PSUlUq.png' alt='loading' />
+
     </span>)
 }
 export default LocationPage

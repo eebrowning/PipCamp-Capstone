@@ -1,0 +1,60 @@
+.owned-review-buttons button {
+    background-color: #447AB9;
+    /* width: 342px; */
+    height: 20px;
+    color: #FEF265;
+    font-weight: 550;
+    border: 0px;
+    border-radius: 3px;
+    font-size: 14px;
+}
+
+#review-component {
+
+    /* border: 1px solid brown; */
+}
+
+.review-box {
+    /* border: 1px solid palegreen; */
+}
+
+.review-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+/* #location-description {
+    padding-top: 30px;
+    width: 70%;
+    font-size: 14px;
+    word-spacing: 1.5px;
+} */
+.recommendation {
+    display: flex;
+    flex-direction: row;
+
+}
+
+.recommendation div {
+    padding: 2.5px;
+}
+
+.user-card {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    /* width: 200px; */
+    height: 100px;
+    padding: 15px;
+}
+
+.user-image {
+    height: 85px;
+    width: 85px;
+    /* border-radius: 50px; */
+    /* border: 1px solid red; */
+
+}

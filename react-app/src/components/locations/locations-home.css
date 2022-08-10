@@ -137,8 +137,9 @@
 }
 
 #search-icon-home:hover {
-    opacity: 75%;
+    /* opacity: 100%; */
     box-shadow: 1px 1px 2px blue;
+    cursor: hand;
 }
 
 #home-search-button {

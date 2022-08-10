@@ -11,7 +11,7 @@
     flex-direction: column;
     justify-content: space-evenly;
     /* max-height: 1000px; */
-    /* border: 1px solid purple; */
+    border: 1px solid purple;
 }
 
 .location-error {
@@ -30,7 +30,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-    /* border: 1px solid chartreuse; */
+    border: 1px solid chartreuse;
 }
 
 #sub-forms>div {
@@ -41,21 +41,47 @@
     display: flex;
     flex-direction: column;
     /* flex-wrap: wrap; */
-    /* border: 1px solid red; */
+    border: 1px solid red;
 }
 
 #campsite-info,
 #essential-info,
 #amenities-info,
 #details-info {
-    /* border: 1px solid blue; */
+    padding: 5px;
+    border: 1px solid blue;
     /* height: 350px; */
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    /* justify-content: space-between; */
 }
 
-select,
-input {
-    width: 200px;
+.fields-box>select,
+.fields-box>input {
+    height: 20px;
+    width: 150px;
+}
+
+label {
+    max-width: 50px;
+    height: auto;
+    font-size: 12px;
+}
+
+.time-label {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 25px;
+}
+
+.location-submit {
+    background-color: #447AB9;
+    /* width: 342px; */
+    height: 50px;
+    color: #FEF265;
+    font-weight: 550;
+    border: 0px;
+    border-radius: 3px;
+    font-size: 20px;
 }
