@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "80bb23ade9fcb86cbb62015dc543983b5d488874d60d0f54e11f7e0c61386001"
+            "sha256": "9e353bfe967a3fbe1c618b2828b70a7087c26f1571ca784c5f7dc5cab0f8a320"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -31,6 +31,14 @@
             ],
             "index": "pypi",
             "version": "==7.1.2"
+        },
+        "dnspython": {
+            "hashes": [
+                "sha256:0f7569a4a6ff151958b64304071d370daa3243d15941a7beedf0c9fe5105603e",
+                "sha256:a851e51367fb93e9e1361732c1d60dab63eff98712e503ea7d92e6eccb109b4f"
+            ],
+            "markers": "python_version >= '3.6' and python_version < '4.0'",
+            "version": "==2.2.1"
         },
         "flask": {
             "hashes": [
@@ -142,6 +150,13 @@
             ],
             "index": "pypi",
             "version": "==20.1.0"
+        },
+        "is-disposable-email": {
+            "hashes": [
+                "sha256:905c84806d8d89c87d77925807a4a2830da6964f89b879a3a9247c314f18e777",
+                "sha256:d31f0200aea99f5f74bf6a6092fc6a65d232d7932a80152a6437e5b8c7884b06"
+            ],
+            "version": "==1.0.0"
         },
         "itsdangerous": {
             "hashes": [
@@ -288,11 +303,11 @@
         },
         "setuptools": {
             "hashes": [
-                "sha256:273b6847ae61f7829c1affcdd9a32f67aa65233be508f4fbaab866c5faa4e408",
-                "sha256:d5340d16943a0f67057329db59b564e938bb3736c6e50ae16ea84d5e5d9ba6d0"
+                "sha256:63f463b90ff5e0a1422010100268fd688e15c44ae0798659013c8412963e15e4",
+                "sha256:9b5d2cb8df48f005825654e0cb17217418317e4d996c035f0bca7cbaeb8acf51"
             ],
             "markers": "python_version >= '3.7'",
-            "version": "==63.3.0"
+            "version": "==64.0.0"
         },
         "six": {
             "hashes": [
@@ -353,6 +368,14 @@
             ],
             "index": "pypi",
             "version": "==2.3.3"
+        },
+        "wtforms.validators": {
+            "hashes": [
+                "sha256:6bafc63fb4a000d097da010d8e89dddffe93e894f2ff91069117f774b93e1f7c",
+                "sha256:b61e2da9b3cb8ce77e59550168eb9c445b13f4ad3b262c26b0bb2801aed2462e"
+            ],
+            "index": "pypi",
+            "version": "==1.0.0"
         }
     },
     "develop": {
