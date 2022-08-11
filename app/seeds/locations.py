@@ -4,62 +4,61 @@ from app.models import db, Location
 def seed_locations():
     demo = Location(
     user_id=1, 
-    name='Joe\'s', 
-    image_1_url = 'https://i.imgur.com/9H2OQft.png',
+    name="Suffolk County Charter School", 
+    image_1_url = 'https://static0.gamerantimages.com/wordpress/wp-content/uploads/2022/04/Fallout-4-Suffolk-County-Charter-School.jpg',
     image_2_url = '',
-    campsite_info = 'Tent-1-2-3-true',
-    essential_info = 'false-true-false',
-    amenities_info = 'true-false-true-false-true-false',
-    details_info = 'Make yourself at home-After 1PM-Before 12PM-1',
+    campsite_info = 'Tent-10-20-1-true',
+    essential_info = "false-true-true",
+    amenities_info = "true-true-true-true-false-false",
+    details_info = "Make yourself at home-After 3PM Before 7AM-1",
     description= "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
     )
     demo2 = Location(
     user_id=1, 
-    name='Joe\'s', 
-    image_1_url = 'https://cdn.discordapp.com/attachments/643598986518855748/655169078498951179/855de687e6a406fe1d8ec03705942e8c.jpg',
+    name="Cranberry Island Shed", 
+    image_1_url = 'https://static0.gamerantimages.com/wordpress/wp-content/uploads/2020/09/Fallout-4-Cranberry-Island-Shed-Cropped.jpg',
     image_2_url = '',
-    campsite_info = 'Tent-1-2-3-true',
-    essential_info = 'false-true-false',
-    amenities_info = 'true-false-true-false-true-false',
-    details_info = 'Make yourself at home-After 2PM-Before 1PM-1',
+    campsite_info = 'Lodge-1-2-1-true',
+    essential_info = "false-true-true",
+    amenities_info = "true-true-true-true-false-false",
+    details_info = "Make yourself at home-After 1PM Before 12PM-1",
+    description= "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+    )
+    demo3 = Location(
+    user_id=1, 
+    name="Carhenge", 
+    image_1_url = 'https://static0.gamerantimages.com/wordpress/wp-content/uploads/2019/08/Fallout-4-Carhenge.jpg',
+    image_2_url = '',
+    campsite_info = "Lodge-1-2-6-true",
+    essential_info = "false-true-true",
+    amenities_info = "true-true-true-true-false-false",
+    details_info = "Make yourself at home-After 8PM Before 6AM-1",
     description= "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
     )
 
-    demo3 = Location(
-    user_id=1, 
-    name='Joe\'s', 
-    image_1_url = 'https://cdn.discordapp.com/attachments/643598986518855748/655169078498951179/855de687e6a406fe1d8ec03705942e8c.jpg',
-    image_2_url = '',
-    campsite_info = 'Tent-1-2-3-true',
-    essential_info = 'false-true-false',
-    amenities_info = 'true-false-true-false-true-false',
-    details_info = 'Make yourself at home-After 1PM-Before 12PM-1',
-    description= "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-    )
 
     demo4 = Location(
     user_id=1, 
-    name='Joe\'s', 
-    image_1_url = 'https://cdn.discordapp.com/attachments/643598986518855748/655169078498951179/855de687e6a406fe1d8ec03705942e8c.jpg',
+    name="Parking Garage Dungeon", 
+    image_1_url = 'https://static0.gamerantimages.com/wordpress/wp-content/uploads/2019/08/Fallout-4-Milton-Parking-Garage.jpg',
     image_2_url = '',
-    campsite_info = 'Tent-1-2-3-true',
-    essential_info = 'false-true-false',
-    amenities_info = 'true-false-true-false-true-false',
-    details_info = 'Make yourself at home-After 1PM-Before 12PM-1',
+    campsite_info = "Recreational Vehicle-100-1000-100-true",
+    essential_info = "true-true-true",
+    amenities_info = "true-false-true-false-false-true",
+    details_info = "Make yourself at home-After 1PM Before 12PM-1",
     description= "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
     )
-
 
 
     demo5 = Location(
     user_id=1, 
-    name='Joe\'s', 
-    image_1_url = 'https://cdn.discordapp.com/attachments/643598986518855748/655169078498951179/855de687e6a406fe1d8ec03705942e8c.jpg',
+    name="Crashed UFO", 
+    image_1_url = 'https://static0.gamerantimages.com/wordpress/wp-content/uploads/2019/08/Fallout-4-Crashed-UFO.jpg',
     image_2_url = '',
-    campsite_info = 'Tent-1-2-3-true',
-    essential_info = 'false-true-false',
-    amenities_info = 'true-false-true-false-true-false',
-    details_info = 'Make yourself at home-After 1PM-Before 12PM-1',
+    campsite_info = "Lodge-1-1-1-true",
+    essential_info = "false-true-false",
+    amenities_info = "true-false-true-false-false-true",
+    details_info = "Make yourself at home-After 1PM Before 12PM-1",
     description= "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
     )
 
@@ -67,9 +66,9 @@ def seed_locations():
 
     demo6 = Location(
     user_id=1, 
-    name='Joe\'s', 
-    image_1_url = 'https://cdn.discordapp.com/attachments/643598986518855748/655169078498951179/855de687e6a406fe1d8ec03705942e8c.jpg',
-    image_2_url = '',
+    name='Red Rocket Garage', 
+    image_1_url = 'https://pm1.narvii.com/6521/d82a24490cbe5b646ab067fabe200711b7996216_hq.jpg',
+    image_2_url = 'https://vignette.wikia.nocookie.net/fallout/images/0/09/Red_Rocket_truck_stop.jpg/revision/latest?cb=20151110105832',
     campsite_info = 'Tent-1-2-3-true',
     essential_info = 'false-true-false',
     amenities_info = 'true-false-true-false-true-false',
@@ -81,8 +80,8 @@ def seed_locations():
 
     demo7 = Location(
     user_id=1, 
-    name='Joe\'s', 
-    image_1_url = 'https://cdn.discordapp.com/attachments/643598986518855748/655169078498951179/855de687e6a406fe1d8ec03705942e8c.jpg',
+    name='Boston Harbor', 
+    image_1_url = 'https://vignette.wikia.nocookie.net/fallout/images/0/05/BostonHarbor-Fallout4.jpg/revision/latest?cb=20161031005323',
     image_2_url = '',
     campsite_info = 'Tent-1-2-3-true',
     essential_info = 'false-true-false',
@@ -95,8 +94,8 @@ def seed_locations():
 
     demo8 = Location(
     user_id=1, 
-    name='Joe\'s', 
-    image_1_url = 'https://cdn.discordapp.com/attachments/643598986518855748/655169078498951179/855de687e6a406fe1d8ec03705942e8c.jpg',
+    name='Diamond City', 
+    image_1_url = 'https://cdn.gamer-network.net/2015/usgamer/f4_02_01.jpg',
     image_2_url = '',
     campsite_info = 'Tent-1-2-3-true',
     essential_info = 'false-true-false',
@@ -108,10 +107,10 @@ def seed_locations():
 
     demo9 = Location(
     user_id=1, 
-    name='Joe\'s', 
-    image_1_url = 'https://i.imgur.com/9H2OQft.png',
+    name='Vault 111', 
+    image_1_url = 'https://i.pinimg.com/originals/b5/68/61/b56861d66adb30a9cb9bd4132cb0cd58.jpg',
     image_2_url = '',
-    campsite_info = 'Tent-1-2-3-true',
+    campsite_info = 'Tent-1-2-0-true',
     essential_info = 'false-true-false',
     amenities_info = 'true-false-true-false-true-false',
     details_info = 'Make yourself at home-After 1PM-Before 12PM-1',
@@ -121,8 +120,8 @@ def seed_locations():
 
     demo10 = Location(
     user_id=1, 
-    name='Joe\'s', 
-    image_1_url = 'https://i.imgur.com/9H2OQft.png',
+    name='The Glowing Sea', 
+    image_1_url = 'https://www.pcgamesn.com/wp-content/uploads/2017/10/Fallout-4-deathclaw-glowing-sea.jpg',
     image_2_url = '',
     campsite_info = 'Tent-1-2-3-true',
     essential_info = 'false-true-false',
