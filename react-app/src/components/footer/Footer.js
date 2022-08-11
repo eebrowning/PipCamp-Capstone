@@ -47,10 +47,10 @@ function Footer() {
                 <div className="title">
                     Download the Pipcamp App
                 </div>
-                <a href="https://github.com/eebrowning/PipCamp-Capstone">
 
 
-                    <div className="github-download">
+                <div id="github-download">
+                    <a href="https://github.com/eebrowning/PipCamp-Capstone">
                         <div id='github-button'>
                             <img id='github-logo' src='https://i.imgur.com/f2r1sEw.png' />
                             <div id='text-box'>
@@ -59,8 +59,8 @@ function Footer() {
                                 <div className="github-text-2">GitHub</div>
                             </div>
                         </div>
-                    </div>
-                </a>
+                    </a>
+                </div>
 
                 <div className="google"></div>
                 <div className="language"></div>

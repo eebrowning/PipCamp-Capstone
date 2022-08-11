@@ -86,33 +86,6 @@ label {
     font-size: 20px;
 }
 
-#github-button {
-    display: flex;
-    align-items: center;
-    height: 60px;
-    width: 180px;
-    background-color: black;
-    border-radius: 8px;
-}
-
-#github-logo {
-    padding-left: 20px;
-    padding-right: 10px;
-
-    height: 50px;
-    width: 50px;
-}
-
-.github-text-1 {
-    color: white;
-    font-size: 12px;
-}
-
-.github-text-2 {
-    color: white;
-    font-size: 24px;
-}
-
 #text-box {
     display: flex;
     flex-direction: column;

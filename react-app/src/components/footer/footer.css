@@ -67,6 +67,7 @@ footer .tagline {
     border-bottom: 1px gray solid;
 }
 
+
 .copyright {
     height: 150px;
     display: flex;
@@ -80,4 +81,46 @@ footer .tagline {
     flex-direction: column;
     text-decoration: none;
     color: rgb(153, 153, 153);
+}
+
+
+
+#github-button {
+    display: flex;
+    align-items: center;
+    height: 60px;
+    width: 180px;
+    background-color: black;
+    border-radius: 8px;
+}
+
+#github-download {
+    width: 180px;
+    /* border: 1px solid red; */
+}
+
+
+
+#github-logo {
+    padding-left: 20px;
+    padding-right: 10px;
+
+    height: 50px;
+    width: 50px;
+}
+
+
+
+.github-text-1 {
+    /* border: 1px solid red; */
+
+    color: white;
+    font-size: 12px;
+}
+
+.github-text-2 {
+    color: white;
+    /* border: 1px solid red; */
+
+    font-size: 24px;
 }
