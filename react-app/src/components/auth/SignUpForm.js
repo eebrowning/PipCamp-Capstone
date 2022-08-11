@@ -31,7 +31,7 @@ const SignUpForm = () => {
       if (data) {
         console.log(data, 'these should be errors?')
 
-        setErrors([errors, ...data])
+        setErrors([...data])
       }
     }
     // needs matching password valiadator
