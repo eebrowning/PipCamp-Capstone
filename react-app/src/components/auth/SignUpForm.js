@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { Redirect } from 'react-router-dom';
 import { signUp } from '../../store/session';
-
+import "./signup-form.css"
 const SignUpForm = () => {
   const [errors, setErrors] = useState([]);
   const [username, setUsername] = useState('');
@@ -12,14 +12,29 @@ const SignUpForm = () => {
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
 
+  // useEffect(() => {
+  //   let arr = [];
+  //   if (password !== repeatPassword) {
+  //     arr.push('Passwords must match')
+  //   }
+  //   setErrors(arr)
+  // }, [password, repeatPassword])
+
   const onSignUp = async (e) => {
     e.preventDefault();
+    if (password !== repeatPassword) {
+      setErrors(['Passwords must match'])
+    }
     if (password === repeatPassword) {
+      setErrors([])
       const data = await dispatch(signUp(username, email, password));
       if (data) {
-        setErrors(data)
+        console.log(data, 'these should be errors?')
+
+        setErrors([errors, ...data])
       }
     }
+    // needs matching password valiadator
   };
 
   const updateUsername = (e) => {
@@ -43,7 +58,7 @@ const SignUpForm = () => {
   }
 
   return (
-    <form onSubmit={onSignUp}>
+    <form id='signup-form' onSubmit={onSignUp}>
       <div>
         {errors.map((error) => (
           <div key={error}>{error}</div>
@@ -86,7 +101,7 @@ const SignUpForm = () => {
           required={true}
         ></input>
       </div>
-      <button type='submit'>Sign Up</button>
+      <button id='signup-form-button' type='submit'>Sign Up</button>
     </form>
   );
 };
