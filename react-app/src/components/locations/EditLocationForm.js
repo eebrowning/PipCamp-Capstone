@@ -11,6 +11,7 @@ export function EditLocationForm() {
     const { locationId } = useParams()
     const dispatch = useDispatch()
     const [errors, setErrors] = useState([])
+    const [frontErrors, setFrontErrors] = useState([])
 
 
     const history = useHistory()
@@ -66,13 +67,18 @@ export function EditLocationForm() {
     const [errorsDetails, setErrorsDetails] = useState([]);
 
     const validateForm = () => {
+
         // errorsMain: Name, Image, Description
         let arr = []
         if (!name) { arr.push("Please enter a name."); };
         if (!image_1_url) { arr.push("Image 1 requires a valid image URL."); };
         if (image_2_url && !image_2_url.includes('http')) {
-            setImage_2_url('')
-        };
+            arr.push('If submitting second image, it must be a valid image URL')
+        }
+        // else {
+        //     // setImage_2_url('')
+        //     return;
+        // };
         // if (description.length < 10) { arr.push('Please provide a description over 10 characters.'); };
         setErrorsMain(arr);
 
@@ -118,33 +124,39 @@ export function EditLocationForm() {
         if (minNights < 0) { arr.push('Time Travel Forbidden.'); };
 
         setErrorsDetails(arr)
+
+        setFrontErrors([...errorsCamp, ...errorsAmenities, ...errorsMain, ...errorsEssential])
     }
 
     async function onSubmit(e) {
         e.preventDefault();
         validateForm()
-        // if (errors.length === 0) {
-        const updatedLocation = {
-            id: locationId,
-            user_id: userId,
-            name,
-            image_1_url,
-            image_2_url,
-            description,
-            campsite_info: camp_info_string,
-            essential_info: essential_info_string,
-            amenities_info: amenities_info_string,
-            details_info: details_info_string
+
+        if (frontErrors.length === 0) {
+
+            // if (errors.length === 0) {
+            const updatedLocation = {
+                id: locationId,
+                user_id: userId,
+                name,
+                image_1_url,
+                image_2_url,
+                description,
+                campsite_info: camp_info_string,
+                essential_info: essential_info_string,
+                amenities_info: amenities_info_string,
+                details_info: details_info_string
+            }
+            console.log('>>> edited: ', updatedLocation)
+            const editedLocation = await dispatch(EditLocationThunk(updatedLocation))
+            if (!editedLocation) {
+                history.push(`/locations/${locationId}`)
+            } else {
+                setErrors(editedLocation)
+            }
+            return editedLocation
+            // } else { return errors }
         }
-        console.log('>>> edited: ', updatedLocation)
-        const editedLocation = await dispatch(EditLocationThunk(updatedLocation))
-        if (!editedLocation) {
-            history.push(`/locations/${locationId}`)
-        } else {
-            setErrors(editedLocation)
-        }
-        return editedLocation
-        // } else { return errors }
     }
 
     useEffect(() => {

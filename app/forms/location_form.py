@@ -42,13 +42,15 @@ def validate_main_image(form, d):
     else:
         raise ValidationError('Image 1: provide a \'.png\' or \'.jpg\' link')
         
-#optional image, doesn't need backend validation.
+
 # def validate_second_image(form, d):
 #     url =form.data['image_2_url']
 #     if len(url) > 0 and not url.__contains__('http'):
 #         raise ValidationError('Image 2: Invalid link')
+#     if url.__contains__('jpg') or url.__contains__('png') or url.__contains__('jpeg') or url.__contains__('gif'):
+#         return None
 #     else:
-#         pass
+#         raise ValidationError('Image 1: provide a \'.png\' or \'.jpg\' link')
 
 class NewLocationForm(FlaskForm):
     user_id = IntegerField('userId')
