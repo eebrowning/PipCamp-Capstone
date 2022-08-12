@@ -38,7 +38,7 @@ const Images = (images) => {
                     </div>
                 </div>
             </div>
-            <img className={currentImg === 1 ? 'grey-arrow' : 'white-arrow'} onClick={next} id="right-arrow" src='https://i.imgur.com/UpFYkCd.png' />
+            <img className={currentImg >= 1 ? 'grey-arrow' : 'white-arrow'} onClick={currentImg < 1 ? next : null} id="right-arrow" src='https://i.imgur.com/UpFYkCd.png' />
             {/* <button onClick={next} id="right-arrow">
                 {`>`}
             </button> */}

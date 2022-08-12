@@ -2,6 +2,8 @@
     height: 1000px;
     display: flex;
     flex-direction: row;
+    border: 1px solid #36659a;
+    color: #36659a;
 }
 
 #location-form {
@@ -11,7 +13,6 @@
     flex-direction: column;
     justify-content: space-evenly;
     /* max-height: 1000px; */
-    /* border: 1px solid purple; */
 }
 
 .location-error {
@@ -22,6 +23,13 @@
 #left-panel {
     margin-right: 40px;
     padding-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#form-image {
+    max-width: 200px;
 }
 
 #sub-forms {
@@ -54,16 +62,28 @@
     display: flex;
     flex-direction: column;
     /* justify-content: space-between; */
+    /* width: 110px; */
+}
+
+#campsite-info input {
+    height: 16px;
+    max-width: 100px;
+}
+
+
+#campsite-info select {
+    height: 18px;
+    max-width: 108px;
 }
 
 .fields-box>select,
 .fields-box>input {
     height: 20px;
-    /* width: 150px; */
+    /* max-width: 120px; */
 }
 
-label {
-    max-width: 50px;
+.location-form-label {
+    max-width: 100px;
     height: auto;
     font-size: 12px;
 }
@@ -74,6 +94,7 @@ label {
     align-items: center;
     height: 25px;
     width: 100%;
+    justify-content: space-between;
 }
 
 .edit-time-label {
@@ -111,4 +132,36 @@ label {
 .side-by-side {
     display: flex;
     flex-direction: row;
+}
+
+.field-label-pair {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.field-label-pair select,
+.field-label-pair input {
+    max-width: 120px;
+    border-radius: 2px;
+    border-color: rgb(200, 200, 200);
+}
+
+.field-label-pair-arrival {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#arrival-method {
+
+    width: 160px;
+}
+
+.min-nights {
+    width: 110px;
+}
+
+.time-input {
+    width: 90%;
 }

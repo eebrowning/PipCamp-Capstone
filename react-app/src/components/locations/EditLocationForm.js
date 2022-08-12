@@ -72,9 +72,13 @@ export function EditLocationForm() {
         let arr = []
         if (!name) { arr.push("Please enter a name."); };
         if (!image_1_url) { arr.push("Image 1 requires a valid image URL."); };
-        if (image_2_url && !image_2_url.includes('http')) {
-            arr.push('If submitting second image, it must be a valid image URL')
-        }
+        // if (!image_2_url?.includes('http')) {
+        //     arr.push('If submitting second image, it must be a valid URL')
+        // }
+        // if (image_2_url?.includes('png') || image_2_url?.includes('jpg')) {
+        //     arr.push('If submitting second image, format must be .jpg or .png')
+        // }
+
         // else {
         //     // setImage_2_url('')
         //     return;
@@ -86,16 +90,18 @@ export function EditLocationForm() {
         arr = []
         if (!shelter) { arr.push("Select Shelter Type."); };
         if (sites < 0) { arr.push("Sites cannot be negative."); };
+        if (sites > 50) { arr.push("50 site limit per location"); };
         if (!sites) { arr.push("Enter Number of Sites."); };
 
         if (guests < 0) { arr.push('Sites cannot be negative.') }
+        if (guests > 100) { arr.push("100 guest limit per location"); };
         if (!guests) { arr.push('Enter Max Guests') }
 
         if (vehicles < 0) { arr.push('Vehicles cannot be negative.'); };
+        if (vehicles > 10) { arr.push('10 vehicle limit per location.'); };
         if (!vehicles) { arr.push('Enter Max Vehicles.'); };
 
         if (!accessible) { arr.push('Select Disabled Accessiblility.'); };
-
 
         setErrorsCamp(arr)
 
@@ -122,56 +128,32 @@ export function EditLocationForm() {
         if (!checkout) { arr.push('Enter Latest Check-Out.'); };
         if (!minNights) { arr.push('Select Minimum Nights.'); };
         if (minNights < 0) { arr.push('Time Travel Forbidden.'); };
+        if (minNights >= 8) { arr.push('7 Night Cap on Minimum') }
 
         setErrorsDetails(arr)
 
         setFrontErrors([...errorsCamp, ...errorsAmenities, ...errorsMain, ...errorsEssential])
+        // console.log(frontErrors, 'these all of the frontend errors')
     }
 
-    async function onSubmit(e) {
-        e.preventDefault();
-        validateForm()
 
-        if (frontErrors.length === 0) {
 
-            // if (errors.length === 0) {
-            const updatedLocation = {
-                id: locationId,
-                user_id: userId,
-                name,
-                image_1_url,
-                image_2_url,
-                description,
-                campsite_info: camp_info_string,
-                essential_info: essential_info_string,
-                amenities_info: amenities_info_string,
-                details_info: details_info_string
-            }
-            console.log('>>> edited: ', updatedLocation)
-            const editedLocation = await dispatch(EditLocationThunk(updatedLocation))
-            if (!editedLocation) {
-                history.push(`/locations/${locationId}`)
-            } else {
-                setErrors(editedLocation)
-            }
-            // dispatch(GetLocationsThunk())
-            return editedLocation
-            // } else { return errors }
-        }
-    }
-
-    useEffect(() => {
-        dispatch(GetLocationDetailThunk(locationId))
-    }, [])
+    useEffect(async () => {
+        await dispatch(GetLocationDetailThunk(locationId))
+        setErrors([])
+        setErrorsAmenities([])
+        setErrorsCamp([])
+        setErrorsDetails([])
+        setErrorsEssential([])
+        setErrorsMain([])
+    }, [dispatch])
 
     useEffect(async () => { //persists autofilled form, can be cleaned up of conditionals in setThing invocations
         // console.log(location, '<<<<< is this anything?')
-
-
         if (location) {
             if (!name) setName(location['name'])
             if (!image_1_url) setImage_1_url(location.image_1_url)
-            // if (!image_2_url) setImage_2_url(location.image_2_url)
+            if (!image_2_url) setImage_2_url(location.image_2_url)
             if (!description) setDescription(location.description)
 
             if (!shelter) await setShelter(camp_array ? camp_array[0] : '')
@@ -198,7 +180,41 @@ export function EditLocationForm() {
             if (!showers) setShowers(amenities_array ? amenities_array[5] : '')
         }
 
-    }, [])
+    })
+
+
+    async function onSubmit(e) {
+        validateForm()
+        e.preventDefault();
+
+        const updatedLocation = {
+            id: locationId,
+            user_id: userId,
+            name,
+            image_1_url,
+            image_2_url,
+            description,
+            campsite_info: camp_info_string,
+            essential_info: essential_info_string,
+            amenities_info: amenities_info_string,
+            details_info: details_info_string
+        }
+
+        setFrontErrors([...errorsCamp, ...errorsAmenities, ...errorsMain, ...errorsEssential])
+        console.log("xxxxx no errors, frontErrors", frontErrors)
+        console.log(updatedLocation, updatedLocation.campsite_info)
+
+        await validateForm()
+        const editedLocation = await dispatch(EditLocationThunk(updatedLocation))
+        if (!editedLocation) {
+
+            history.push(`/locations/${locationId}`)
+        } else {
+            setErrors(editedLocation)
+        }
+        return editedLocation
+        // dispatch(GetLocationsThunk())
+    }
 
     if (location) return (
         <div id='location-form-container'>
@@ -216,6 +232,7 @@ export function EditLocationForm() {
                         </>
                     )}
                 </div>
+                <img id='form-image' src="https://vignette.wikia.nocookie.net/fallout/images/e/eb/Fo4_Robotics_Expert.png/revision/latest/scale-to-width-down/240?cb=20151115231404" />
 
             </div>
             <form id='location-form' onSubmit={onSubmit}>
@@ -224,9 +241,15 @@ export function EditLocationForm() {
                     {errorsMain && errorsMain.length > 0 && errorsMain.map(error =>
                         <div key={error} className="location-error">{error}</div>
                     )}
+
+
+                    <label className='location-form-label'>Location Name</label>
                     <input type='text' name='name' defaultValue={name} placeholder='Location Name' onChange={e => setName(e.target.value)}></input>
+                    <label className='location-form-label'>Main Image</label>
                     <input type='text' name='image_1_url' defaultValue={image_1_url} placeholder='Main Image' onChange={e => setImage_1_url(e.target.value)}></input>
+                    <label className='location-form-label'>Secondary Image</label>
                     <input type='text' name='image_2_url' defaultValue={image_2_url} placeholder='Secondary Image(optional)' onChange={e => setImage_2_url(e.target.value)}></input>
+                    <label className='location-form-label'>Description</label>
                     <textarea placeholder='Location Description' defaultValue={description} onChange={e => setDescription(e.target.value)}></textarea>
 
                 </div>
@@ -234,22 +257,40 @@ export function EditLocationForm() {
 
                     <div id='campsite-info'>
                         Campsite Information
-                        <div className='fields-box'>
 
-                            <select id='camp-shelter' value={shelter} onChange={e => setShelter(e.target.value)}>
-                                <option value=''>--Select Shelter--</option>
-                                {shelters.map(shelter => (
-                                    <option key={shelter} value={shelter}>{shelter}</option>
-                                ))}
-                            </select>
-                            <input type='number' defaultValue={sites} id='camp-sites' placeholder='Number of Sites' onChange={e => setSites(e.target.value)}></input>
-                            <input type='number' defaultValue={guests} id='max-guests' placeholder='Max Guests per Site' onChange={e => setGuests(e.target.value)}></input>
-                            <input type='number' defaultValue={vehicles} id='max-vehicles' placeholder='Max Vehicles per Site' onChange={e => setVehicles(e.target.value)}></input>
-                            <select id='camp-accessible' value={accessible} onChange={e => setAccessible(e.target.value)}>
-                                <option> --Disabled Accessible</option>
-                                <option value={true}>True</option>
-                                <option value={false}>False</option>
-                            </select>
+                        <div className='fields-box'>
+                            <div className='field-label-pair'>
+                                <label className='location-form-label'>Shelter Type</label>
+                                <select id='camp-shelter' value={shelter} onChange={e => setShelter(e.target.value)}>
+                                    <option value=''>--Select Shelter--</option>
+                                    {shelters.map(shelter => (
+                                        <option key={shelter} value={shelter}>{shelter}</option>
+                                    ))}
+                                </select>
+
+                            </div>
+                            <div className='field-label-pair'>
+                                <label className='location-form-label'>Available Sites</label>
+                                <input style={{ width: '120px' }} min='1' max='50' type='number' defaultValue={sites} id='camp-sites' placeholder='Number of Sites' onChange={e => { setSites(e.target.value); validateForm(); }}></input>
+                            </div>
+                            <div className='field-label-pair'>
+                                <label className='location-form-label'>Max Guests</label>
+                                <input style={{ width: '120px' }} min='1' max='100' type='number' defaultValue={guests} id='max-guests' placeholder='Max Guests per Site' onChange={e => { setGuests(e.target.value); validateForm(); }}></input>
+                            </div>
+                            <div className='field-label-pair'>
+                                <label className='location-form-label'>Max Vehicles</label>
+                                <input style={{ width: '120px' }} min='0' max={10} type='number' defaultValue={vehicles} id='max-vehicles' placeholder='Max Vehicles per Site' onChange={async e => { await setVehicles(e.target.value); validateForm(); }}></input>
+                            </div>
+
+                            <div className='field-label-pair'>
+                                <label className='location-form-label'>Accessible</label>
+                                <select id='camp-accessible' value={accessible} onChange={e => setAccessible(e.target.value)}>
+                                    <option> --Disabled Accessible</option>
+                                    <option value={true}>True</option>
+                                    <option value={false}>False</option>
+                                </select>
+                            </div>
+
                         </div>
 
                         <div className='error-block'>
@@ -265,22 +306,31 @@ export function EditLocationForm() {
 
                         Essential Information
                         <div className='fields-box'>
+                            <div className='field-label-pair'>
+                                <label className='location-form-label'>Fires</label>
+                                <select value={fires} id='fires-allowed' onChange={e => setFires(e.target.value)}>
+                                    <option> --Fires Allowed--</option>
+                                    <option value={true}>True</option>
+                                    <option value={false}>False</option>
+                                </select>
+                            </div>
+                            <div className='field-label-pair'>
+                                <label className='location-form-label'>Bathrooms</label>
+                                <select value={bathrooms} id='bathroom-available' onChange={e => setBathrooms(e.target.value)}>
+                                    <option> --Bathrooms--</option>
+                                    <option value={true}>True</option>
+                                    <option value={false}>False</option>
+                                </select>
+                            </div>
+                            <div className='field-label-pair'>
+                                <label className='location-form-label'>Pets</label>
+                                <select value={pets} id='pets-allowed' onChange={e => setPets(e.target.value)}>
+                                    <option> --Pets Allowed--</option>
+                                    <option value={true}>True</option>
+                                    <option value={false}>False</option>
+                                </select>
+                            </div>
 
-                            <select value={fires} id='fires-allowed' onChange={e => setFires(e.target.value)}>
-                                <option> --Fires Allowed--</option>
-                                <option value={true}>True</option>
-                                <option value={false}>False</option>
-                            </select>
-                            <select value={bathrooms} id='bathroom-available' onChange={e => setBathrooms(e.target.value)}>
-                                <option> --Bathrooms--</option>
-                                <option value={true}>True</option>
-                                <option value={false}>False</option>
-                            </select>
-                            <select value={pets} id='pets-allowed' onChange={e => setPets(e.target.value)}>
-                                <option> --Pets Allowed--</option>
-                                <option value={true}>True</option>
-                                <option value={false}>False</option>
-                            </select>
                         </div>
 
                         <div className='error-block'>
@@ -296,36 +346,54 @@ export function EditLocationForm() {
 
                         {/* <label> */}
                         Amenities Information
-                        <select value={tables} id='tables-available' onChange={e => setTables(e.target.value)}>
-                            <option> --Tables Available--</option>
-                            <option value={true}>True</option>
-                            <option value={false}>False</option>
-                        </select>
-                        <select value={wifi} id='wifi-available' onChange={e => setWifi(e.target.value)}>
-                            <option> --Wifi Available--</option>
-                            <option value={true}>True</option>
-                            <option value={false}>False</option>
-                        </select>
-                        <select value={bins} id='bins-available' onChange={e => setBins(e.target.value)}>
-                            <option> --Bins Available--</option>
-                            <option value={true}>True</option>
-                            <option value={false}>False</option>
-                        </select>
-                        <select value={water} id='water-available' onChange={e => setWater(e.target.value)}>
-                            <option> --Water Available--</option>
-                            <option value={true}>True</option>
-                            <option value={false}>False</option>
-                        </select>
-                        <select value={kitchen} id='kitchen-available' onChange={e => setKitchen(e.target.value)}>
-                            <option> --Kitchen Available--</option>
-                            <option value={true}>True</option>
-                            <option value={false}>False</option>
-                        </select>
-                        <select value={showers} id='showers-available' onChange={e => setShowers(e.target.value)}>
-                            <option> --Showers Available--</option>
-                            <option value={true}>True</option>
-                            <option value={false}>False</option>
-                        </select>
+                        <div className='field-label-pair'>
+                            <label className='location-form-label'>Tables</label>
+                            <select value={tables} id='tables-available' onChange={e => setTables(e.target.value)}>
+                                <option> --Tables Available--</option>
+                                <option value={true}>True</option>
+                                <option value={false}>False</option>
+                            </select>
+                        </div>
+                        <div className='field-label-pair'>
+                            <label className='location-form-label'>Wifi</label>
+                            <select value={wifi} id='wifi-available' onChange={e => setWifi(e.target.value)}>
+                                <option> --Wifi Available--</option>
+                                <option value={true}>True</option>
+                                <option value={false}>False</option>
+                            </select>
+                        </div>
+                        <div className='field-label-pair'>
+                            <label className='location-form-label'>Trash Bins</label>
+                            <select value={bins} id='bins-available' onChange={e => setBins(e.target.value)}>
+                                <option> --Bins Available--</option>
+                                <option value={true}>True</option>
+                                <option value={false}>False</option>
+                            </select>
+                        </div>
+                        <div className='field-label-pair'>
+                            <label className='location-form-label'>Water</label>
+                            <select value={water} id='water-available' onChange={e => setWater(e.target.value)}>
+                                <option> --Water Available--</option>
+                                <option value={true}>True</option>
+                                <option value={false}>False</option>
+                            </select>
+                        </div>
+                        <div className='field-label-pair'>
+                            <label className='location-form-label'>Kitchen</label>
+                            <select value={kitchen} id='kitchen-available' onChange={e => setKitchen(e.target.value)}>
+                                <option> --Kitchen Available--</option>
+                                <option value={true}>True</option>
+                                <option value={false}>False</option>
+                            </select>
+                        </div>
+                        <div className='field-label-pair'>
+                            <label className='location-form-label'>Showers</label>
+                            <select value={showers} id='showers-available' onChange={e => setShowers(e.target.value)}>
+                                <option> --Showers Available--</option>
+                                <option value={true}>True</option>
+                                <option value={false}>False</option>
+                            </select>
+                        </div>
                         {/* </label> */}
                         <div className='error-block'>
 
@@ -337,12 +405,15 @@ export function EditLocationForm() {
                     <div id='details-info' className='fields-box'>
 
                         Detail Information
-                        <select value={arrival} id='arrival-method' onChange={e => setArrival(e.target.value)}>
-                            <option value=''>--Select Arrival--</option>
-                            {arrivalOptions.map(option => (
-                                <option key={option} value={option}>{option}</option>
-                            ))}
-                        </select>
+                        <div className='field-label-pair-arrival'>
+                            <label className='location-form-label'>Arrival</label>
+                            <select value={arrival} id='arrival-method' onChange={e => setArrival(e.target.value)}>
+                                <option value=''>--Select Arrival--</option>
+                                {arrivalOptions.map(option => (
+                                    <option key={option} value={option}>{option}</option>
+                                ))}
+                            </select>
+                        </div>
                         <div className='edit-time-label'>
                             <div className='side-by-side'>
 
@@ -353,7 +424,7 @@ export function EditLocationForm() {
                                     (default: {checkin})
                                 </div>
                             </div>
-                            <input placeholder='Check in time' type='time' onChange={e => setCheckin(`${`After ${timeConverter(e.target.value)}`}`)}></input>
+                            <input className='time-input' placeholder='Check in time' type='time' onChange={e => setCheckin(`${`After ${timeConverter(e.target.value)}`}`)}></input>
                         </div>
                         <div className='edit-time-label'>
                             <div className='side-by-side'>
@@ -365,11 +436,14 @@ export function EditLocationForm() {
                                     (default: {checkout})
                                 </div>
                             </div>
-                            <input placeholder='Check out time' type='time' onChange={e => setCheckout(`${`Before ${timeConverter(e.target.value)}`}`)}></input>
+                            <input className='time-input' placeholder='Check out time' type='time' onChange={e => setCheckout(`${`Before ${timeConverter(e.target.value)}`}`)}></input>
 
                         </div>
-                        <input defaultValue={+minNights} value={+minNights} placeholder='Miniumum Nights' type='number' onChange={e => setMinNights(e.target.value)}></input>
 
+                        <div className='field-label-pair'>
+                            <label className='location-form-label'>Min Nights</label>
+                            <input min='1' max='7' className='min-nights' value={+minNights} placeholder='Miniumum Nights' type='number' onChange={e => { validateForm(); setMinNights(e.target.value) }}></input>
+                        </div>
 
                         <div className='error-block'>
                             {errorsDetails.length > 0 && errorsDetails.map(error =>
@@ -378,6 +452,7 @@ export function EditLocationForm() {
                         </div>
                     </div>
                 </div>
+                {/* <div disabled={errorsCamp.length > 0 || errorsDetails > 0 ? false : true}> You have unresolved input errors.</div> */}
                 <button type='submit' className='location-submit' onClick={onSubmit}>Submit</button>
 
             </form >

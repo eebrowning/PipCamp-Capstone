@@ -75,7 +75,7 @@
     display: none;
 }
 
-.users-mock-search {
+.show-search {
     border: .5px solid lightgray;
     border-radius: 50px;
     display: flex;

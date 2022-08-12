@@ -4,7 +4,6 @@ import { NavLink } from 'react-router-dom';
 import { GetLocationsThunk } from '../../store/location';
 import { demoLogin } from '../../store/session';
 import LogoutButton from '../auth/LogoutButton';
-import Footer from '../footer/Footer';
 import './locations-home.css'
 
 
@@ -14,7 +13,7 @@ function Locations() {
     const locations = useSelector(state => Object.values(state.locations))
     const randLocation = locations ? locations[Math.floor(Math.random() * locations.length)] : null
     // console.log(randLocation.id, randLocation.name, 'here random')
-    const tagColors = ['#325886', '#447AB9', '#82A7D6', '#e3d4bc', '#34a4d4', "#dfb387", '#0b89d5', '#504455']
+    const tagColors = ['#325886', '#447AB9', '#82A7D6', '#34a4d4', "#dfb387", '#0b89d5', '#504455']
     const randColor = () => {
         return tagColors[Math.floor(Math.random() * tagColors.length)]
     }

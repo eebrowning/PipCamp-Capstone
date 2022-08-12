@@ -16,7 +16,9 @@ const LoginForm = () => {
   useEffect(() => {
     const navBox = document.getElementById('nav-box');
     if (navBox) { navBox.id = 'nav-box-other' }
-  }, [])
+    const authNav = document.getElementsByClassName('hide-search')[0]
+    if (authNav) { authNav.className = 'show-search' }
+  }, [window.location.pathname])
 
 
 
@@ -59,8 +61,8 @@ const LoginForm = () => {
             <div key={error}>{error}</div>
           ))}
         </div>
-        <div>
-          {/* <label htmlFor='email'>Email</label> */}
+        <div className='login-field'>
+          <label>Email</label>
           <input
             id='login-email'
             name='email'
@@ -70,8 +72,8 @@ const LoginForm = () => {
             onChange={updateEmail}
           />
         </div>
-        <div>
-          {/* <label htmlFor='password'>Password</label> */}
+        <div className='login-field'>
+          <label>Password</label>
           <input
             id='login-password'
             name='password'

@@ -73,13 +73,17 @@ function LocationForm() {
         arr = []
         if (!shelter) { arr.push("Select Shelter Type."); };
         if (sites < 0) { arr.push("Sites cannot be negative."); };
+        if (sites > 50) { arr.push("50 site limit per location"); };
         if (!sites) { arr.push("Enter Number of Sites."); };
 
         if (guests < 0) { arr.push('Sites cannot be negative.') }
+        if (guests > 100) { arr.push("100 guest limit per location"); };
         if (!guests) { arr.push('Enter Max Guests') }
 
         if (vehicles < 0) { arr.push('Vehicles cannot be negative.'); };
+        if (vehicles > 10) { arr.push('10 vehicle limit per location.'); };
         if (!vehicles) { arr.push('Enter Max Vehicles.'); };
+
         if (!accessible) { arr.push('Select Accessiblility.'); };
         setErrorsCamp(arr)
         // setErrors([...errors, ...arr])
@@ -111,6 +115,7 @@ function LocationForm() {
         if (!checkout) { arr.push('Enter Latest Check-Out.'); };
         if (!minNights) { arr.push('Select Minimum Nights.'); };
         if (minNights < 0) { arr.push('Time Travel Forbidden.'); };
+        if (minNights > 7) { arr.push('7 Night Cap on Minimum') }
 
         setErrorsDetails(arr)
         // setErrors([...errors, ...arr])
@@ -135,7 +140,7 @@ function LocationForm() {
         console.log('>>> errors in form', errors)
 
         const newLocation = await dispatch(CreateLocationThunk(location))
-        if (!newLocation) { history.push('/') }
+        if (!newLocation) { history.push(`/locations/${location.id}}`) }
         else {
             setErrors(newLocation)
         }
@@ -154,6 +159,7 @@ function LocationForm() {
         <div id='location-form-container'>
             <div id='left-panel'>
                 <h2 id='location-form-title'>Add a Location</h2>
+
                 <div className='error-block'>
                     {errors.length > 0 && errors.map(error =>
                         <div key={error} className="location-error">{error}</div>
@@ -165,6 +171,7 @@ function LocationForm() {
                         </>
                     )}
                 </div>
+                <img id='form-image' src="https://vignette.wikia.nocookie.net/fallout/images/e/eb/Fo4_Robotics_Expert.png/revision/latest/scale-to-width-down/240?cb=20151115231404" />
 
             </div>
             <form id='location-form' onSubmit={onSubmit}>
@@ -173,9 +180,14 @@ function LocationForm() {
                     {errorsMain && errorsMain.length > 0 && errorsMain.map(error =>
                         <div key={error} className="location-error">{error}</div>
                     )}
+
+                    <label className='location-form-label'>Location Name</label>
                     <input type='text' name='name' placeholder='Location Name' onChange={e => setName(e.target.value)}></input>
+                    <label className='location-form-label'>Main Image</label>
                     <input type='text' name='image_1_url' placeholder='Main Image' onChange={e => setImage_1_url(e.target.value)}></input>
+                    <label className='location-form-label'>Secondary Image</label>
                     <input type='text' name='image_2_url' placeholder='Secondary Image(optional)' onChange={e => setImage_2_url(e.target.value)}></input>
+                    <label className='location-form-label'>Description</label>
                     <textarea placeholder='Location Description' onChange={e => setDescription(e.target.value)}></textarea>
 
                 </div>
@@ -183,21 +195,35 @@ function LocationForm() {
                     <div id='campsite-info'>
                         Campsite Information
                         <div className='fields-box'>
-
-                            <select id='camp-shelter' onChange={e => setShelter(e.target.value)}>
-                                <option value=''>--Select Shelter--</option>
-                                {shelters.map(shelter => (
-                                    <option key={shelter} value={shelter}>{shelter}</option>
-                                ))}
-                            </select>
-                            <input type='number' id='camp-sites' placeholder='Number of Sites' onChange={e => setSites(e.target.value)}></input>
-                            <input type='number' id='max-guests' placeholder='Max Guests per Site' onChange={e => setGuests(e.target.value)}></input>
-                            <input type='number' id='max-vehicles' placeholder='Max Vehicles per Site' onChange={e => setVehicles(e.target.value)}></input>
-                            <select id='camp-accessible' onChange={e => setAccessible(e.target.value)}>
-                                <option> --Disabled Accessible</option>
-                                <option value={true}>True</option>
-                                <option value={false}>False</option>
-                            </select>
+                            <div className='field-label-pair'>
+                                <label className='location-form-label'>Shelter</label>
+                                <select id='camp-shelter' onChange={e => setShelter(e.target.value)}>
+                                    <option value=''>--Select Shelter--</option>
+                                    {shelters.map(shelter => (
+                                        <option key={shelter} value={shelter}>{shelter}</option>
+                                    ))}
+                                </select>
+                            </div>
+                            <div className='field-label-pair'>
+                                <label className='location-form-label'>Sites</label>
+                                <input type='number' id='camp-sites' placeholder='Number of Sites' onChange={e => setSites(e.target.value)}></input>
+                            </div>
+                            <div className='field-label-pair'>
+                                <label className='location-form-label'>Guests</label>
+                                <input type='number' id='max-guests' placeholder='Max Guests per Site' onChange={e => setGuests(e.target.value)}></input>
+                            </div>
+                            <div className='field-label-pair'>
+                                <label className='location-form-label'>Vehicles</label>
+                                <input type='number' id='max-vehicles' placeholder='Max Vehicles per Site' onChange={e => setVehicles(e.target.value)}></input>
+                            </div>
+                            <div className='field-label-pair'>
+                                <label className='location-form-label'>Accessible</label>
+                                <select id='camp-accessible' onChange={e => setAccessible(e.target.value)}>
+                                    <option> --Disabled Accessible</option>
+                                    <option value={true}>True</option>
+                                    <option value={false}>False</option>
+                                </select>
+                            </div>
                         </div>
 
 
@@ -214,22 +240,31 @@ function LocationForm() {
 
                         Essential Information
                         <div className='fields-box'>
+                            <div className='field-label-pair'>
+                                <label className='location-form-label'>Fires</label>
+                                <select id='fires-allowed' onChange={e => setFires(e.target.value)}>
+                                    <option> --Fires Allowed--</option>
+                                    <option value={true}>True</option>
+                                    <option value={false}>False</option>
+                                </select>
+                            </div>
+                            <div className='field-label-pair'>
+                                <label className='location-form-label'>Bathrooms</label>
 
-                            <select id='fires-allowed' onChange={e => setFires(e.target.value)}>
-                                <option> --Fires Allowed--</option>
-                                <option value={true}>True</option>
-                                <option value={false}>False</option>
-                            </select>
-                            <select id='bathroom-available' onChange={e => setBathrooms(e.target.value)}>
-                                <option> --Bathrooms--</option>
-                                <option value={true}>True</option>
-                                <option value={false}>False</option>
-                            </select>
-                            <select id='pets-allowed' onChange={e => setPets(e.target.value)}>
-                                <option> --Pets Allowed--</option>
-                                <option value={true}>True</option>
-                                <option value={false}>False</option>
-                            </select>
+                                <select id='bathroom-available' onChange={e => setBathrooms(e.target.value)}>
+                                    <option> --Bathrooms--</option>
+                                    <option value={true}>True</option>
+                                    <option value={false}>False</option>
+                                </select>
+                            </div>
+                            <div className='field-label-pair'>
+                                <label className='location-form-label'>Pets</label>
+                                <select id='pets-allowed' onChange={e => setPets(e.target.value)}>
+                                    <option> --Pets Allowed--</option>
+                                    <option value={true}>True</option>
+                                    <option value={false}>False</option>
+                                </select>
+                            </div>
                         </div>
 
                         <div className='error-block'>
@@ -241,36 +276,58 @@ function LocationForm() {
                     </div>
                     <div id='amenities-info' className='fields-box'>
                         Amenities Information
-                        <select id='tables-available' onChange={e => setTables(e.target.value)}>
-                            <option> --Tables Available--</option>
-                            <option value={true}>True</option>
-                            <option value={false}>False</option>
-                        </select>
-                        <select id='wifi-available' onChange={e => setWifi(e.target.value)}>
-                            <option> --Wifi Available--</option>
-                            <option value={true}>True</option>
-                            <option value={false}>False</option>
-                        </select>
-                        <select id='bins-available' onChange={e => setBins(e.target.value)}>
-                            <option> --Bins Available--</option>
-                            <option value={true}>True</option>
-                            <option value={false}>False</option>
-                        </select>
-                        <select id='water-available' onChange={e => setWater(e.target.value)}>
-                            <option> --Water Available--</option>
-                            <option value={true}>True</option>
-                            <option value={false}>False</option>
-                        </select>
-                        <select id='kitchen-available' onChange={e => setKitchen(e.target.value)}>
-                            <option> --Kitchen Available--</option>
-                            <option value={true}>True</option>
-                            <option value={false}>False</option>
-                        </select>
-                        <select id='showers-available' onChange={e => setShowers(e.target.value)}>
-                            <option> --Showers Available--</option>
-                            <option value={true}>True</option>
-                            <option value={false}>False</option>
-                        </select>
+
+
+                        <div className='field-label-pair'>
+                            <label className='location-form-label'>Tables</label>
+                            <select id='tables-available' onChange={e => setTables(e.target.value)}>
+                                <option> --Tables Available--</option>
+                                <option value={true}>True</option>
+                                <option value={false}>False</option>
+                            </select>
+                        </div>
+                        <div className='field-label-pair'>
+                            <label className='location-form-label'>Wifi</label>
+                            <select id='wifi-available' onChange={e => setWifi(e.target.value)}>
+                                <option> --Wifi Available--</option>
+                                <option value={true}>True</option>
+                                <option value={false}>False</option>
+                            </select>
+                        </div>
+                        <div className='field-label-pair'>
+                            <label className='location-form-label'>Trash Bins</label>
+                            <select id='bins-available' onChange={e => setBins(e.target.value)}>
+                                <option> --Bins Available--</option>
+                                <option value={true}>True</option>
+                                <option value={false}>False</option>
+                            </select>
+                        </div>
+                        <div className='field-label-pair'>
+                            <label className='location-form-label'>Water</label>
+                            <select id='water-available' onChange={e => setWater(e.target.value)}>
+                                <option> --Water Available--</option>
+                                <option value={true}>True</option>
+                                <option value={false}>False</option>
+                            </select>
+
+                        </div>
+                        <div className='field-label-pair'>
+                            <label className='location-form-label'>Kitchen</label>
+                            <select id='kitchen-available' onChange={e => setKitchen(e.target.value)}>
+                                <option> --Kitchen Available--</option>
+                                <option value={true}>True</option>
+                                <option value={false}>False</option>
+                            </select>
+                        </div>
+                        <div className='field-label-pair'>
+
+                            <label className='location-form-label'>Showers</label>
+                            <select id='showers-available' onChange={e => setShowers(e.target.value)}>
+                                <option> --Showers Available--</option>
+                                <option value={true}>True</option>
+                                <option value={false}>False</option>
+                            </select>
+                        </div>
                         {/* </label> */}
                         <div className='error-block'>
 
@@ -282,12 +339,23 @@ function LocationForm() {
                     <div id='details-info' className='fields-box'>
 
                         Detail Information
-                        <select id='arrival-method' onChange={e => setArrival(e.target.value)}>
-                            <option value=''>--Select Arrival--</option>
-                            {arrivalOptions.map(option => (
-                                <option key={option} value={option}>{option}</option>
-                            ))}
-                        </select>
+
+                        <label className='location-form-label'></label>
+                        <label className='location-form-label'></label>
+                        <label className='location-form-label'></label>
+                        <label className='location-form-label'></label>
+
+                        <div className='field-label-pair-arrival'>
+                            <label className='location-form-label'>
+                                Arrival
+                            </label>
+                            <select id='arrival-method' onChange={e => setArrival(e.target.value)}>
+                                <option value=''>--Select Arrival--</option>
+                                {arrivalOptions.map(option => (
+                                    <option key={option} value={option}>{option}</option>
+                                ))}
+                            </select>
+                        </div>
                         <div className='time-label'>
                             <label>
                                 Checkin
@@ -302,7 +370,13 @@ function LocationForm() {
                             <input placeholder='Check out time' type='time' onChange={e => setCheckout(`${`Before ${timeConverter(e.target.value)}`}`)}></input>
 
                         </div>
-                        <input placeholder='Miniumum Nights' type='number' onChange={e => setMinNights(e.target.value)}></input>
+                        <div className='field-label-pair'>
+
+                            <label className='location-form-label'>
+                                Min Nights
+                            </label>
+                            <input className='min-nights' placeholder='Miniumum Nights' type='number' onChange={e => setMinNights(e.target.value)}></input>
+                        </div>
 
 
                         <div className='error-block'>
