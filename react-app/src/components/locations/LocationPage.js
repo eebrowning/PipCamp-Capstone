@@ -211,7 +211,7 @@ function LocationPage() {
                     )}
                 </div>
                 <div id='reservation-box'>
-                    <h3>Reservations coming soon!</h3>
+                    {/* <h3></h3> */}
                     <img id='reservation-placeholder' src="https://i.imgur.com/9H2OQft.png" />
 
                 </div>
