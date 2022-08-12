@@ -147,6 +147,8 @@ const locationReducer = (state = initialState, action) => {
         case GET_LOCATION:
             console.log('in get_location reducer')
             let get_loc_state = { ...state }
+            // let get_loc_state = {}
+
             get_loc_state[action.location.id] = action.location
             return get_loc_state;
 

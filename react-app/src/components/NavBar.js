@@ -8,19 +8,15 @@ import './nav-bar.css'
 
 
 const NavBar = () => {
-  // console.log('>>> url', window.location.pathname)
-  // const pathname = window.location.pathname
   const state = useSelector(state => state)
-  // const location = useSelector(state => Object.values(state.location))
   const [home, setHome] = useState(window.location.pathname == '/' ? true : false)
 
   const locations = useSelector(state => Object.values(state.locations))
-  // const randLocation = locations ? locations[Math.floor(Math.random() * locations.length)] : null;
   const [randLocation, setRandLocation] = useState(locations ? locations[Math.floor(Math.random() * locations.length)] : 1)
 
 
-
   const dispatch = useDispatch();
+
   function handleClick(e) {
     e.preventDefault();
 
@@ -32,7 +28,7 @@ const NavBar = () => {
   // }, [])
 
   useEffect(() => {
-    setHome(window.location.pathname == '/' ? true : false)
+    setHome(window.location.pathname === '/' ? true : false)
   }, [window.location.pathname])
 
   if (locations) return (
@@ -52,7 +48,7 @@ const NavBar = () => {
 
             </NavLink>
           </li>
-          <span className={home ? 'hide-search' : 'users-mock-search'}>
+          <span className={home ? 'hide-search' : 'show-search'}>
             <div id='nav-users-buttons'>
               {!state.session.user && (<>
                 <li>

@@ -12,13 +12,14 @@ const SignUpForm = () => {
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   let arr = [];
-  //   if (password !== repeatPassword) {
-  //     arr.push('Passwords must match')
-  //   }
-  //   setErrors(arr)
-  // }, [password, repeatPassword])
+  useEffect(() => {
+    const navBox = document.getElementById('nav-box');
+    if (navBox) { navBox.id = 'nav-box-other' }
+
+    const authNav = document.getElementsByClassName('hide-search')[0]
+    if (authNav) { authNav.className = 'show-search' }
+  }, [window.location.pathname])
+
 
   const onSignUp = async (e) => {
     e.preventDefault();
@@ -61,6 +62,16 @@ const SignUpForm = () => {
     <div id='signup-form-box'>
 
       <form id='signup-form' onSubmit={onSignUp}>
+        <div id='login-form-top'>
+          <h2>
+            Welcome!
+          </h2>
+          <div>
+            Let's get you set up.
+          </div>
+        </div>
+        <img id='login-image' src='https://pngimg.com/uploads/fallout/fallout_PNG45.png' />
+
         <div id='signup-errors'>
           {errors.map((error) => (
             <div key={error}>{error}</div>
@@ -69,8 +80,10 @@ const SignUpForm = () => {
         <div>
           <label>User Name</label>
           <input
+            className='signup-name'
             type='text'
             name='username'
+            placeholder='Username'
             onChange={updateUsername}
             value={username}
           ></input>
@@ -78,8 +91,11 @@ const SignUpForm = () => {
         <div>
           <label>Email</label>
           <input
+            className='signup-email'
             type='text'
             name='email'
+            placeholder='Email address'
+
             onChange={updateEmail}
             value={email}
           ></input>
@@ -87,8 +103,12 @@ const SignUpForm = () => {
         <div>
           <label>Password</label>
           <input
+            className='signup-password'
+
             type='password'
             name='password'
+            placeholder='Password'
+
             onChange={updatePassword}
             value={password}
           ></input>
@@ -96,8 +116,12 @@ const SignUpForm = () => {
         <div>
           <label>Repeat Password</label>
           <input
+            className='signup-password'
+
             type='password'
             name='repeat_password'
+            placeholder='Password'
+
             onChange={updateRepeatPassword}
             value={repeatPassword}
             required={true}

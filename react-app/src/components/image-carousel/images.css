@@ -50,9 +50,7 @@
 
 }
 
-#left-arrow:hover {
-    cursor: hand;
-}
+
 
 #right-arrow {
     right: 24px;
@@ -65,13 +63,16 @@
 
 }
 
-#right-arrow:hover {
-    cursor: hand;
-}
-
+/* #right-arrow:hover {
+    cursor: pointer;
+} */
 
 .grey-arrow {
     opacity: 30%;
 }
 
 .white-arrow {}
+
+.white-arrow:hover {
+    cursor: pointer;
+}
