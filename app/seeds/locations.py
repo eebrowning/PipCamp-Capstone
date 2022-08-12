@@ -42,7 +42,7 @@ def seed_locations():
     name="Parking Garage Dungeon", 
     image_1_url = 'https://static0.gamerantimages.com/wordpress/wp-content/uploads/2019/08/Fallout-4-Milton-Parking-Garage.jpg',
     image_2_url = '',
-    campsite_info = "Recreational Vehicle-100-1000-100-true",
+    campsite_info = "Recreational Vehicle-10-10-10-true",
     essential_info = "true-true-true",
     amenities_info = "true-false-true-false-false-true",
     details_info = "Make yourself at home-After 1PM-Before 12PM-1",
