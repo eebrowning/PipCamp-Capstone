@@ -442,7 +442,7 @@ export function EditLocationForm() {
 
                         <div className='field-label-pair'>
                             <label className='location-form-label'>Min Nights</label>
-                            <input min='1' max='7' className='min-nights' value={+minNights} placeholder='Miniumum Nights' type='number' onChange={e => { validateForm(); setMinNights(e.target.value) }}></input>
+                            <input min='1' max='7' className='min-nights' defaultValue={+minNights} value={+minNights} placeholder='Miniumum Nights' type='number' onChange={e => { validateForm(); setMinNights(e.target.value) }}></input>
                         </div>
 
                         <div className='error-block'>

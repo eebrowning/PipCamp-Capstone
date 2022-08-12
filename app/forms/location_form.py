@@ -63,9 +63,17 @@ def validate_details_info(form, d):
 
 def validate_details_info_values(form, d):
     data= form.data['details_info'].split('-')
-    print(">>>>>>>>>>>", data[len(data)-1],'<<<<<<<<<<<<<<<<')
-    if int(data[len(data)-1]) > 7: 
+    # print(">>>>>>>>>>>", data[len(data)-1],'<<<<<<<<<<<<<<<<')
+    if data[len(data)-1] and (int(data[len(data)-1]) > 7): 
             raise ValidationError('Detail Info: Max Min stay 7 days')
+    elif data[len(data)-1] and (int(data[len(data)-1]) < 1): 
+            raise ValidationError('Detail Info: Minimum stay 1 day')
+
+# def validate_details_info_values_plus(form, d):
+#     data= form.data['details_info'].split('-')
+#     # print(">>>>>>>>>>>", data[len(data)-1],'<<<<<<<<<<<<<<<<')
+#     if data[len(data)-1] and (int(data[len(data)-1]) < 1): 
+#             raise ValidationError('Detail Info: Minimum stay 1 day')
 
 
 def validate_main_image(form, d):
@@ -98,4 +106,4 @@ class NewLocationForm(FlaskForm):
     campsite_info = StringField('Campsite info', validators=[DataRequired(message="Please provide complete Campsite info form."), validate_campsite_info, validate_campsite_info_values])
     essential_info = StringField('Essential info', validators=[DataRequired(message="Please provide complete Essential info form."), validate_essential_info])
     amenities_info = StringField('Amenities info', validators=[DataRequired(message="Please provide complete Amenities info form."), validate_amenities_info])
-    details_info = StringField('Details info', validators=[DataRequired(message="Please provide complete Details info form."), validate_details_info, validate_details_info_values])
+    details_info = StringField('Details info', validators=[DataRequired(message="Please provide complete Details info form."), validate_details_info, validate_details_info_values])#, validate_details_info_values_plus])
