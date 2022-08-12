@@ -27,6 +27,7 @@ function LocationPage() {
         'https://cdn-icons-png.flaticon.com/512/6917/6917269.png',
         'https://cdn-icons-png.flaticon.com/512/1467/1467267.png']
     const campsite_details = campsite ? [`${campsite[0]} sites`, `${campsite[1]} sites`, `Up to${campsite[2]} guests per site`, `Up to ${campsite[3]} vehicles`, `${campsite[4] == 'true' ? 'Wheelchair access' : 'Not accessible'}`] : [];
+
     const essential = location?.essential_info.split('-')
     const essential_labels = ["Fires Allowed", 'Bathrooms Available', "Pets Allowed"]
     const essential_icons = [
@@ -34,7 +35,8 @@ function LocationPage() {
         'https://cdn-icons-png.flaticon.com/512/4745/4745263.png',
         "https://i.imgur.com/2ysOWVx.png"
     ]
-    const essential_details = essential ? [`${essential[0] ? 'Fires allowed' : 'Fires not allowed'}`, `${essential[1] ? 'Toilet available' : "Toilet not available"}`, `${essential[2] ? 'Pets allowed' : 'Pets not allowed'}`] : [];
+    const essential_details = essential ? [`${essential[0] == 'true' ? 'Fires allowed' : 'Fires not allowed'}`, `${essential[1] == 'true' ? 'Toilet available' : "Toilet not available"}`, `${essential[2] == 'true' ? 'Pets allowed' : 'Pets not allowed'}`] : [];
+
     const amenities = location?.amenities_info.split('-')
     const amenities_labels = ["Tables Available", 'Wifi Available', "Bins Available", "Kitchen Available", 'Water Available', 'Showers Available']
     const amenities_icons = [
@@ -46,13 +48,14 @@ function LocationPage() {
         'https://cdn-icons-png.flaticon.com/512/2844/2844030.png'
     ]
     const amenities_details = amenities ? [
-        `${amenities[0] ? 'Tables available' : 'Tables not available'}`,
-        `${amenities[1] ? 'Wifi available' : 'Wifi not available'}`,
-        `${amenities[2] ? 'Trash bins available' : 'Trash bins not available'}`,
-        `${amenities[3] ? 'Kitchen available' : 'Kitchen not available'}`,
-        `${amenities[4] ? 'Potable water available' : 'Potable water not available'}`,
-        `${amenities[5] ? 'Showers available' : 'Showers not available'}`
+        `${amenities[0] == 'true' ? 'Tables available' : 'Tables not available'}`,
+        `${amenities[1] == 'true' ? 'Wifi available' : 'Wifi not available'}`,
+        `${amenities[2] == 'true' ? 'Trash bins available' : 'Trash bins not available'}`,
+        `${amenities[3] == 'true' ? 'Kitchen available' : 'Kitchen not available'}`,
+        `${amenities[4] == 'true' ? 'Potable water available' : 'Potable water not available'}`,
+        `${amenities[5] == 'true' ? 'Showers available' : 'Showers not available'}`
     ] : [];
+
     const details = location?.details_info.split('-')
     const details_labels = ['On Arrival', 'Check In', 'Check Out', 'Minimum Nights']
     const history = useHistory()
@@ -128,7 +131,7 @@ function LocationPage() {
                 {!location.image_2_url && (
                     <img id='second-image' src='https://i.imgur.com/Q9rHlY5.png' alt="default second"></img>
                 )}
-                {location.image_2_url.length > 0 && (
+                {location.image_2_url && location.image_2_url.length > 0 && (
                     <img id='second-image' src={location.image_2_url} alt="second" />
                 )}
             </Images>

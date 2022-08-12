@@ -6,7 +6,20 @@ from sqlalchemy import Integer
 from wtforms import StringField, IntegerField, SubmitField, TimeField, SelectField, TextAreaField
 from wtforms.validators import DataRequired, Regexp, ValidationError
 
-# EXAMPLE VALIDATION
+def name_length(form, field):
+    # Checking if user exists
+    name = field.data
+    
+    if len(name)>40:
+        raise ValidationError('Please enter a name shorter than 40 characters')
+
+def silly_length(form, field):
+    # Checking if user exists
+    field = field.data
+    
+    if len(field)>100:
+        raise ValidationError(f'Please enter something shorter than 100 characters')
+
 def validate_description(form, d):
     if not form.data['description'] or len(form.data['description']) <10:
         raise ValidationError('Description must be more than 10 characters')
@@ -54,7 +67,7 @@ def validate_main_image(form, d):
 
 class NewLocationForm(FlaskForm):
     user_id = IntegerField('userId')
-    name = StringField('Name', validators=[DataRequired(message="Please provide name of the location.")])
+    name = StringField('Name', validators=[DataRequired(message="Please provide name of the location."), name_length])
     image_1_url = StringField('Main image', validators=[DataRequired(message="Please provide an image link."), validate_main_image])
     image_2_url = StringField('Secondary image')#, validators=[validate_second_image])
     description= TextAreaField('Description', validators=[DataRequired(message="Please provide a description."), validate_description])

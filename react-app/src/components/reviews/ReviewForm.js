@@ -11,7 +11,8 @@ function ReviewForm({ locationId, hide }) {
     const [recommends, setRecommends] = useState(1);
     const [errors, setErrors] = useState([]);
 
-    function onSubmit(e) {
+    async function onSubmit(e) {
+        setErrors([])
         e.preventDefault();
         const review = {
             user_id: +user.id,
@@ -20,13 +21,14 @@ function ReviewForm({ locationId, hide }) {
             recommends
         }
         // console.log('>> Submitted location information:', review);
-        const newReview = dispatch(CreateReviewsThunk(review))
+        const newReview = await dispatch(CreateReviewsThunk(review))
         if (!newReview) {
             hide()
         } else {
-            setErrors(newReview)
-            // console.log('>>> errors in form', errors)
+            await setErrors(newReview)
+            console.log('>>> errors in review form', errors)
         }
+
         return newReview
     }
 
