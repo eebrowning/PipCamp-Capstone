@@ -200,7 +200,7 @@ export function EditLocationForm() {
 
     }, [])
 
-    if (location && name) return (
+    if (location) return (
         <div id='location-form-container'>
             <div id='left-panel'>
 

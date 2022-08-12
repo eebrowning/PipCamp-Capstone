@@ -54,27 +54,25 @@ const NavBar = () => {
           </li>
           <span className={home ? 'hide-search' : 'users-mock-search'}>
             <div id='nav-users-buttons'>
-              <li>
-                <NavLink className={'navlink'} to='/login' exact={true} activeClassName='active'>
-                  Login
-                </NavLink>
-              </li>
-              <div className='spacer'>·</div>
-              <li>
-                <NavLink className={'navlink'} to='/sign-up' exact={true} activeClassName='active'>
-                  Sign Up
-                </NavLink>
-              </li>
-              <div className='spacer'>·</div>
-              {/* <li>
-                <NavLink className={'navlink'} to='/login' exact={true} activeClassName='active'>
-                  Demo
-                </NavLink>
-              </li> */}
-              {!state.session.user && (
+              {!state.session.user && (<>
+                <li>
+                  <NavLink className={'navlink'} to='/login' exact={true} activeClassName='active'>
+                    Login
+                  </NavLink>
+                </li>
+                <div className='spacer'>·</div>
+                <li>
+                  <NavLink className={'navlink'} to='/sign-up' exact={true} activeClassName='active'>
+                    Sign Up
+                  </NavLink>
+                </li>
+                <div className='spacer'>·</div>
+
                 <li id={'demo-login'} onClick={handleClick}>
                   Demo
                 </li>
+              </>
+
               )}
               {state.session.user && (
                 <li>
