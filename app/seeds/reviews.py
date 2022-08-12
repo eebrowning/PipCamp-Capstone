@@ -3,8 +3,8 @@ from app.models import db, Review
 
 def seed_reviews():
     demo = Review(
-    user_id = 1,
-            location_id = 1,
+    user_id = 3,
+            location_id = 2,
             content = "I managed to keep my radiation sickness down while here!",
             recommends = True
     )
@@ -21,13 +21,13 @@ def seed_reviews():
             recommends = False
     )
     demo4 = Review(
-    user_id = 1,
+    user_id = 2,
             location_id = 2,
             content = "I managed to keep my radiation sickness down while here!",
             recommends = True
     )
     demo5 = Review(
-    user_id = 1,
+    user_id = 2,
             location_id = 3,
             content = "Who could have done this? must be aliens...",
             recommends = True
@@ -39,7 +39,7 @@ def seed_reviews():
             recommends = False
     )
     demo7 = Review(
-    user_id = 1,
+    user_id = 2,
             location_id = 5,
             content = "I FOUND THE ALIENS WHAT MADE THAT CARHENGE!",
             recommends = True
