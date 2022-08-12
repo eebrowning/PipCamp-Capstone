@@ -91,12 +91,15 @@ function Reviews({ locationId }) {
 
                             {showModal && (
                                 <Modal onClose={() => setShowModal(false)}>
-                                    <p> Are you sure you want to delete your review?</p>
-                                    <>
-                                        <button className={`delete-${review.id}`} id='delete-location' onClick={handleDelete}>Delete</button>
-                                        <button id='close-modal' onClick={() => setShowModal(false)}>Cancel</button>
-                                    </>
+                                    <div className='delete-modal-content'>
+                                        <p> Are you sure you want to delete your review?</p>
+                                        <div className='modal-buttons'>
+                                            <button className={`delete-${review.id}`} id='delete-location' onClick={handleDelete}>Delete</button>
+                                            <button id='close-modal' onClick={() => setShowModal(false)}>Cancel</button>
+                                        </div>
 
+                                    </div>
+                                    <img src='https://pngimg.com/uploads/fallout/fallout_PNG18.png' />
                                 </Modal>
                             )}
                         </div>

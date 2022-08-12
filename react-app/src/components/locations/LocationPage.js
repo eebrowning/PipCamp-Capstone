@@ -6,6 +6,7 @@ import { DeleteLocationThunk, GetLocationDetailThunk, GetLocationsThunk } from '
 import Images from '../image-carousel/Images';
 import Reviews from '../reviews/Reviews';
 import './location-page.css'
+import '../../context/modal.css'
 
 
 
@@ -112,12 +113,16 @@ function LocationPage() {
                         <button id='open-modal' onClick={() => setShowModal(true)}>Delete</button>
                         {showModal && (
                             <Modal onClose={() => setShowModal(false)}>
-                                <p> Are you sure you want to delete {location.name}?</p>
-                                <>
-                                    <button id='delete-location' onClick={handleDelete}>Delete</button>
-                                    <button id='close-modal' onClick={() => setShowModal(false)}>Cancel</button>
-                                </>
 
+                                <div className='delete-modal-content'>
+
+                                    <p> Are you sure you want to delete {location.name}?</p>
+                                    <div className='modal-buttons'>
+                                        <button id='delete-location' onClick={handleDelete}>Delete</button>
+                                        <button id='close-modal' onClick={() => setShowModal(false)}>Cancel</button>
+                                    </div>
+                                </div>
+                                <img src='https://pngimg.com/uploads/fallout/fallout_PNG18.png' />
                             </Modal>
                         )}
                     </>

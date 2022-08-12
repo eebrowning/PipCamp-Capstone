@@ -1,13 +1,27 @@
+/* #modal-outer-box {
+    height: 100%;
+    width: 100%;
+    border: 1px solid red;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+} */
+
+
 #modal {
     position: fixed;
     top: 0;
     right: 0;
-    left: 0;
+    left: 35%;
     bottom: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 100;
+    height: 400px;
+    width: 400px;
+
 }
 
 #modal-background {
@@ -20,6 +34,24 @@
 }
 
 #modal-content {
+    height: 400px;
     position: absolute;
     background-color: white;
+    height: 25%;
+    border-radius: 8px;
+    border: 5px solid #447AB9;
+}
+
+.delete-modal-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+    height: 100%;
+}
+
+.delete-modal-content p {
+    color: #376498;
+    text-align: center;
 }
