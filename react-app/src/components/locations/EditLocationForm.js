@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { EditLocationThunk, GetLocationDetailThunk } from '../../store/location';
+import { EditLocationThunk, GetLocationDetailThunk, GetLocationsThunk } from '../../store/location';
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory, useParams } from 'react-router-dom'
 import { timeConverter } from '../utils';
@@ -154,6 +154,7 @@ export function EditLocationForm() {
             } else {
                 setErrors(editedLocation)
             }
+            // dispatch(GetLocationsThunk())
             return editedLocation
             // } else { return errors }
         }
@@ -163,8 +164,9 @@ export function EditLocationForm() {
         dispatch(GetLocationDetailThunk(locationId))
     }, [])
 
-    useEffect(() => { //persists autofilled form, can be cleaned up of conditionals in setThing invocations
+    useEffect(async () => { //persists autofilled form, can be cleaned up of conditionals in setThing invocations
         // console.log(location, '<<<<< is this anything?')
+
 
         if (location) {
             if (!name) setName(location['name'])
@@ -172,7 +174,7 @@ export function EditLocationForm() {
             // if (!image_2_url) setImage_2_url(location.image_2_url)
             if (!description) setDescription(location.description)
 
-            if (!shelter) setShelter(camp_array ? camp_array[0] : '')
+            if (!shelter) await setShelter(camp_array ? camp_array[0] : '')
             if (!sites) setSites(camp_array ? camp_array[1] : '')
             if (!guests) setGuests(camp_array ? camp_array[2] : '')
             if (!vehicles) setVehicles(camp_array ? camp_array[3] : '')
@@ -184,6 +186,7 @@ export function EditLocationForm() {
 
             if (!arrival) setArrival(details_array ? details_array[0] : '')
             if (!checkin) setCheckin(details_array ? details_array[1] : '')
+
             if (!checkout) setCheckout(details_array ? details_array[2] : '')
             if (!minNights) setMinNights(details_array ? details_array[3] : '')
 
@@ -194,7 +197,8 @@ export function EditLocationForm() {
             if (!kitchen) setKitchen(amenities_array ? amenities_array[4] : '')
             if (!showers) setShowers(amenities_array ? amenities_array[5] : '')
         }
-    })
+
+    }, [])
 
     if (location && name) return (
         <div id='location-form-container'>
@@ -232,7 +236,7 @@ export function EditLocationForm() {
                         Campsite Information
                         <div className='fields-box'>
 
-                            <select id='camp-shelter' defaultValue={shelter} onChange={e => setShelter(e.target.value)}>
+                            <select id='camp-shelter' value={shelter} onChange={e => setShelter(e.target.value)}>
                                 <option value=''>--Select Shelter--</option>
                                 {shelters.map(shelter => (
                                     <option key={shelter} value={shelter}>{shelter}</option>
@@ -241,7 +245,7 @@ export function EditLocationForm() {
                             <input type='number' defaultValue={sites} id='camp-sites' placeholder='Number of Sites' onChange={e => setSites(e.target.value)}></input>
                             <input type='number' defaultValue={guests} id='max-guests' placeholder='Max Guests per Site' onChange={e => setGuests(e.target.value)}></input>
                             <input type='number' defaultValue={vehicles} id='max-vehicles' placeholder='Max Vehicles per Site' onChange={e => setVehicles(e.target.value)}></input>
-                            <select id='camp-accessible' defaultValue={accessible} onChange={e => setAccessible(e.target.value)}>
+                            <select id='camp-accessible' value={accessible} onChange={e => setAccessible(e.target.value)}>
                                 <option> --Disabled Accessible</option>
                                 <option value={true}>True</option>
                                 <option value={false}>False</option>
@@ -262,17 +266,17 @@ export function EditLocationForm() {
                         Essential Information
                         <div className='fields-box'>
 
-                            <select defaultValue={fires} id='fires-allowed' onChange={e => setFires(e.target.value)}>
+                            <select value={fires} id='fires-allowed' onChange={e => setFires(e.target.value)}>
                                 <option> --Fires Allowed--</option>
                                 <option value={true}>True</option>
                                 <option value={false}>False</option>
                             </select>
-                            <select defaultValue={bathrooms} id='bathroom-available' onChange={e => setBathrooms(e.target.value)}>
+                            <select value={bathrooms} id='bathroom-available' onChange={e => setBathrooms(e.target.value)}>
                                 <option> --Bathrooms--</option>
                                 <option value={true}>True</option>
                                 <option value={false}>False</option>
                             </select>
-                            <select defaultValue={pets} id='pets-allowed' onChange={e => setPets(e.target.value)}>
+                            <select value={pets} id='pets-allowed' onChange={e => setPets(e.target.value)}>
                                 <option> --Pets Allowed--</option>
                                 <option value={true}>True</option>
                                 <option value={false}>False</option>
@@ -292,32 +296,32 @@ export function EditLocationForm() {
 
                         {/* <label> */}
                         Amenities Information
-                        <select defaultValue={tables} id='tables-available' onChange={e => setTables(e.target.value)}>
+                        <select value={tables} id='tables-available' onChange={e => setTables(e.target.value)}>
                             <option> --Tables Available--</option>
                             <option value={true}>True</option>
                             <option value={false}>False</option>
                         </select>
-                        <select defaultValue={wifi} id='wifi-available' onChange={e => setWifi(e.target.value)}>
+                        <select value={wifi} id='wifi-available' onChange={e => setWifi(e.target.value)}>
                             <option> --Wifi Available--</option>
                             <option value={true}>True</option>
                             <option value={false}>False</option>
                         </select>
-                        <select defaultValue={bins} id='bins-available' onChange={e => setBins(e.target.value)}>
+                        <select value={bins} id='bins-available' onChange={e => setBins(e.target.value)}>
                             <option> --Bins Available--</option>
                             <option value={true}>True</option>
                             <option value={false}>False</option>
                         </select>
-                        <select defaultValue={water} id='water-available' onChange={e => setWater(e.target.value)}>
+                        <select value={water} id='water-available' onChange={e => setWater(e.target.value)}>
                             <option> --Water Available--</option>
                             <option value={true}>True</option>
                             <option value={false}>False</option>
                         </select>
-                        <select defaultValue={kitchen} id='kitchen-available' onChange={e => setKitchen(e.target.value)}>
+                        <select value={kitchen} id='kitchen-available' onChange={e => setKitchen(e.target.value)}>
                             <option> --Kitchen Available--</option>
                             <option value={true}>True</option>
                             <option value={false}>False</option>
                         </select>
-                        <select defaultValue={showers} id='showers-available' onChange={e => setShowers(e.target.value)}>
+                        <select value={showers} id='showers-available' onChange={e => setShowers(e.target.value)}>
                             <option> --Showers Available--</option>
                             <option value={true}>True</option>
                             <option value={false}>False</option>
@@ -333,27 +337,38 @@ export function EditLocationForm() {
                     <div id='details-info' className='fields-box'>
 
                         Detail Information
-                        <select defaultValue={arrival} id='arrival-method' onChange={e => setArrival(e.target.value)}>
+                        <select value={arrival} id='arrival-method' onChange={e => setArrival(e.target.value)}>
                             <option value=''>--Select Arrival--</option>
                             {arrivalOptions.map(option => (
                                 <option key={option} value={option}>{option}</option>
                             ))}
                         </select>
-                        <div className='time-label'>
-                            <label>
-                                Checkin
-                            </label>
-                            <input placeholder='Check in time' type='time' onChange={e => setCheckin(`${`After ${timeConverter(e.target.value)}`}`)}></input>
+                        <div className='edit-time-label'>
+                            <div className='side-by-side'>
 
+                                <div className='edit-checkout'>
+                                    Check-in
+                                </div>
+                                <div className='default-checkout'>
+                                    (default: {checkin})
+                                </div>
+                            </div>
+                            <input placeholder='Check in time' type='time' onChange={e => setCheckin(`${`After ${timeConverter(e.target.value)}`}`)}></input>
                         </div>
-                        <div className='time-label'>
-                            <label>
-                                Checkout
-                            </label>
+                        <div className='edit-time-label'>
+                            <div className='side-by-side'>
+
+                                <div className='edit-checkout'>
+                                    Check-out
+                                </div>
+                                <div className='default-checkout'>
+                                    (default: {checkout})
+                                </div>
+                            </div>
                             <input placeholder='Check out time' type='time' onChange={e => setCheckout(`${`Before ${timeConverter(e.target.value)}`}`)}></input>
 
                         </div>
-                        <input defaultValue={minNights} placeholder='Miniumum Nights' type='number' onChange={e => setMinNights(e.target.value)}></input>
+                        <input defaultValue={+minNights} value={+minNights} placeholder='Miniumum Nights' type='number' onChange={e => setMinNights(e.target.value)}></input>
 
 
                         <div className='error-block'>
@@ -365,7 +380,7 @@ export function EditLocationForm() {
                 </div>
                 <button type='submit' className='location-submit' onClick={onSubmit}>Submit</button>
 
-            </form>
+            </form >
         </div >
 
     )

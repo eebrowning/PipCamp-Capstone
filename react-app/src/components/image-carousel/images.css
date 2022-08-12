@@ -68,3 +68,10 @@
 #right-arrow:hover {
     cursor: hand;
 }
+
+
+.grey-arrow {
+    opacity: 30%;
+}
+
+.white-arrow {}

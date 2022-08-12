@@ -52,9 +52,9 @@ def create_review():
 
 @reviews_routes.route('/<reviewId>/edit', methods=['PUT'])
 def update_review(reviewId):
-    print('>>>>--------<<<<')
-    print('>>>>',reviewId, '<<<<')
-    print('>>>>--------<<<<')
+    # print('>>>>--------<<<<')
+    # print('>>>>',reviewId, '<<<<')
+    # print('>>>>--------<<<<')
 
     form= ReviewForm()
     review= Review.query.get(reviewId)

@@ -10,7 +10,7 @@ def seed_locations():
     campsite_info = 'Tent-10-20-1-true',
     essential_info = "false-true-true",
     amenities_info = "true-true-true-true-false-false",
-    details_info = "Make yourself at home-After 3PM Before 7AM-1",
+    details_info = "Make yourself at home-After 3PM-Before 7AM-1",
     description= "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
     )
     demo2 = Location(
@@ -21,7 +21,7 @@ def seed_locations():
     campsite_info = 'Lodge-1-2-1-true',
     essential_info = "false-true-true",
     amenities_info = "true-true-true-true-false-false",
-    details_info = "Make yourself at home-After 1PM Before 12PM-1",
+    details_info = "Make yourself at home-After 1PM-Before 12PM-1",
     description= "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
     )
     demo3 = Location(
@@ -32,7 +32,7 @@ def seed_locations():
     campsite_info = "Lodge-1-2-6-true",
     essential_info = "false-true-true",
     amenities_info = "true-true-true-true-false-false",
-    details_info = "Make yourself at home-After 8PM Before 6AM-1",
+    details_info = "Make yourself at home-After 8PM-Before 6AM-1",
     description= "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
     )
 
@@ -45,7 +45,7 @@ def seed_locations():
     campsite_info = "Recreational Vehicle-100-1000-100-true",
     essential_info = "true-true-true",
     amenities_info = "true-false-true-false-false-true",
-    details_info = "Make yourself at home-After 1PM Before 12PM-1",
+    details_info = "Make yourself at home-After 1PM-Before 12PM-1",
     description= "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
     )
 
@@ -58,7 +58,7 @@ def seed_locations():
     campsite_info = "Lodge-1-1-1-true",
     essential_info = "false-true-false",
     amenities_info = "true-false-true-false-false-true",
-    details_info = "Make yourself at home-After 1PM Before 12PM-1",
+    details_info = "Make yourself at home-After 1PM-Before 12PM-1",
     description= "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
     )
 

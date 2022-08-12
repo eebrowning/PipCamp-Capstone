@@ -27,7 +27,7 @@ const Images = (images) => {
 
     return (
         <div id="images-box-outer">
-            <img onClick={prev} id="left-arrow" src='https://i.imgur.com/oTediJN.png' />
+            <img className={currentImg === 0 ? 'grey-arrow' : 'white-arrow'} onClick={prev} id="left-arrow" src='https://i.imgur.com/oTediJN.png' />
             {/* <button onClick={prev} id="left-arrow">
                 {`<`}
             </button> */}
@@ -38,7 +38,7 @@ const Images = (images) => {
                     </div>
                 </div>
             </div>
-            <img onClick={next} id="right-arrow" src='https://i.imgur.com/UpFYkCd.png' />
+            <img className={currentImg === 1 ? 'grey-arrow' : 'white-arrow'} onClick={next} id="right-arrow" src='https://i.imgur.com/UpFYkCd.png' />
             {/* <button onClick={next} id="right-arrow">
                 {`>`}
             </button> */}

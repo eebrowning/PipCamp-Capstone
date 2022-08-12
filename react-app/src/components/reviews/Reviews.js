@@ -19,7 +19,7 @@ function Reviews({ locationId }) {
     const locations = useSelector(state => Object.values(state.locations))
     const location = locations?.find(location => location.id == +locationId)
     const [usersArr, setUsersArr] = useState([]);
-    console.log('>>>>>>>>>>>>>> usersArr', usersArr)
+    // console.log('>>>>>>>>>>>>>> usersArr', usersArr)
     const matchUser = (userArr, id) => {//swap user_id for username
         return userArr?.find(user => user.id === id)?.username
     }
@@ -56,11 +56,12 @@ function Reviews({ locationId }) {
         <div id='review-component'>
 
             {/* add-review button goes here, will be conditionally available if no reviews by user*/}
-            {!userReview && (<ReviewForm locationId={locationId} />)}
+            {!userReview && user.id !== location.user_id && (<ReviewForm locationId={locationId} />)}
             {locationReviews && locationReviews.map(review => (
                 <div key={review.id} className='review-box'>
 
                     <div className='review-content' key={review.id}>
+
                         <div className='user-card'>
                             {review.recommends && (
                                 <img src="https://i.imgur.com/rUN6XwH.png" className='user-image' />
@@ -79,7 +80,7 @@ function Reviews({ locationId }) {
                             <div>{review.content}</div>
                         </div>
                         {/* user-owned-review buttons go here */}
-                        {userReview === review && editing && (<EditReviewForm review={review} locationId={locationId} hide={() => setEditing(false)} />)}
+
                     </div>
                     {user && user.id === review.user_id && (
                         <div className='owned-review-buttons'>
@@ -100,6 +101,7 @@ function Reviews({ locationId }) {
                             )}
                         </div>
                     )}
+                    {userReview === review && editing && (<EditReviewForm review={review} locationId={locationId} hide={() => setEditing(false)} />)}
                 </div>
             ))
             }
