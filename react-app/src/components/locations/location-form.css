@@ -2,7 +2,7 @@
     height: 1000px;
     display: flex;
     flex-direction: row;
-    border: 1px solid #36659a;
+    /* border: 1px solid #36659a; */
     color: #36659a;
 }
 
@@ -18,6 +18,7 @@
 .location-error {
     color: crimson;
     width: 200px;
+    font-size: 14px;
 }
 
 #left-panel {
@@ -68,6 +69,7 @@
 #campsite-info input {
     height: 16px;
     max-width: 100px;
+
 }
 
 
@@ -95,6 +97,10 @@
     height: 25px;
     width: 100%;
     justify-content: space-between;
+}
+
+.time-label label {
+    font-size: 12px;
 }
 
 .edit-time-label {
@@ -155,7 +161,7 @@
 
 #arrival-method {
 
-    width: 160px;
+    max-width: 120px;
 }
 
 .min-nights {
@@ -164,4 +170,10 @@
 
 .time-input {
     width: 90%;
+}
+
+#location-form select,
+#details-info select {
+    margin-bottom: 2px;
+    width: 170px;
 }

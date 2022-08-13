@@ -3,7 +3,7 @@ from app.models import db, Location
 
 def seed_locations():
     demo = Location(
-    user_id=1, 
+    user_id=4, 
     name="Suffolk County Charter School", 
     image_1_url = 'https://static0.gamerantimages.com/wordpress/wp-content/uploads/2022/04/Fallout-4-Suffolk-County-Charter-School.jpg',
     image_2_url = '',
@@ -25,7 +25,7 @@ def seed_locations():
     description= "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
     )
     demo3 = Location(
-    user_id=1, 
+    user_id=4, 
     name="Carhenge", 
     image_1_url = 'https://static0.gamerantimages.com/wordpress/wp-content/uploads/2019/08/Fallout-4-Carhenge.jpg',
     image_2_url = '',
@@ -51,7 +51,7 @@ def seed_locations():
 
 
     demo5 = Location(
-    user_id=1, 
+    user_id=4, 
     name="Crashed UFO", 
     image_1_url = 'https://static0.gamerantimages.com/wordpress/wp-content/uploads/2019/08/Fallout-4-Crashed-UFO.jpg',
     image_2_url = '',
@@ -79,7 +79,7 @@ def seed_locations():
 
 
     demo7 = Location(
-    user_id=1, 
+    user_id=4, 
     name='Boston Harbor', 
     image_1_url = 'https://vignette.wikia.nocookie.net/fallout/images/0/05/BostonHarbor-Fallout4.jpg/revision/latest?cb=20161031005323',
     image_2_url = '',
@@ -93,7 +93,7 @@ def seed_locations():
 
 
     demo8 = Location(
-    user_id=1, 
+    user_id=6, 
     name='Diamond City', 
     image_1_url = 'https://cdn.gamer-network.net/2015/usgamer/f4_02_01.jpg',
     image_2_url = '',
@@ -106,7 +106,7 @@ def seed_locations():
     )
 
     demo9 = Location(
-    user_id=1, 
+    user_id=4, 
     name='Vault 111', 
     image_1_url = 'https://i.pinimg.com/originals/b5/68/61/b56861d66adb30a9cb9bd4132cb0cd58.jpg',
     image_2_url = '',
