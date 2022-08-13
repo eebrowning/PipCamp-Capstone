@@ -67,15 +67,18 @@ export const CreateLocationThunk = (location) => async (dispatch) => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(location)
     })
+    console.log('response in createloctationthunk', response)
+
     if (response.ok) {
         const data = await response.json()
+        console.log('data in createloctationthunk', data)
         dispatch(createLocation(data))
-        return null
+        return data
     } else if (response.status <= 500) {
         const data = await response.json();
         if (data.errors) {
             console.log(data.errors, '<<<<< data.errors from CreateLocationThunk')
-            return data.errors;
+            return data;
         }
     }
 }
