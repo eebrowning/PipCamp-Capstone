@@ -14,7 +14,6 @@ const NavBar = () => {
   const locations = useSelector(state => Object.values(state.locations))
   const [randLocation, setRandLocation] = useState(locations ? locations[Math.floor(Math.random() * locations.length)] : 1)
 
-
   const dispatch = useDispatch();
 
   function handleClick(e) {
@@ -23,12 +22,20 @@ const NavBar = () => {
     return dispatch(demoLogin())
   }
 
-  // useEffect(() => {
-  //   setHome(window.location.pathname == '/' ? true : false)
-  // }, [])
 
   useEffect(() => {
     setHome(window.location.pathname === '/' ? true : false)
+    // if (home) {
+    //   const navSearch = document.getElementById('hide-search');
+    //   if (navSearch) { navSearch.id = 'show-search' }
+    //   const navBox = document.getElementById('nav-box');
+    //   if (navBox) { navBox.id = 'nav-box-other' }
+    // } else {
+    //   const navSearch = document.getElementById('show-search');
+    //   if (navSearch) { navSearch.id = 'hide-search' }
+    //   const navBox = document.getElementById('nav-box-other');
+    //   if (navBox) { navBox.id = 'nav-box' }
+    // }
   }, [window.location.pathname])
 
   if (locations) return (
