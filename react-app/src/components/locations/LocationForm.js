@@ -150,15 +150,15 @@ function LocationForm() {
         const newLocation = await dispatch(CreateLocationThunk(location))
 
         // console.log(">>>>>>", state, '<<<<<<<<<<<<<<')
-        console.log(">>>>>>", Object.values(state.locations).length + 2, '<<<<<<<<<<<<<<')
+        console.log(">>>>>>", newLocation, '<<<<<<<<<<<<<<')
         // const justMade = locations?.filter(local => local.name === location.name)
 
-        const locationArray = Object.values(state.locations)
-        const newId = locationArray[locationArray.length - 1].id + 1;
-        console.log('is this correct?', newId)
-        if (!newLocation) { history.push(`/locations/${newId}`) }
+        // const locationArray = Object.values(state.locations)
+        // const newId = locationArray[locationArray.length - 1].id + 1;
+        // console.log('is this correct?', newId)
+        if (!newLocation.errors) { history.push(`/locations/${newLocation.id}`) }
         else {
-            setErrors(newLocation)
+            setErrors(newLocation.errors)
         }
 
     }
