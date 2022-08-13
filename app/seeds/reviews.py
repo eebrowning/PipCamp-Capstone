@@ -33,7 +33,7 @@ def seed_reviews():
             recommends = True
     )
     demo6 = Review(
-    user_id = 2,
+    user_id = 4,
             location_id = 10,
             content = "My skin... It's melting...",
             recommends = False
