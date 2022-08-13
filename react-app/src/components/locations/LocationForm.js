@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { CreateLocationThunk } from '../../store/location';
+import { CreateLocationThunk, GetLocationsThunk } from '../../store/location';
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import './location-form.css'
 import { timeConverter } from '../utils';
 
 function LocationForm() {
+    const state = useSelector(state => state)
+
     const dispatch = useDispatch()
     const history = useHistory()
     const userId = useSelector(state => state.session.user?.id)
@@ -57,6 +59,9 @@ function LocationForm() {
     const details_info_string = `${arrival}-${checkin}-${checkout}-${minNights}`
     const [errorsDetails, setErrorsDetails] = useState([]);
 
+
+
+
     const validateForm = () => {
         // errorsMain: Name, Image, Description
         let arr = []
@@ -73,7 +78,7 @@ function LocationForm() {
         arr = []
         if (!shelter) { arr.push("Select Shelter Type."); };
         if (sites < 0) { arr.push("Sites cannot be negative."); };
-        if (sites > 50) { arr.push("50 site limit per location"); };
+        if (sites > 50) { arr.push("100 site limit per location"); };
         if (!sites) { arr.push("Enter Number of Sites."); };
 
         if (guests < 0) { arr.push('Sites cannot be negative.') }
@@ -81,7 +86,7 @@ function LocationForm() {
         if (!guests) { arr.push('Enter Max Guests') }
 
         if (vehicles < 0) { arr.push('Vehicles cannot be negative.'); };
-        if (vehicles > 10) { arr.push('10 vehicle limit per location.'); };
+        if (vehicles > 10) { arr.push('100 vehicle limit per location.'); };
         if (!vehicles) { arr.push('Enter Max Vehicles.'); };
 
         if (!accessible) { arr.push('Select Accessiblility.'); };
@@ -122,6 +127,9 @@ function LocationForm() {
 
     }
 
+
+    // const newLocal = locations?.filter(local => local.name === name)
+
     async function onSubmit(e) {
         validateForm();
         e.preventDefault();
@@ -140,21 +148,30 @@ function LocationForm() {
         console.log('>>> errors in form', errors)
 
         const newLocation = await dispatch(CreateLocationThunk(location))
-        if (!newLocation) { history.push(`/locations/${location.id}}`) }
+
+        // console.log(">>>>>>", state, '<<<<<<<<<<<<<<')
+        console.log(">>>>>>", Object.values(state.locations).length + 2, '<<<<<<<<<<<<<<')
+        // const justMade = locations?.filter(local => local.name === location.name)
+
+        const locationArray = Object.values(state.locations)
+        const newId = locationArray[locationArray.length - 1].id + 1;
+        console.log('is this correct?', newId)
+        if (!newLocation) { history.push(`/locations/${newId}`) }
         else {
             setErrors(newLocation)
         }
 
-        // if (newLocation) {
-        //     history.push('/')
-        // } else {
-        // }
-
     }
+    // useEffect(() => {
+    //     dispatch(GetLocationsThunk())
+
+    // }, [dispatch])
     useEffect(() => {
         const navBox = document.getElementById('nav-box');
         if (navBox) { navBox.id = 'nav-box-other' }
+
     }, [])
+
     return (
         <div id='location-form-container'>
             <div id='left-panel'>
@@ -340,10 +357,7 @@ function LocationForm() {
 
                         Detail Information
 
-                        <label className='location-form-label'></label>
-                        <label className='location-form-label'></label>
-                        <label className='location-form-label'></label>
-                        <label className='location-form-label'></label>
+
 
                         <div className='field-label-pair-arrival'>
                             <label className='location-form-label'>

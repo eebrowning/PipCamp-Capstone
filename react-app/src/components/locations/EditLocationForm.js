@@ -84,7 +84,7 @@ export function EditLocationForm() {
         arr = []
         if (!shelter) { arr.push("Select Shelter Type."); };
         if (sites < 0) { arr.push("Sites cannot be negative."); };
-        if (sites > 50) { arr.push("50 site limit per location"); };
+        if (sites > 50) { arr.push("100 site limit per location"); };
         if (!sites) { arr.push("Enter Number of Sites."); };
 
         if (guests < 0) { arr.push('Sites cannot be negative.') }
@@ -92,7 +92,7 @@ export function EditLocationForm() {
         if (!guests) { arr.push('Enter Max Guests') }
 
         if (vehicles < 0) { arr.push('Vehicles cannot be negative.'); };
-        if (vehicles > 10) { arr.push('10 vehicle limit per location.'); };
+        if (vehicles > 10) { arr.push('100 vehicle limit per location.'); };
         if (!vehicles) { arr.push('Enter Max Vehicles.'); };
 
         if (!accessible) { arr.push('Select Disabled Accessiblility.'); };
@@ -284,7 +284,7 @@ export function EditLocationForm() {
                                 </div>
                                 <div className='field-label-pair'>
                                     <label className='location-form-label'>Available Sites</label>
-                                    <input style={{ width: '120px' }} min='1' max='50' type='number' defaultValue={sites} id='camp-sites' placeholder='Number of Sites' onChange={e => { setSites(e.target.value); validateForm(); }}></input>
+                                    <input style={{ width: '120px' }} min='1' max='100' type='number' defaultValue={sites} id='camp-sites' placeholder='Number of Sites' onChange={e => { setSites(e.target.value); validateForm(); }}></input>
                                 </div>
                                 <div className='field-label-pair'>
                                     <label className='location-form-label'>Max Guests</label>
@@ -292,7 +292,7 @@ export function EditLocationForm() {
                                 </div>
                                 <div className='field-label-pair'>
                                     <label className='location-form-label'>Max Vehicles</label>
-                                    <input style={{ width: '120px' }} min='0' max={10} type='number' defaultValue={vehicles} id='max-vehicles' placeholder='Max Vehicles per Site' onChange={async e => { await setVehicles(e.target.value); validateForm(); }}></input>
+                                    <input style={{ width: '120px' }} min='0' max={100} type='number' defaultValue={vehicles} id='max-vehicles' placeholder='Max Vehicles per Site' onChange={async e => { await setVehicles(e.target.value); validateForm(); }}></input>
                                 </div>
 
                                 <div className='field-label-pair'>
