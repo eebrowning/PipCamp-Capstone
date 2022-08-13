@@ -17,10 +17,7 @@ function LocationForm() {
     const [image_1_url, setImage_1_url] = useState('')
     const [image_2_url, setImage_2_url] = useState('')
     const [description, setDescription] = useState('')
-    // const [campsite_info, setCampsite_info] = useState('')
-    // const [essential_info, setEssential_info] = useState('')
-    // const [amenities_info, setAmenities_info] = useState('')
-    // const [details_info, setDetails_info] = useState('')
+
     const [errorsMain, setErrorsMain] = useState([])
 
     //Camp info form
@@ -55,7 +52,7 @@ function LocationForm() {
     const [arrival, setArrival] = useState()
     const [checkin, setCheckin] = useState()
     const [checkout, setCheckout] = useState()
-    const [minNights, setMinNights] = useState()
+    const [minNights, setMinNights] = useState(0)
     const details_info_string = `${arrival}-${checkin}-${checkout}-${minNights}`
     const [errorsDetails, setErrorsDetails] = useState([]);
 
@@ -144,18 +141,11 @@ function LocationForm() {
             amenities_info: amenities_info_string,
             details_info: details_info_string
         }
-        console.log('>> Submitted location information:', location);
-        console.log('>>> errors in form', errors)
-
+        // console.log('>> Submitted location information:', location);
+        // console.log('>>> errors in form', errors)
         const newLocation = await dispatch(CreateLocationThunk(location))
-
         // console.log(">>>>>>", state, '<<<<<<<<<<<<<<')
-        console.log(">>>>>>", newLocation, '<<<<<<<<<<<<<<')
-        // const justMade = locations?.filter(local => local.name === location.name)
-
-        // const locationArray = Object.values(state.locations)
-        // const newId = locationArray[locationArray.length - 1].id + 1;
-        // console.log('is this correct?', newId)
+        // console.log(">>>>>>", newLocation, '<<<<<<<<<<<<<<')
         if (!newLocation.errors) { history.push(`/locations/${newLocation.id}`) }
         else {
             setErrors(newLocation.errors)
@@ -167,6 +157,7 @@ function LocationForm() {
 
     // }, [dispatch])
     useEffect(() => {
+
         const navBox = document.getElementById('nav-box');
         if (navBox) { navBox.id = 'nav-box-other' }
 
@@ -389,7 +380,7 @@ function LocationForm() {
                             <label className='location-form-label'>
                                 Min Nights
                             </label>
-                            <input className='min-nights' placeholder='Miniumum Nights' type='number' onChange={e => setMinNights(e.target.value)}></input>
+                            <input className='min-nights' placeholder='Miniumum Nights' type='number' onChange={e => setMinNights(`${e.target.value}`)}></input>
                         </div>
 
 

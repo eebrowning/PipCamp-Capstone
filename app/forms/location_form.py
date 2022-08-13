@@ -63,8 +63,10 @@ def validate_details_info(form, d):
 
 def validate_details_info_values(form, d):
     data= form.data['details_info'].split('-')
+
+    
     # print(">>>>>>>>>>>", data[len(data)-1],'<<<<<<<<<<<<<<<<')
-    if data[len(data)-1] and (int(data[len(data)-1]) > 7): 
+    if data[len(data)-1]  and (int(data[len(data)-1]) > 7): 
             raise ValidationError('Detail Info: Max Min stay 7 days')
     elif data[len(data)-1] and (int(data[len(data)-1]) < 1): 
             raise ValidationError('Detail Info: Minimum stay 1 day')
