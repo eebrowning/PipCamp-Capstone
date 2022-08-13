@@ -34,9 +34,10 @@ def validate_campsite_info(form, d):
 
 def validate_campsite_info_values(form, d):
     for item in form.data['campsite_info'].split('-'):
-        if len(item)>2 and len(item)<4:
-            raise ValidationError('Campsite Info: No values over 100')
 
+        print(">>>>", item.isdigit(),"<<<<")
+        if item.isdigit() and int(item)>100:
+            raise ValidationError('Campsite Info: No values over 100')
 
 #essential
 def validate_essential_info(form, d):
