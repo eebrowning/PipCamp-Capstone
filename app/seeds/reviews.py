@@ -56,6 +56,38 @@ def seed_reviews():
             content = "I have a noticable glow after my stay here 10/10",
             recommends = True
     )
+    demo10 = Review(
+    user_id = 5,
+            location_id = 2,
+            content = "Pretty good place to flog my wares!",
+            recommends = True
+    )
+    demo11 = Review(
+    user_id = 5,
+            location_id = 1,
+            content = "Don't like abandoned schools. Creepy stuff.",
+            recommends = False
+    )
+    demo12 = Review(
+    user_id = 5,
+            location_id = 10,
+            content = "Made a killing on radaway here.",
+            recommends = True
+    )
+    demo13 = Review(
+    user_id = 6,
+            location_id = 1,
+            content = "Filled with mutants. Should have seen that coming.",
+            recommends = False
+    )
+    demo14 = Review(
+    user_id = 6,
+            location_id = 10,
+            content = "Have I been there? No. Neither should you.",
+            recommends = False
+    )
+
+
     db.session.add(demo)
     db.session.add(demo2)
     db.session.add(demo3)
@@ -65,6 +97,11 @@ def seed_reviews():
     db.session.add(demo7)
     db.session.add(demo8)
     db.session.add(demo9)
+    db.session.add(demo10)
+    db.session.add(demo11)
+    db.session.add(demo12)
+    db.session.add(demo13)
+    db.session.add(demo14)
 
 
     db.session.commit()

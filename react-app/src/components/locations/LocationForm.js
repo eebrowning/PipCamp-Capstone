@@ -141,11 +141,9 @@ function LocationForm() {
             amenities_info: amenities_info_string,
             details_info: details_info_string
         }
-        // console.log('>> Submitted location information:', location);
-        // console.log('>>> errors in form', errors)
+
         const newLocation = await dispatch(CreateLocationThunk(location))
-        // console.log(">>>>>>", state, '<<<<<<<<<<<<<<')
-        // console.log(">>>>>>", newLocation, '<<<<<<<<<<<<<<')
+
         if (!newLocation.errors) { history.push(`/locations/${newLocation.id}`) }
         else {
             setErrors(newLocation.errors)
@@ -158,8 +156,8 @@ function LocationForm() {
     // }, [dispatch])
     useEffect(() => {
 
-        const navBox = document.getElementById('nav-box');
-        if (navBox) { navBox.id = 'nav-box-other' }
+        // const navBox = document.getElementById('nav-box');
+        // if (navBox) { navBox.id = 'nav-box-other' }
 
     }, [])
 

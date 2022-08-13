@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import { GetLocationsThunk } from '../../store/location';
 import { login } from '../../store/session';
 import './login-form.css'
 
@@ -14,11 +15,9 @@ const LoginForm = () => {
   const state = useSelector(state => state)
   console.log('>>>>> state;', state)
   useEffect(() => {
-    const navBox = document.getElementById('nav-box');
-    if (navBox) { navBox.id = 'nav-box-other' }
-    const authNav = document.getElementsByClassName('hide-search')[0]
-    if (authNav) { authNav.className = 'show-search' }
-  }, [window.location.pathname])
+    dispatch(GetLocationsThunk());//KEEP: forces state to change for navbar to render 
+
+  }, [])
 
 
 
