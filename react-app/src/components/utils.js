@@ -1,3 +1,5 @@
+//funcs to handle awkwardness autofilling checkin/checkout times in EditLocationForm
+
 export const timeConverter = (time) => {
     let hours = time.split(':')[0];
     if (+hours > 12) {
@@ -8,6 +10,7 @@ export const timeConverter = (time) => {
     }
     return hours;
 }
+
 
 
 export const checkinToTime = (time) => {

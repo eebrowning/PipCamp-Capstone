@@ -150,14 +150,8 @@ function LocationForm() {
         }
 
     }
-    // useEffect(() => {
-    //     dispatch(GetLocationsThunk())
-
-    // }, [dispatch])
     useEffect(() => {
-
-        // const navBox = document.getElementById('nav-box');
-        // if (navBox) { navBox.id = 'nav-box-other' }
+        dispatch(GetLocationsThunk());//KEEP: forces state to change for navbar to render 
 
     }, [])
 

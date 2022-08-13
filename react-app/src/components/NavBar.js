@@ -27,7 +27,6 @@ const NavBar = () => {
   useEffect(() => {
     setHome(window.location.pathname === '/' ? true : false)
     console.log(">>>>>>>", home, "<<<<<<")
-    // dispatch(GetLocationsThunk())
     if (home === true) {
       const navSearch = document.getElementById('hide-search');
       if (navSearch) { navSearch.id = 'show-search' }
@@ -40,7 +39,8 @@ const NavBar = () => {
       const navBox = document.getElementById('nav-box');
       if (navBox) { navBox.id = 'nav-box-other' }
     }
-  }, [state])
+  }, [state])//if state updates, refreshes id attributes on NavBar to display appropriately on every page. 
+  //dependent on some sort of dispatch that updates/changes state, GetLocationsThunk in places 'unnecessary' are facilitating this.
 
   if (locations) return (
     <nav id={home ? 'nav-box' : 'nav-box-other'}>
