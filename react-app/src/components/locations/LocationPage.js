@@ -206,9 +206,8 @@ function LocationPage() {
                         </span>
 
                     </div>
-                    {userId && (
+                    {(
                         <Reviews locationId={locationId} />
-
                     )}
                 </div>
                 <div id='reservation-box'>
@@ -219,11 +218,9 @@ function LocationPage() {
             </span>
 
         </span>)
-    else return (<span id='box-404'>
-        {/* <img src='https://www.pngmart.com/files/15/Fallout-Pip-Boy-PNG-Pic.png' alt='404' />
-        <h1>404 Page Not Found</h1> */}
-        <img src='https://i.imgur.com/1PSUlUq.png' alt='loading' />
 
+    else return (<span id='box-404'>
+        <img src='https://i.imgur.com/1PSUlUq.png' alt='loading' />
     </span>)
 }
 export default LocationPage

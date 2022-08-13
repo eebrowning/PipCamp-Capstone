@@ -56,7 +56,8 @@ function Reviews({ locationId }) {
         <div id='review-component'>
 
             {/* add-review button goes here, will be conditionally available if no reviews by user*/}
-            {!userReview && user.id !== location.user_id && (<ReviewForm locationId={locationId} />)}
+            {user && !userReview && user?.id !== location.user_id && (<ReviewForm locationId={locationId} />)}
+
             {locationReviews && locationReviews.map(review => (
                 <div key={review.id} className='review-box'>
 
