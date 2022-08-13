@@ -58,7 +58,8 @@
 
 #home-search {
     max-width: 1170px;
-
+    display: flex;
+    align-items: center;
     height: 120px;
     /* width: 88%; */
     width: 82%;
