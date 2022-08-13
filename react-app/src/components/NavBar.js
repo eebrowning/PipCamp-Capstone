@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useParams } from 'react-router-dom';
+import { GetLocationsThunk } from '../store/location';
 import { demoLogin } from '../store/session';
 import LogoutButton from './auth/LogoutButton';
 import './nav-bar.css'
@@ -25,18 +26,21 @@ const NavBar = () => {
 
   useEffect(() => {
     setHome(window.location.pathname === '/' ? true : false)
-    // if (home) {
-    //   const navSearch = document.getElementById('hide-search');
-    //   if (navSearch) { navSearch.id = 'show-search' }
-    //   const navBox = document.getElementById('nav-box');
-    //   if (navBox) { navBox.id = 'nav-box-other' }
-    // } else {
-    //   const navSearch = document.getElementById('show-search');
-    //   if (navSearch) { navSearch.id = 'hide-search' }
-    //   const navBox = document.getElementById('nav-box-other');
-    //   if (navBox) { navBox.id = 'nav-box' }
-    // }
-  }, [window.location.pathname])
+    console.log(">>>>>>>", home, "<<<<<<")
+    // dispatch(GetLocationsThunk())
+    if (home === true) {
+      const navSearch = document.getElementById('hide-search');
+      if (navSearch) { navSearch.id = 'show-search' }
+      const navBox = document.getElementById('nav-box-other');
+      if (navBox) { navBox.id = 'nav-box' }
+
+    } else if (home === false) {
+      const navSearch = document.getElementById('show-search');
+      if (navSearch) { navSearch.id = 'hide-search' }
+      const navBox = document.getElementById('nav-box');
+      if (navBox) { navBox.id = 'nav-box-other' }
+    }
+  }, [state])
 
   if (locations) return (
     <nav id={home ? 'nav-box' : 'nav-box-other'}>

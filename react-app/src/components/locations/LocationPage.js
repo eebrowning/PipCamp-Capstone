@@ -30,7 +30,7 @@ function LocationPage() {
     const campsite_details = campsite ? [`${campsite[0]} sites`, `${campsite[1]} sites`, `Up to${campsite[2]} guests per site`, `Up to ${campsite[3]} vehicles`, `${campsite[4] == 'true' ? 'Wheelchair access' : 'Not accessible'}`] : [];
 
     const essential = location?.essential_info.split('-')
-    const essential_labels = ["Fires Allowed", 'Bathrooms Available', "Pets Allowed"]
+    // const essential_labels = ["Fires Allowed", 'Bathrooms Available', "Pets Allowed"]
     const essential_icons = [
         "https://i.imgur.com/kHHRFoy.png",
         'https://cdn-icons-png.flaticon.com/512/4745/4745263.png',
@@ -39,7 +39,7 @@ function LocationPage() {
     const essential_details = essential ? [`${essential[0] == 'true' ? 'Fires allowed' : 'Fires not allowed'}`, `${essential[1] == 'true' ? 'Toilet available' : "Toilet not available"}`, `${essential[2] == 'true' ? 'Pets allowed' : 'Pets not allowed'}`] : [];
 
     const amenities = location?.amenities_info.split('-')
-    const amenities_labels = ["Tables Available", 'Wifi Available', "Bins Available", "Kitchen Available", 'Water Available', 'Showers Available']
+    // const amenities_labels = ["Tables Available", 'Wifi Available', "Bins Available", "Kitchen Available", 'Water Available', 'Showers Available']
     const amenities_icons = [
         "https://cdn-icons-png.flaticon.com/512/7627/7627697.png",
         'https://cdn-icons-png.flaticon.com/512/748/748151.png',
@@ -63,9 +63,9 @@ function LocationPage() {
     const [usersArr, setUsersArr] = useState([]);
 
 
-    // console.log(location?.user_id, userId, 'pages creator and visiting user')
-
     useEffect(() => {
+        // const navBox = document.getElementById('nav-box');
+        // if (navBox) { navBox.id = 'nav-box-other' }
         async function fetchData() {
             const response = await fetch('/api/users/');
             const responseData = await response.json();
@@ -76,8 +76,6 @@ function LocationPage() {
         console.log('dispatched to GetLocationDetailThunk')
         dispatch(GetLocationDetailThunk(locationId))
         dispatch(GetLocationsThunk())
-        const navBox = document.getElementById('nav-box');
-        if (navBox) { navBox.id = 'nav-box-other' }
         window.scrollTo({
             top: 0,
             left: 0,
@@ -91,7 +89,6 @@ function LocationPage() {
     }
     function handleDelete(e) {
         e.preventDefault()
-
         dispatch(DeleteLocationThunk(location.id))
         history.push('/')
 
@@ -100,7 +97,6 @@ function LocationPage() {
     function handleEdit(e) {
         e.preventDefault()
         dispatch(GetLocationDetailThunk(locationId))
-
         history.push(`/locations/${locationId}/edit`)
     }
 

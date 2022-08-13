@@ -19,12 +19,11 @@ function Locations() {
     }
 
     useEffect(() => {
-        const navSearch = document.getElementById('show-search');
-        if (navSearch) { navSearch.id = 'hide-search' }
-        const navBox = document.getElementById('nav-box-other');
-        if (navBox) { navBox.id = 'nav-box' }
-
-    }, [window.location.pathname])
+        // const navSearch = document.getElementById('show-search');
+        // if (navSearch) { navSearch.id = 'hide-search' }
+        // const navBox = document.getElementById('nav-box-other');
+        // if (navBox) { navBox.id = 'nav-box' }
+    }, [])
 
 
     useEffect(() => {
