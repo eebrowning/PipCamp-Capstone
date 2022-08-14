@@ -144,7 +144,10 @@ export function EditLocationForm() {
 
 
 
+    useEffect(() => {
 
+
+    }, [])
 
 
     useEffect(async () => { //persists autofilled form, can be cleaned up of conditionals in setThing invocations
@@ -152,7 +155,7 @@ export function EditLocationForm() {
         if (location) {
             if (!name) setName(location['name'])
             if (!image_1_url) setImage_1_url(location.image_1_url)
-            if (!image_2_url) setImage_2_url(location.image_2_url)
+            if (!image_2_url && image_2_url !== '') setImage_2_url(location.image_2_url)
             if (!description) setDescription(location.description)
 
             if (!shelter) await setShelter(camp_array ? camp_array[0] : '')
