@@ -26,7 +26,7 @@ const NavBar = () => {
 
   useEffect(() => {
     setHome(window.location.pathname === '/' ? true : false)
-    console.log(">>>>>>>", home, "<<<<<<")
+    // console.log(">>>>>>>", home, "<<<<<<")
     if (home === true) {
       const navSearch = document.getElementById('hide-search');
       if (navSearch) { navSearch.id = 'show-search' }
