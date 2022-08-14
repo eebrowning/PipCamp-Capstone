@@ -121,7 +121,7 @@ function LocationForm() {
         if (+checkoutInt >= +checkinInt) { arr.push('Checkout must occur at least an hour before Checkin: times occur on the same date.') }
 
         if (!minNights) { arr.push('Select Minimum Nights.'); };
-        if (minNights < 0) { arr.push('Time Travel Forbidden.'); };
+        if (minNights <= 0) { arr.push('Select Valid Miniumum Nights.'); };
         if (minNights > 7) { arr.push('7 Night Cap on Minimum') }
 
         setErrorsDetails(arr)
