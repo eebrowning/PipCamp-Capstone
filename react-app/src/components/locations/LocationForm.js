@@ -135,8 +135,30 @@ function LocationForm() {
         setErrors([])
         validateForm();
 
-        if (+checkoutHour?.split(':')[0] < +checkinHour?.split(':')[0]) {
-            e.preventDefault();
+        if (+checkoutHour?.split(':')[0] >= 0 + checkinHour?.split(':')[0]) {//if checkin is before checkout, alter submission to throw backend error, frontend error will render as well.
+            let checkinInt = +checkinHour.split(':')[0]
+            let checkoutInt = +checkoutHour.split(':')[0]
+            console.log(checkoutInt, '<- out. ERROR: checkin MUST be after checkout! in->', checkinInt)
+
+
+            const location = {
+                user_id: userId,
+                name,
+                image_1_url,
+                image_2_url,
+                description,
+                campsite_info: camp_info_string,
+                essential_info: essential_info_string,
+                amenities_info: amenities_info_string,
+                details_info: '---'
+            }
+
+            //NO TOUCHY
+            const newLocation = await dispatch(CreateLocationThunk(location))
+            if (newLocation?.errors) setErrors([...newLocation.errors])
+            console.log(errors)
+        } else if (+checkoutHour?.split(':')[0] < +checkinHour?.split(':')[0]) {
+
 
             let checkinInt = +checkinHour.split(':')[0]
             let checkoutInt = +checkoutHour.split(':')[0]
@@ -161,13 +183,7 @@ function LocationForm() {
                 if (newLocation?.errors) setErrors([...newLocation.errors])
                 // if (!newLocation) setErrors([])
             }
-        }
-        else if (+checkoutHour?.split(':')[0] >= 0 + checkinHour?.split(':')[0]) {//if checkin is before checkout, alter submission to throw backend error, frontend error will render as well.
-            let checkinInt = +checkinHour.split(':')[0]
-            let checkoutInt = +checkoutHour.split(':')[0]
-            console.log(checkoutInt, '<- out. ERROR: checkin MUST be after checkout! in->', checkinInt)
-            e.preventDefault();
-
+        } else {
             const location = {
                 user_id: userId,
                 name,
@@ -177,13 +193,17 @@ function LocationForm() {
                 campsite_info: camp_info_string,
                 essential_info: essential_info_string,
                 amenities_info: amenities_info_string,
-                details_info: '---'
+                details_info: details_info_string
             }
-
-            //NO TOUCHY
             const newLocation = await dispatch(CreateLocationThunk(location))
-            if (newLocation?.errors) setErrors([...newLocation.errors])
-        } else { return }
+            if (!newLocation.errors) {
+                history.push(`/locations/${newLocation.id}`)
+            }
+            else {
+                if (newLocation?.errors) setErrors([...newLocation.errors])
+                // if (!newLocation) setErrors([])
+            }
+        }
 
     }
 
