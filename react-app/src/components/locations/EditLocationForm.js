@@ -6,13 +6,11 @@ import { timeConverter, checkinToTime } from '../utils';
 import './location-form.css'
 
 
-
 export function EditLocationForm() {
     const { locationId } = useParams()
     const dispatch = useDispatch()
     const [errors, setErrors] = useState([])
     const [frontErrors, setFrontErrors] = useState([])
-
 
     const history = useHistory()
     const userId = useSelector(state => state.session.user?.id)
@@ -58,12 +56,17 @@ export function EditLocationForm() {
     const [checkin, setCheckin] = useState();
     const [checkinHour, setCheckinHour] = useState();
 
-
     const [checkout, setCheckout] = useState()
     const [checkoutHour, setCheckoutHour] = useState();
 
+    let [checkinInt, setCheckinInt] = useState()
+    let [checkoutInt, setCheckoutInt] = useState()
+
     const [minNights, setMinNights] = useState()
     const details_info_string = `${arrival}-${checkin}-${checkout}-${minNights}`
+
+
+
 
     const [errorsMain, setErrorsMain] = useState([])
     const [errorsCamp, setErrorsCamp] = useState([])
@@ -120,6 +123,9 @@ export function EditLocationForm() {
         // if (checkin <= checkout) { arr.push('Check-Out must be before Check-In') }
         if (!checkin) { arr.push("Enter Earliest Check-In.") };
         if (!checkout) { arr.push('Enter Latest Check-Out.'); };
+        // let checkinInt = +checkinHour.split(':')[0]
+        // let checkoutInt = +checkoutHour.split(':')[0]
+        if (checkin && +checkinToTime(checkout) >= +checkinToTime(checkin)) { arr.push('Checkout must occur at least an hour before Checkin') }
         if (!minNights) { arr.push('Select Minimum Nights.'); };
         if (minNights < 0) { arr.push('Time Travel Forbidden.'); };
         if (minNights >= 8) { arr.push('7 Night Cap on Minimum') }
@@ -130,8 +136,6 @@ export function EditLocationForm() {
         // console.log(frontErrors, 'these all of the frontend errors')
     }
 
-
-
     useEffect(async () => {
         await dispatch(GetLocationDetailThunk(locationId))
         setErrors([])
@@ -140,15 +144,7 @@ export function EditLocationForm() {
         setErrorsDetails([])
         setErrorsEssential([])
         setErrorsMain([])
-    }, [dispatch])
-
-
-
-    useEffect(() => {
-
-
     }, [])
-
 
     useEffect(async () => { //persists autofilled form, can be cleaned up of conditionals in setThing invocations
         // console.log(location, '<<<<< is this anything?')
@@ -170,12 +166,15 @@ export function EditLocationForm() {
 
             if (!arrival) setArrival(details_array ? details_array[0] : '')
             if (!checkin) setCheckin(details_array ? details_array[1] : '')
-
+            // if(!checkinHour) setCheckinHour(details_array ? details_array[1] : '') 
             if (!checkout) setCheckout(details_array ? details_array[2] : '')
+
 
             if (checkin && !checkinHour) { setCheckinHour(checkinToTime(checkin)) }
             if (checkout && !checkoutHour) { setCheckoutHour(checkinToTime(checkout)) }
 
+            if (!checkinHour) { setCheckinInt(+checkinHour); }
+            if (!checkoutHour) { setCheckoutInt(+checkoutHour); }
 
             if (!minNights) setMinNights(details_array ? details_array[3] : '')
 
@@ -186,48 +185,108 @@ export function EditLocationForm() {
             if (!kitchen) setKitchen(amenities_array ? amenities_array[4] : '')
             if (!showers) setShowers(amenities_array ? amenities_array[5] : '')
 
-            console.log(checkoutHour);
+
+            if (checkin && checkout) console.log(checkinHour, checkinToTime(checkin), checkinToTime(checkout), 'checkin, checkout')
         }
 
     })
 
 
     async function onSubmit(e) {
-        validateForm()
+        setErrors([])
+        validateForm();
         e.preventDefault();
 
-        const updatedLocation = {
-            id: locationId,
-            user_id: userId,
-            name,
-            image_1_url,
-            image_2_url,
-            description,
-            campsite_info: camp_info_string,
-            essential_info: essential_info_string,
-            amenities_info: amenities_info_string,
-            details_info: details_info_string
+        console.log(checkin, checkout, 'checkin, checkout')
+        console.log(checkinToTime(checkin), checkinToTime(checkout), 'checkin, checkout')
+
+
+        // if (+checkoutHour.split(':')[0] < +checkinHour.split(':')[0]) {
+        if (+checkinToTime(checkin) > +checkinToTime(checkout)) {
+            console.log(+checkinToTime(checkin), '<- out.checkin is after checkout! in->', +checkinToTime(checkout))
+            const location = {
+                id: locationId,
+                user_id: userId,
+                name,
+                image_1_url,
+                image_2_url,
+                description,
+                campsite_info: camp_info_string,
+                essential_info: essential_info_string,
+                amenities_info: amenities_info_string,
+                details_info: details_info_string
+            }
+            const newLocation = await dispatch(EditLocationThunk(location))
+            console.log(newLocation, 'newlocation')
+
+            if (!newLocation?.errors) {
+                history.push(`/locations/${locationId}`)
+            }
+            else {
+                if (newLocation?.errors) setErrors([...newLocation.errors])
+                // if (!newLocation) setErrors([])
+            }
+        }
+        if (+checkinToTime(checkin) <= +checkinToTime(checkout)) {
+            console.log(+checkinToTime(checkin), '<- out. ERROR: checkin MUST be after checkout! in->', +checkinToTime(checkout))
+
+            //if checkin is before checkout, alter submission to throw backend error, frontend error will render as well.
+            // console.log(checkoutInt, '<- out. ERROR: checkin MUST be after checkout! in->', checkinInt)
+
+            const location = {
+                id: locationId,
+                user_id: userId,
+                name,
+                image_1_url,
+                image_2_url,
+                description,
+                campsite_info: camp_info_string,
+                essential_info: essential_info_string,
+                amenities_info: amenities_info_string,
+                details_info: '---'
+            }
+
+            const newLocation = await dispatch(EditLocationThunk(location))
+            console.log(newLocation, 'newlocation')
+            if (newLocation?.errors) setErrors([...newLocation.errors])
+            //NO TOUCHY
         }
 
-        setFrontErrors([...errorsCamp, ...errorsAmenities, ...errorsMain, ...errorsEssential])
-        console.log("xxxxx no errors, frontErrors", frontErrors)
-        console.log(updatedLocation, updatedLocation.campsite_info)
-
-        await validateForm()
-        const editedLocation = await dispatch(EditLocationThunk(updatedLocation))
-        if (!editedLocation) {
-
-            history.push(`/locations/${locationId}`)
-        } else {
-            setErrors(editedLocation)
-        }
-        return editedLocation
-        // dispatch(GetLocationsThunk())
     }
 
-    useEffect(() => {
 
-    }, [])
+    // async function onSubmit(e) {
+    //     validateForm()
+    //     e.preventDefault();
+
+    //     const updatedLocation = {
+    //         id: locationId,
+    //         user_id: userId,
+    //         name,
+    //         image_1_url,
+    //         image_2_url,
+    //         description,
+    //         campsite_info: camp_info_string,
+    //         essential_info: essential_info_string,
+    //         amenities_info: amenities_info_string,
+    //         details_info: details_info_string
+    //     }
+
+    //     setFrontErrors([...errorsCamp, ...errorsAmenities, ...errorsMain, ...errorsEssential])
+    //     console.log("xxxxx no errors, frontErrors", frontErrors)
+    //     console.log(updatedLocation, updatedLocation.campsite_info)
+
+    //     await validateForm()
+    //     const editedLocation = await dispatch(EditLocationThunk(updatedLocation))
+    //     if (!editedLocation) {
+
+    //         history.push(`/locations/${locationId}`)
+    //     } else {
+    //         setErrors(editedLocation)
+    //     }
+    //     return editedLocation
+    //     // dispatch(GetLocationsThunk())
+    // }
 
     if (location) return (
         <div id='location-form-container'>
@@ -441,7 +500,7 @@ export function EditLocationForm() {
                                     </div>
                                 </div>
 
-                                <input defaultValue={`${checkinHour}:00`} className='time-input' placeholder='Check in time' type='time' onChange={e => setCheckin(`${`After ${timeConverter(e.target.value)}`}`)}></input>
+                                <input defaultValue={`${checkinHour}:00`} className='time-input' placeholder='Check in time' type='time' step="3600000" onChange={e => { setCheckin(`${`After ${timeConverter(e.target.value)}`}`); setCheckinHour(e.target.value) }}></input>
                             </div>
                             <div className='edit-time-label'>
                                 <div className='side-by-side'>
@@ -453,7 +512,7 @@ export function EditLocationForm() {
                                         (default: {checkout})
                                     </div>
                                 </div>
-                                <input defaultValue={`${checkoutHour}:00`} className='time-input' placeholder='Check out time' type='time' onChange={e => setCheckout(`${`Before ${timeConverter(e.target.value)}`}`)}></input>
+                                <input defaultValue={`${checkoutHour}:00`} className='time-input' placeholder='Check out time' type='time' step="3600000" onChange={e => { setCheckout(`${`Before ${timeConverter(e.target.value)}`}`); setCheckoutHour(e.target.value) }}></input>
 
                             </div>
 

@@ -98,7 +98,9 @@ export const EditLocationThunk = (location) => async (dispatch) => {
     } else if (response.status < 500) {
         const data = await response.json();
         if (data.errors) {
-            return data.errors;
+            console.log(data.errors, '<<<<< data.errors from EditLocationThunk')
+
+            return data;
         }
     }
 }

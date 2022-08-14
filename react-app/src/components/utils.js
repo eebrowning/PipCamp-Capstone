@@ -17,12 +17,12 @@ export const checkinToTime = (time) => {
     if (time.split(' ')[1].includes('AM')) {
 
         let hour = parseInt(time.split(' ')[1].split("A")[0]);
-        console.log(hour)
+        // console.log(hour)
         if (hour === 12) { return `0${hour - 12}` }
         else if (hour < 10) {
             return `0${hour}`
         }
-        else { return hour }
+        else { return `${hour}` }
 
     } else if (time.split(' ')[1].includes('PM')) {
 
@@ -32,7 +32,7 @@ export const checkinToTime = (time) => {
             return `${hour + 12}`
         }
         else if (hour == 12) {
-            return hour
+            return `${hour}`
         }
 
         return time.split(' ')[1].includes('AM')
