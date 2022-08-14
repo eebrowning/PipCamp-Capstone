@@ -55,7 +55,7 @@ Users are able to leave a review for a location and leave their recommendation(y
 - POST /sign_up - create new user instance and log them in
 
 ### __/locations__
-- GET /new-location - Get new restaurant form
+- GET /new-location - Get new location form
 - POST /new-location - Submit new location form
 - GET /:locationId - Get details for a specific location
 - DELETE /:locationId/delete - Delete a specified location
