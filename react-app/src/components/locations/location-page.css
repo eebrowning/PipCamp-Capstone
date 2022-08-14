@@ -141,7 +141,7 @@
 #owner-card {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
     width: 200px;
     height: 100px;
