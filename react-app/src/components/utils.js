@@ -2,7 +2,7 @@
 
 export const timeConverter = (time) => {
     let hours = time.split(':')[0];
-    if (+hours > 12) {
+    if (+hours > 11) {
         hours = `${((+hours + 11) % 12 + 1)}PM`;
     }
     else {

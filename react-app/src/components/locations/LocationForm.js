@@ -118,7 +118,7 @@ function LocationForm() {
         if (!checkout) { arr.push('Enter Latest Check-Out.'); };
         let checkinInt = +checkinHour?.split(':')[0]
         let checkoutInt = +checkoutHour?.split(':')[0]
-        if (+checkoutInt >= +checkinInt) { arr.push('Checkout must occur at least an hour before Checkin') }
+        if (+checkoutInt >= +checkinInt) { arr.push('Checkout must occur at least an hour before Checkin: times occur on the same date.') }
 
         if (!minNights) { arr.push('Select Minimum Nights.'); };
         if (minNights < 0) { arr.push('Time Travel Forbidden.'); };
