@@ -75,19 +75,20 @@ function LocationForm() {
         // errorsCamp: shelter, sites, guests, vehicles, accessible
         arr = []
         if (!shelter) { arr.push("Select Shelter Type."); };
-        if (sites < 0) { arr.push("Sites cannot be negative."); };
-        if (sites > 50) { arr.push("100 site limit per location"); };
+        if (sites <= 0) { arr.push("Sites must be a positive integer."); };
+        if (sites > 100 || sites === 0) { arr.push("100 site limit per location"); };
+
         if (!sites) { arr.push("Enter Number of Sites."); };
 
-        if (guests < 0) { arr.push('Sites cannot be negative.') }
+        if (guests <= 0) { arr.push('Guests must be a positive integer.') }
         if (guests > 100) { arr.push("100 guest limit per location"); };
         if (!guests) { arr.push('Enter Max Guests') }
 
-        if (vehicles < 0) { arr.push('Vehicles cannot be negative.'); };
-        if (vehicles > 10) { arr.push('100 vehicle limit per location.'); };
+        if (vehicles <= 0) { arr.push('Vehicles must be a positive integer.'); };
+        if (vehicles > 100) { arr.push('100 vehicle limit per location.'); };
         if (!vehicles) { arr.push('Enter Max Vehicles.'); };
 
-        if (!accessible) { arr.push('Select Accessiblility.'); };
+        if (!accessible) { arr.push('Select Disabled Accessiblility.'); };
         setErrorsCamp(arr)
         // setErrors([...errors, ...arr])
 
