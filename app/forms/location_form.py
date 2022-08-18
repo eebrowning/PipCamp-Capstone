@@ -106,8 +106,8 @@ def validate_second_image(form, d):
 class NewLocationForm(FlaskForm):
     user_id = IntegerField('userId')
     name = StringField('Name', validators=[DataRequired(message="Please provide name of the location."), name_length])
-    image_1_url = StringField('Main image', validators=[DataRequired(message="Please provide an image link."), validate_main_image])
-    image_2_url = StringField('Secondary image', validators=[validate_second_image])
+    image_1_url = StringField('Main image')#, validators=[DataRequired(message="Please provide an image link.")])#, validate_main_image])
+    image_2_url = StringField('Secondary image')#, validators=[validate_second_image])
     description= TextAreaField('Description', validators=[DataRequired(message="Please provide a description."), validate_description])
     campsite_info = StringField('Campsite info', validators=[DataRequired(message="Please provide complete Campsite info form."), validate_campsite_info, validate_campsite_info_values])
     essential_info = StringField('Essential info', validators=[DataRequired(message="Please provide complete Essential info form."), validate_essential_info])

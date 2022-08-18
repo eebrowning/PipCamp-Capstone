@@ -28,6 +28,8 @@ Mako = "==1.1.4"
 psycopg2 = "*"
 "wtforms.validators" = "*"
 email-validator = "*"
+boto3 = "*"
+botocore = "*"
 
 [dev-packages]
 psycopg2-binary = "==2.8.6"

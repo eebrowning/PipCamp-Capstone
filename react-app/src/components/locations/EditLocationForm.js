@@ -16,8 +16,11 @@ export function EditLocationForm() {
     const userId = useSelector(state => state.session.user?.id)
     const location = useSelector((state) => state.locations[locationId])
     const [name, setName] = useState(location?.name)
-    const [image_1_url, setImage_1_url] = useState()
+    // const [image_1_url, setImage_1_url] = useState()
+    const [image_1_file, setImage_1_file] = useState()
     const [image_2_url, setImage_2_url] = useState(location?.image_2_url)
+    const [image_2_file, setImage_2_file] = useState()
+
     const [description, setDescription] = useState()
 
 
@@ -79,7 +82,7 @@ export function EditLocationForm() {
         // errorsMain: Name, Image, Description
         let arr = []
         if (!name) { arr.push("Please enter a name."); };
-        if (!image_1_url) { arr.push("Image 1 requires a valid image URL."); };
+        // if (!image_1_url) { arr.push("Image 1 requires a valid image URL."); };
 
         setErrorsMain(arr);
 
@@ -152,7 +155,7 @@ export function EditLocationForm() {
         // console.log(location, '<<<<< is this anything?')
         if (location) {
             if (!name) setName(location['name'])
-            if (!image_1_url) setImage_1_url(location.image_1_url)
+            // if (!image_1_url) setImage_1_url(location.image_1_url)
             if (!image_2_url && image_2_url !== '') setImage_2_url(location.image_2_url)
             if (!description) setDescription(location.description)
 
@@ -198,27 +201,38 @@ export function EditLocationForm() {
         setErrors([])
         validateForm();
         e.preventDefault();
-
-        console.log(checkin, checkout, 'checkin, checkout')
-        console.log(checkinToTime(checkin), checkinToTime(checkout), 'checkin, checkout')
-
-
-        // if (+checkoutHour.split(':')[0] < +checkinHour.split(':')[0]) {
+        // console.log(checkin, checkout, 'checkin, checkout')
+        // console.log(checkinToTime(checkin), checkinToTime(checkout), 'checkin, checkout')
         if (+checkinToTime(checkin) > +checkinToTime(checkout)) {
-            console.log(+checkinToTime(checkin), '<- out.checkin is after checkout! in->', +checkinToTime(checkout))
+            // console.log(+checkinToTime(checkin), '<- out.checkin is after checkout! in->', +checkinToTime(checkout))
+
+            console.log(image_2_file, 'file 2 in onSubmit')
+
             const location = {
-                id: locationId,
-                user_id: userId,
-                name,
-                image_1_url,
-                image_2_url,
-                description,
-                campsite_info: camp_info_string,
-                essential_info: essential_info_string,
-                amenities_info: amenities_info_string,
-                details_info: details_info_string
+                "id": locationId,
+                "user_id": userId,
+                "name": name,
+                "image_1_url": "",
+                "image_2_url": "",
+                "description": description,
+                "campsite_info": camp_info_string,
+                "essential_info": essential_info_string,
+                "amenities_info": amenities_info_string,
+                "details_info": details_info_string
             }
-            const newLocation = await dispatch(EditLocationThunk(location))
+            const locationData = new FormData();
+            locationData.append('locationId', locationId)
+            if (image_1_file) { locationData.append('image_1_file', image_1_file) }
+            if (image_2_file) { locationData.append('image_2_file', image_2_file) }
+
+            // locationData.append('location', location)
+            for (let data in location) {
+                // console.log('looping through location object', data, location[data])
+                locationData.append(`${data}`, location[data])
+            }
+
+
+            const newLocation = await dispatch(EditLocationThunk(locationData))
             console.log(newLocation, 'newlocation')
 
             if (!newLocation?.errors) {
@@ -229,26 +243,35 @@ export function EditLocationForm() {
                 // if (!newLocation) setErrors([])
             }
         }
-        if (+checkinToTime(checkin) <= +checkinToTime(checkout)) {
+        if (+checkinToTime(checkin) <= +checkinToTime(checkout)) { ///update and replace after AWS
             console.log(+checkinToTime(checkin), '<- out. ERROR: checkin MUST be after checkout! in->', +checkinToTime(checkout))
 
-            //if checkin is before checkout, alter submission to throw backend error, frontend error will render as well.
-            // console.log(checkoutInt, '<- out. ERROR: checkin MUST be after checkout! in->', checkinInt)
+            console.log(image_1_file, 'file in onSubmit')
 
             const location = {
-                id: locationId,
-                user_id: userId,
-                name,
-                image_1_url,
-                image_2_url,
-                description,
-                campsite_info: camp_info_string,
-                essential_info: essential_info_string,
-                amenities_info: amenities_info_string,
-                details_info: '---'
-            }
+                "id": locationId,
+                "user_id": userId,
+                "name": name,
+                "image_1_url": "",
+                "image_2_url": image_2_url,
+                "description": description,
+                "campsite_info": camp_info_string,
+                "essential_info": essential_info_string,
+                "amenities_info": amenities_info_string,
+                "details_info": '---'
 
-            const newLocation = await dispatch(EditLocationThunk(location))
+            }
+            const locationData = new FormData();
+            locationData.append('locationId', locationId)
+            locationData.append('image_1_file', image_1_file)
+            for (let data in location) {
+                // console.log('looping through location object', data, location[data])
+                locationData.append(`${data}`, location[data])
+            }
+            // locationData.forEach(function (value, key) {
+            //     console.log(key, value);
+            // });
+            const newLocation = await dispatch(EditLocationThunk(locationData))
             console.log(newLocation, 'newlocation')
             if (newLocation?.errors) setErrors([...newLocation.errors])
             //NO TOUCHY
@@ -257,38 +280,37 @@ export function EditLocationForm() {
     }
 
 
-    // async function onSubmit(e) {
-    //     validateForm()
-    //     e.preventDefault();
+    const updateImage = (e) => {
+        const file = e.target.files[0];
+        const typeError = [];
+        if (!file?.name.includes("jpg") && !file?.name.includes("jpeg") && !file?.name.includes("png")) {
+            typeError.push("Invalid filetype: jpg, jpeg, png only.")
+        }
+        if (typeError.length) {
+            setErrors(typeError)
+            return;
+        }
+        // console.log(URL.createObjectURL(file), 'URL,  maaaaang')
+        setImage_1_file(file)
+        console.log(file, 'this is the file via updateImage')
+        // setImage_1_url(URL.createObjectURL(file))
+    }
+    const updateImage2 = (e) => {
+        const file = e.target.files[0];
+        const typeError = [];
+        if (!file?.name.includes("jpg") && !file?.name.includes("jpeg") && !file?.name.includes("png")) {
+            typeError.push("Invalid filetype: jpg, jpeg, png only.")
+        }
+        if (typeError.length) {
+            setErrors(typeError)
+            return;
+        }
+        // console.log(URL.createObjectURL(file), 'URL,  maaaaang')
+        setImage_2_file(file)
+        console.log(file, 'this is the file via updateImage2')
+        // setImage_1_url(URL.createObjectURL(file))
+    }
 
-    //     const updatedLocation = {
-    //         id: locationId,
-    //         user_id: userId,
-    //         name,
-    //         image_1_url,
-    //         image_2_url,
-    //         description,
-    //         campsite_info: camp_info_string,
-    //         essential_info: essential_info_string,
-    //         amenities_info: amenities_info_string,
-    //         details_info: details_info_string
-    //     }
-
-    //     setFrontErrors([...errorsCamp, ...errorsAmenities, ...errorsMain, ...errorsEssential])
-    //     console.log("xxxxx no errors, frontErrors", frontErrors)
-    //     console.log(updatedLocation, updatedLocation.campsite_info)
-
-    //     await validateForm()
-    //     const editedLocation = await dispatch(EditLocationThunk(updatedLocation))
-    //     if (!editedLocation) {
-
-    //         history.push(`/locations/${locationId}`)
-    //     } else {
-    //         setErrors(editedLocation)
-    //     }
-    //     return editedLocation
-    //     // dispatch(GetLocationsThunk())
-    // }
 
     if (location) return (
         <div id='location-form-container'>
@@ -323,9 +345,22 @@ export function EditLocationForm() {
                         <label className='location-form-label'>Location Name</label>
                         <input type='text' name='name' defaultValue={name} placeholder='Location Name' onChange={e => setName(e.target.value)}></input>
                         <label className='location-form-label'>Main Image</label>
-                        <input type='text' name='image_1_url' defaultValue={image_1_url} placeholder='Main Image' onChange={e => setImage_1_url(e.target.value)}></input>
+                        {/* <input type='text' name='image_1_url' defaultValue={image_1_url} placeholder='Main Image' onChange={e => setImage_1_url(e.target.value)}></input> */}
+                        {/* AWS */}
+                        <div className="card-body ">
+                            <p className="card-text">Choose a file to upload:</p>
+                            <input type="file" name="file" onChange={updateImage} />
+
+                        </div>
+                        {/* AWS */}
+
                         <label className='location-form-label'>Secondary Image</label>
-                        <input type='text' name='image_2_url' defaultValue={image_2_url} placeholder='Secondary Image(optional)' onChange={e => setImage_2_url(e.target.value)}></input>
+                        <div className="card-body ">
+                            <p className="card-text">Choose a file to upload:</p>
+                            <input type="file" name="file" onChange={updateImage2} />
+
+                        </div>
+                        {/* <input type='text' name='image_2_url' defaultValue={image_2_url} placeholder='Secondary Image(optional)' onChange={e => setImage_2_url(e.target.value)}></input> */}
                         <label className='location-form-label'>Description</label>
                         <textarea placeholder='Location Description' defaultValue={description} onChange={e => setDescription(e.target.value)}></textarea>
 
