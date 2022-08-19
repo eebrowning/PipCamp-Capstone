@@ -62,10 +62,20 @@ export const GetLocationDetailThunk = (id) => async (dispatch) => {
 //works!
 export const CreateLocationThunk = (location) => async (dispatch) => {
     console.log('>>> entered Create Location Thunk <<<')
+    console.log(location, 'location in create location thunk')
+    // const locationObject = {}
+    // for (const pair of location.entries()) {
+    //     console.log("location entry: ", `${pair[0]}`, pair[1]);
+    //     locationObject[`${pair[0]}`] = pair[1]
+    // }
+
+
     const response = await fetch(`/api/locations/new_location`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(location)
+        // headers: { "Content-Type": "application/json" },
+        // body: JSON.stringify(location)
+        body: location
+
     })
     console.log('response in createloctationthunk', response)
 
@@ -74,7 +84,7 @@ export const CreateLocationThunk = (location) => async (dispatch) => {
         console.log('data in createloctationthunk', data)
         dispatch(createLocation(data))
         return data
-    } else if (response.status <= 500) {
+    } else if (response.status < 500) {
         const data = await response.json();
         if (data.errors) {
             console.log(data.errors, '<<<<< data.errors from CreateLocationThunk')
@@ -85,12 +95,22 @@ export const CreateLocationThunk = (location) => async (dispatch) => {
 
 //Works!
 export const EditLocationThunk = (location) => async (dispatch) => {
-    console.log(location, 'in EditLocationThunk')
-    const response = await fetch(`/api/locations/${location.id}/edit`, {
+    // console.log([...location.entries()], 'in EditLocationThunk')
+
+    console.log('location in editlocationthunk', location.entries())
+
+    const locationObject = {}
+    for (const pair of location.entries()) {
+        console.log("location entry: ", `${pair[0]}`, pair[1]);
+        locationObject[`${pair[0]}`] = pair[1]
+    }
+
+    const response = await fetch(`/api/locations/${location.get('locationId')}/edit`, {
         method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(location)
+        body: location//AWs
+
     })
+
     if (response.ok) {
         const data = await response.json()
         dispatch(editLocation(data))
@@ -102,7 +122,15 @@ export const EditLocationThunk = (location) => async (dispatch) => {
 
             return data;
         }
+    } else if (response.status == 500) {
+        const data = await response.json();
+        if (data.errors) {
+            console.log(data.errors, '<<<<< data.errors from EditLocationThunk')
+
+            return data;
+        }
     }
+    // else return [response, 'oh well']
 }
 
 

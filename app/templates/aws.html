@@ -1,0 +1,41 @@
+<!-- <form action="/upload" method="post" enctype="multipart/form-data">
+    <p class="card-text">Choose a file to upload it to AWS S3</p>
+    <input type="file" name="file" value="file">
+    <hr>
+    <input type="submit" name="upload" value="Upload" class="btn btn-success">
+</form>
+{{msg}} -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+</head>
+
+<body>
+
+    <hr>
+
+    <div class="container">
+        <!-- AWS practice  -->
+
+        <div class="card" style="width:400px">
+
+            <div class="card-body ">
+                <form action="api/locations/" method="post" enctype="multipart/form-data">
+                    <p class="card-text">Choose a file to upload:</p>
+                    <input type="file" name="file" value="file">
+                    <hr>
+                    <input type="submit" name="upload" value="Upload" class="btn btn-success">
+                </form>
+                {{msg, url}}
+            </div>
+        </div>
+        <br>
+    </div>
+
+</body>
+
+</html>
