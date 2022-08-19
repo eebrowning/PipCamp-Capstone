@@ -11,7 +11,7 @@ s3 = boto3.client(
    "s3",
    aws_access_key_id=os.environ.get("ACCESS_KEY_S3"),
    aws_secret_access_key=os.environ.get("SECRET_ACCESS_KEY_S3"),
-   aws_session_token=os.environ.get('AWS_SESSION')
+#    aws_session_token=os.environ.get('AWS_SESSION')
 )
 
 
