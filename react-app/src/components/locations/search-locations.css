@@ -4,3 +4,16 @@
     /* width: 80%; */
     border: none;
 }
+
+.results-container {
+    /* width: 100%; */
+    background-color: white;
+    z-index: 2;
+    position: absolute;
+    top: 60px;
+    left: 285px;
+}
+
+.individual-result {
+    padding: 10px;
+}
