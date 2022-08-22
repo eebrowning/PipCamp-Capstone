@@ -2,9 +2,10 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useParams } from 'react-router-dom';
-import { GetLocationsThunk } from '../store/location';
+// import { GetLocationsThunk } from '../store/location';
 import { demoLogin } from '../store/session';
 import LogoutButton from './auth/LogoutButton';
+import Search from './locations/SearchLocations';
 import './nav-bar.css'
 
 
@@ -60,8 +61,11 @@ const NavBar = () => {
             </NavLink>
           </li>
           <span className={home ? 'hide-search' : 'show-search'}>
-            <div id='nav-users-buttons'>
-              {!state.session.user && (<>
+
+            <li id='search-field-1'>
+              <Search className={'home-navlink search'} to='/login' exact={true} activeClassName='active' />
+            </li>
+            {/* {!state.session.user && (<>
                 <li>
                   <NavLink className={'navlink'} to='/login' exact={true} activeClassName='active'>
                     Login
@@ -86,18 +90,22 @@ const NavBar = () => {
                   <LogoutButton />
                 </li>
               )}
-            </div>
+            */}
+
             {/* 
             <button id="mock-search-button">
               <img id='search-icon'
                 src="https://i.pinimg.com/originals/b8/19/89/b81989d219b76f2e5073af1b95c63a63.png" alt="" />
             </button> */}
+            <div id='random-wrapper'>
 
-            <NavLink onClick={() => setRandLocation(locations ? locations[Math.floor(Math.random() * locations.length)] : 1)} to={randLocation ? `/locations/${randLocation.id}` : '/locations/1'}>
-              <img id='search-icon'
-                src="https://i.pinimg.com/originals/b8/19/89/b81989d219b76f2e5073af1b95c63a63.png" alt="" />
-              {/*  src="https://i.imgur.com/YYjb0K6.png" alt="" /> */}
-            </NavLink>
+              <label style={{ fontSize: '10px' }}>Random!</label>
+              <NavLink onClick={() => setRandLocation(locations ? locations[Math.floor(Math.random() * locations.length)] : 1)} to={randLocation ? `/locations/${randLocation.id}` : '/locations/1'}>
+                <img id='search-icon'
+                  src="https://i.pinimg.com/originals/b8/19/89/b81989d219b76f2e5073af1b95c63a63.png" alt="" />
+                {/*  src="https://i.imgur.com/YYjb0K6.png" alt="" /> */}
+              </NavLink>
+            </div>
 
           </span>
         </span>
@@ -106,16 +114,39 @@ const NavBar = () => {
           {/* <li>
             {state.session.user && (<LogoutButton />)}
           </li> */}
-          <li>
-            <NavLink className={'navlink'} to='/new-location' exact={true} activeClassName='active'>
-              New Location
-            </NavLink>
-          </li>
-          {/* <li>
-            <NavLink className={'navlink'} to='/users' exact={true} activeClassName='active'>
-              Users
-            </NavLink>
-          </li> */}
+          {!state.session.user && (<>
+            <li>
+              <NavLink className={'navlink'} to='/login' exact={true} activeClassName='active'>
+                Login
+              </NavLink>
+            </li>
+            <div className='spacer'>·</div>
+            <li>
+              <NavLink className={'navlink'} to='/sign-up' exact={true} activeClassName='active'>
+                Sign Up
+              </NavLink>
+            </li>
+            <div className='spacer'>·</div>
+
+            <li id={'demo-login'} onClick={handleClick}>
+              Demo
+            </li>
+          </>
+
+          )}
+          {state.session.user && (
+            <>
+              <li>
+                <NavLink className={'navlink'} to='/new-location' exact={true} activeClassName='active'>
+                  New Location
+                </NavLink>
+              </li>
+              <li>
+                <LogoutButton />
+              </li>
+            </>
+          )}
+          {/* </div> */}
         </span>
       </ul>
     </nav >
