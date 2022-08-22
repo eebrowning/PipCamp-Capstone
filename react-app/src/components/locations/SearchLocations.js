@@ -39,7 +39,6 @@ const Search = () => {
           <Link key={result.id} to={`/locations/${result.id}`}>
             <div className='individual-result'>
               <p className='search-name'>{result.name}</p>
-              {/* <p>{result.description}</p> */}
             </div>
           </Link>
         ))}
