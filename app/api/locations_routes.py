@@ -23,39 +23,15 @@ def singleLocation(locationId):
     return location.to_dict()
 
 
-#AWS test START
-
-# @locations_routes.route('/',methods=['post'])
-# def upload():
-
-#     if request.method == 'POST':
-#         img = request.files['file']
-
-#         if not allowed_file(img.filename):
-#             return {"errors": "Invalid filetype: jpg, jpeg, png only."}, 400
-#         img.filename = get_unique_filename(img.filename)
-#         upload= upload_to_s3(img)
-#         if 'url' not in upload:
-#             return upload, 400
-#         url= upload['url']
-#         print(">>>>>>>>>>><<<<<<<<")
-#         print(">>>>>>>>>>>",request, "<<<<<<<<")
-#         print(">>>>>>>>>>><<<<<<<<")
-
-
-#     return render_template("aws.html",msg=url)
-
-########AWS test END
-
 
 @locations_routes.route('/new_location', methods=['GET','POST'])
 # @login_required
 def newLocationForm():
 
-    print(">>>>>>>>>>><<<<<<<< start attempt")
-    print(">>>>>>>>>>>",request.form, "<<<<<<<<")
-    print(">>>>>>>>>>>",'files in request:',len(request.files), "<<<<<<<<")
-    print(">>>>>>>>>>><<<<<<<<")
+    # print(">>>>>>>>>>><<<<<<<< start attempt")
+    # print(">>>>>>>>>>>",request.form, "<<<<<<<<")
+    # print(">>>>>>>>>>>",'files in request:',len(request.files), "<<<<<<<<")
+    # print(">>>>>>>>>>><<<<<<<<")
     if "image_1_file" not in request.files:
         print('image_1_file not in request object')
 
@@ -167,9 +143,9 @@ def editLocation(locationId):
 @locations_routes.route('/<locationId>/delete', methods=['DELETE'])
 def deleteLocation(locationId):
     users = User.query.all()
-    print('===============')
-    print("USERS:: ", users)
-    print('===============')
+    # print('===============')
+    # print("USERS:: ", users)
+    # print('===============')
     location= Location.query.get(locationId)
     db.session.delete(location)
     db.session.commit()

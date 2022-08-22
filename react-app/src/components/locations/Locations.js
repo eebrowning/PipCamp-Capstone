@@ -47,6 +47,12 @@ function Locations() {
             <p>Discover and review spawn camping, RPG maps, shacks, fortresses, and rad sickness.</p>
         </div>
         <span id='home-search' className={'users-mock-search'}>
+            <div className='searchBanner'>
+                <div className='searchWrapper'>
+                    <h1 className='mainPageBanner'>Find your table tonight!</h1>
+                    <Search />
+                </div>
+            </div>
             {!state.session.user && (
                 <div id='home-nav-users-buttons'>
                     <li id='search-field-1'>
