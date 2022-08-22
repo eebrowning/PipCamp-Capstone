@@ -5,6 +5,7 @@ import { GetLocationsThunk } from '../../store/location';
 import { demoLogin } from '../../store/session';
 import LogoutButton from '../auth/LogoutButton';
 import './locations-home.css'
+import Search from './SearchLocations';
 
 
 function Locations() {
@@ -47,15 +48,25 @@ function Locations() {
             <p>Discover and review spawn camping, RPG maps, shacks, fortresses, and rad sickness.</p>
         </div>
         <span id='home-search' className={'users-mock-search'}>
-            {!state.session.user && (
-                <div id='home-nav-users-buttons'>
-                    <li id='search-field-1'>
+            {/* <div className='searchBanner'>
+                <div className='searchWrapper'>
+                <Search />
+
+                </div>
+            </div> */}
+
+            <div id='home-nav-users-buttons'>
+                {/* <li id='search-field-1'>
                         Load Save
                         <NavLink className={'home-navlink'} to='/login' exact={true} activeClassName='active'>
                             Login
                         </NavLink>
-                    </li>
-                    <li id='search-field-2'>
+                    </li> */}
+                <li id='search-field-1'>
+                    Search Locations
+                    <Search className={'home-navlink search'} to='/login' exact={true} activeClassName='active' />
+                </li>
+                {/* <li id='search-field-2'>
                         New Game
                         <NavLink className={'home-navlink'} to='/sign-up' exact={true} activeClassName='active'>
                             Sign Up
@@ -63,9 +74,7 @@ function Locations() {
                     </li>
                     <div id='search-field-3'>
                         Quick Start
-                        {/* <NavLink className={'home-navlink'} to='/login' exact={true} activeClassName='active'>
-                        Demo
-                    </NavLink> */}
+
                         {!state.session.user && (
                             <li className={'home-navlink'} id={'demo-login'} onClick={handleClick}>
                                 Demo
@@ -76,19 +85,18 @@ function Locations() {
                                 <LogoutButton />
                             </li>
                         )}
+                    </div> */}
+                <li id="home-search-button">
+                    <div>
+                        Random!
                     </div>
-                    <li id="home-search-button">
-                        <div>
-                            Random!
-                        </div>
-                        <NavLink to={randLocation ? `/locations/${randLocation.id}` : '/'}>
-                            <img id='search-icon-home'
-                                src="https://i.pinimg.com/originals/b8/19/89/b81989d219b76f2e5073af1b95c63a63.png" alt="" />
-                            {/*  src="https://i.imgur.com/YYjb0K6.png" alt="" /> */}
-                        </NavLink>
-                    </li>
-                </div>)}
-            {state.session.user && (
+                    <NavLink to={randLocation ? `/locations/${randLocation.id}` : '/'}>
+                        <img id='search-icon-home'
+                            src="https://i.pinimg.com/originals/b8/19/89/b81989d219b76f2e5073af1b95c63a63.png" alt="" />
+                    </NavLink>
+                </li>
+            </div>
+            {/* {state.session.user && (
                 <div id='home-nav-users-buttons'>
 
                     <div id='search-field-1'>
@@ -104,11 +112,10 @@ function Locations() {
                         <NavLink to={randLocation ? `/locations/${randLocation.id}` : '/'}>
                             <img id='search-icon-home'
                                 src="https://i.pinimg.com/originals/b8/19/89/b81989d219b76f2e5073af1b95c63a63.png" alt="" />
-                            {/*  src="https://i.imgur.com/YYjb0K6.png" alt="" /> */}
                         </NavLink>
                     </li>
                 </div>
-            )}
+            )} */}
         </span>
         {/* <div id='splash-image'> */}
         <img id='splash-image' src='https://i.imgur.com/ggDpArP.jpg'></img>
