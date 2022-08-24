@@ -1,7 +1,7 @@
 from .db import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
-
+from .location import favorites
 
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
@@ -13,6 +13,9 @@ class User(db.Model, UserMixin):
 
     locations = db.relationship('Location', back_populates='users')
     reviews = db.relationship('Review', back_populates='user')
+    
+    # user delete issue ?
+    user_favorite = db.relationship('Location', secondary=favorites, back_populates='location_favorite', cascade='all, delete')
 
 
     @property

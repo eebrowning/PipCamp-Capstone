@@ -160,7 +160,7 @@ export const DeleteLocationThunk = (id) => async (dispatch) => {
 //     });
 //     if (response.ok) {
 //         const data = await response.json();
-//         dispatch(searchRestaurants(data.locations));
+//         dispatch(searchLocations(data.locations));
 //         return data;
 //     } else {
 //         return { "Message": "Unsuccessful" }

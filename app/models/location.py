@@ -1,5 +1,10 @@
 from .db import db
 
+favorites = db.Table('favorites',
+  db.Model.metadata,
+  db.Column('locations', db.Integer, db.ForeignKey('locations.id'), primary_key=True),
+  db.Column('users', db.Integer, db.ForeignKey('users.id'), primary_key=True))
+
 
 class Location(db.Model):
     __tablename__ = 'locations'
@@ -20,6 +25,10 @@ class Location(db.Model):
         'Review', back_populates='location', cascade='all, delete')
     # bookings = db.relationship( #worry about this later, get your pass first.
     #     'Booking', back_populates='location', cascade='all, delete')
+
+    # user delete issue ?
+    location_favorite = db.relationship('User', secondary=favorites, back_populates='user_favorite', cascade='all, delete')
+
 
 
     def to_dict(self):
