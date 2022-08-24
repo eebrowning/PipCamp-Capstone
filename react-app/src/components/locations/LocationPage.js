@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { Modal } from '../../context/Modal';
 import { DeleteLocationThunk, GetLocationDetailThunk, GetLocationsThunk } from '../../store/location';
+import { GetFavoritesThunk, DeleteFavoriteThunk, SetFavoriteThunk } from '../../store/favorite';
+
 import Images from '../image-carousel/Images';
 import Reviews from '../reviews/Reviews';
 import './location-page.css'
@@ -17,7 +19,12 @@ function LocationPage() {
     const locations = useSelector(state => Object.values(state.locations))
 
     const { locationId } = useParams()
+    const favorite = useSelector(state => state.favorites[locationId])
+    const [starFill, setStarFill] = useState('noFill');
     const userId = useSelector(state => state.session.user?.id)
+    console.log(userId, favorite, starFill)
+
+
     const location = locations?.find(location => location.id == +locationId)
     const campsite = location?.campsite_info.split('-')
     // const campsite_labels = ['Shelter Type', "Available Sites", 'Max Guests', 'Max Vehicles', 'Disabled Accessible']
@@ -75,6 +82,7 @@ function LocationPage() {
 
         console.log('dispatched to GetLocationDetailThunk')
         dispatch(GetLocationDetailThunk(locationId))
+        if (userId) dispatch(GetFavoritesThunk(userId, locationId))
         dispatch(GetLocationsThunk())
         window.scrollTo({
             top: 0,
@@ -99,6 +107,21 @@ function LocationPage() {
         dispatch(GetLocationDetailThunk(locationId))
         history.push(`/locations/${locationId}/edit`)
     }
+
+    const handleFav = async (e) => {
+        const fav = {
+            user_id: userId,
+            location_id: +locationId
+        };
+
+        if (e.target.innerText === 'Add to Favorites') {
+            setStarFill('fill');
+            await dispatch(SetFavoriteThunk(fav));
+        } else {
+            setStarFill('noFill');
+            await dispatch(DeleteFavoriteThunk(fav));
+        }
+    };
 
     if (location) return (
         <span id='location-page'>
@@ -125,7 +148,15 @@ function LocationPage() {
                 </div>
 
             )}
+            <div id='favorite-button-box'>
+                {userId && (
+                    <button id='favorite-button' onClick={(e) => {
+                        handleFav(e);
+                    }} className={`star-${favorite !== undefined ? 'fill' : 'noFill'}`}>{favorite !== undefined ? "Remove from Favorites" : "Add to Favorites"}
+                    </button>
+                )}
 
+            </div>
             <Images>
                 <img id='main-image' src={location.image_1_url} alt='image 1' />
 
@@ -142,6 +173,7 @@ function LocationPage() {
                         <h1>{location.name}</h1>
                         <p>This listing needs a few more reviews;
                             please scroll down and provide a recommendation</p>
+
                     </div>
 
                     <div id='location-information'>

@@ -2,7 +2,7 @@ from shutil import register_unpack_format
 from flask import Blueprint, redirect, render_template, request
 from app.forms.location_form import NewLocationForm
 
-from app.models import db,User,Location
+from app.models import db,User,Location, favorites
 from flask_login import login_required
 from app.aws_s3 import (
     upload_to_s3, allowed_file, get_unique_filename)
@@ -150,3 +150,70 @@ def deleteLocation(locationId):
     db.session.delete(location)
     db.session.commit()
     return location.to_dict()
+
+
+
+
+#POSTs a new favorite for a user
+@locations_routes.route('/favorites', methods=['GET','POST'])
+def favorite_location():
+    data = request.json
+
+    user = User.query.get(data['user_id'])
+    location = Location.query.get(data['location_id'])
+    user.user_favorite.append(location)
+
+    db.session.commit()
+    return {
+        "user_id": user.id,
+        "location_id": location.id
+    }
+
+#GET's a user's favorite locations
+@locations_routes.route('/favorites/<user_id>/<location_id>')
+def get_favorites(user_id, location_id):
+    user = User.query.get(user_id)
+    location = Location.query.get(location_id)
+    if(location in user.user_favorite):
+        return {
+        "user_id": user_id,
+        "location_id": location_id
+        }
+    else:
+        return {
+            "message": "no favs"
+        }
+
+#Gets a user's favorite locations for user profile
+@locations_routes.route('/favorites/<user_id>')
+def get_all_favorites(user_id):
+    user = User.query.get(user_id)
+    favorites = [location.to_dict() for location in user.user_favorite]
+    return {
+        "favorites": favorites
+    }
+
+
+@locations_routes.route('/<user_id>/<location_id>', methods=['DELETE'])
+def remove_favorite(user_id, location_id):
+    user = User.query.get(user_id)
+    location = Location.query.get(location_id)
+    if location in user.user_favorite:
+        user.user_favorite.remove(location)
+        db.session.commit()
+    return {
+            "user_id": user_id,
+            "location_id": location_id
+        }
+
+
+#should only need if delete all on cascade causes issues
+@locations_routes.route('/favorites/<location_id>', methods=['DELETE'])
+def destroy_all_favorites(location_id):
+    users = User.query.all()
+    location = Location.query.get(location_id)
+    for user in users:
+        if location in user.user_favorite:
+            user.user_favorite.remove(location)
+            db.session.commit()
+    return { "message": "success" }

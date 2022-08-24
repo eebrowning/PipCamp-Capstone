@@ -16,6 +16,33 @@
     font-size: 14px;
 }
 
+
+
+.star-fill {
+    margin-top: 5px;
+    background-color: #FEF265;
+
+    height: 25px;
+    color: #447AB9;
+    font-weight: 550;
+    border: 0px;
+    border-radius: 3px;
+    font-size: 16px;
+}
+
+.star-noFill {
+    margin-top: 5px;
+    background-color: #447AB9;
+
+    height: 25px;
+    color: #FEF265;
+    font-weight: 550;
+    border: 0px;
+    border-radius: 3px;
+    font-size: 16px;
+}
+
+
 #location-page {
     display: flex;
     justify-content: center;
