@@ -65,38 +65,7 @@ const NavBar = () => {
             <li id='search-field-1'>
               <Search className={'home-navlink search'} to='/login' exact={true} activeClassName='active' />
             </li>
-            {/* {!state.session.user && (<>
-                <li>
-                  <NavLink className={'navlink'} to='/login' exact={true} activeClassName='active'>
-                    Login
-                  </NavLink>
-                </li>
-                <div className='spacer'>·</div>
-                <li>
-                  <NavLink className={'navlink'} to='/sign-up' exact={true} activeClassName='active'>
-                    Sign Up
-                  </NavLink>
-                </li>
-                <div className='spacer'>·</div>
 
-                <li id={'demo-login'} onClick={handleClick}>
-                  Demo
-                </li>
-              </>
-
-              )}
-              {state.session.user && (
-                <li>
-                  <LogoutButton />
-                </li>
-              )}
-            */}
-
-            {/* 
-            <button id="mock-search-button">
-              <img id='search-icon'
-                src="https://i.pinimg.com/originals/b8/19/89/b81989d219b76f2e5073af1b95c63a63.png" alt="" />
-            </button> */}
             <div id='random-wrapper'>
 
               <label style={{ fontSize: '10px' }}>Random!</label>
@@ -111,9 +80,7 @@ const NavBar = () => {
         </span>
 
         <span id='right-nav-span'>
-          {/* <li>
-            {state.session.user && (<LogoutButton />)}
-          </li> */}
+
           {!state.session.user && (<>
             <li>
               <NavLink className={'navlink'} to='/login' exact={true} activeClassName='active'>
@@ -143,6 +110,11 @@ const NavBar = () => {
               </li>
               <li>
                 <LogoutButton />
+              </li>
+              <li>
+                <NavLink className={'navlink'} to={`/users/${state.session.user.id}`} exact={true} activeClassName='active'>
+                  User
+                </NavLink>
               </li>
             </>
           )}

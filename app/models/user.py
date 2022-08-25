@@ -14,7 +14,8 @@ class User(db.Model, UserMixin):
     locations = db.relationship('Location', back_populates='users')
     reviews = db.relationship('Review', back_populates='user')
     
-    # user delete issue ?
+    reservations = db.relationship('Reservation', back_populates='user')
+
     user_favorite = db.relationship('Location', secondary=favorites, back_populates='location_favorite', cascade='all, delete')
 
 

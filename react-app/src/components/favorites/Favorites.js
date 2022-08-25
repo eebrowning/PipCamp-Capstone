@@ -15,10 +15,8 @@ const Favorites = () => {
     }, [dispatch, userId]);
 
     return (
-        <>
-            <div className='userFavoritesHeader'>
-                <h3>Your Favorites</h3>
-            </div>
+        <div id='user-favorites'>
+
             <div className='user-favorites-container'>
                 <div className='userFavoritesCardWrapper'>
                     {favorites.map(favorite => (
@@ -36,7 +34,7 @@ const Favorites = () => {
                     ))}
                 </div>
             </div>
-        </>
+        </div>
     )
 };
 

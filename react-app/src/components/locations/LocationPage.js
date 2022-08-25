@@ -9,6 +9,7 @@ import Images from '../image-carousel/Images';
 import Reviews from '../reviews/Reviews';
 import './location-page.css'
 import '../../context/modal.css'
+import ReservationForm from '../reservations/ReservationForm';
 
 
 
@@ -244,8 +245,8 @@ function LocationPage() {
                 </div>
                 <div id='reservation-box'>
                     {/* <h3></h3> */}
-                    <img id='reservation-placeholder' src="https://i.imgur.com/9H2OQft.png" />
-
+                    {/* <img id='reservation-placeholder' src="https://i.imgur.com/9H2OQft.png" /> */}
+                    <ReservationForm />
                 </div>
             </span>
 

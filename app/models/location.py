@@ -23,10 +23,9 @@ class Location(db.Model):
     users = db.relationship('User', back_populates='locations')
     reviews = db.relationship(
         'Review', back_populates='location', cascade='all, delete')
-    # bookings = db.relationship( #worry about this later, get your pass first.
-    #     'Booking', back_populates='location', cascade='all, delete')
+ 
+    reservations = db.relationship('Reservation', back_populates='location', cascade= 'all, delete')
 
-    # user delete issue ?
     location_favorite = db.relationship('User', secondary=favorites, back_populates='user_favorite', cascade='all, delete')
 
 

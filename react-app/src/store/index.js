@@ -3,14 +3,15 @@ import thunk from 'redux-thunk';
 import locationReducer from './location';
 import reviewReducer from './review';
 import favoriteReducer from './favorite';
-
+import reservationReducer from './reservation';
 import session from './session'
 
 const rootReducer = combineReducers({
   session,
   locations: locationReducer,
   favorites: favoriteReducer,
-  reviews: reviewReducer
+  reviews: reviewReducer,
+  reservations: reservationReducer,
 });
 
 
