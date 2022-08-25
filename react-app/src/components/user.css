@@ -1,0 +1,44 @@
+#user-profile {
+    display: flex;
+    flex-direction: row;
+    /* border: 1px solid brown;/ */
+    border: 1px solid rgb(224, 224, 224);
+
+
+    width: 100%;
+}
+
+#user-details {
+    width: 300px;
+    /* border: 1px solid red; */
+    border: 1px solid rgb(224, 224, 224);
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+}
+
+#user-details li {
+    padding-top: 10px;
+}
+
+#user-main {
+    width: 100%;
+}
+
+#user-favorites {
+    /* border: 1px solid red; */
+    border: 1px solid rgb(224, 224, 224);
+
+    /* width: 100%; */
+    margin: 40px;
+    padding: 15px;
+
+}
+
+#user-reservations {
+    /* border: 1px solid chartreuse; */
+    border: 1px solid rgb(224, 224, 224);
+
+    margin: 40px;
+    padding: 15px;
+}

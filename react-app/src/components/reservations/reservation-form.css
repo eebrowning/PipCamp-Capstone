@@ -1,0 +1,124 @@
+#reservation-box {
+  height: 383px;
+  display: flex;
+  justify-content: flex-start;
+  color: #447AB9
+}
+
+#reservation-form-component {
+  display: flex;
+  flex-direction: column;
+  height: 80%;
+  width: 100%;
+  justify-content: flex-start;
+  /* border: 1px solid green; */
+}
+
+
+.reservation-form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 100%;
+  height: 100%;
+  /* border: 1px solid red; */
+
+}
+
+
+#reservation-form {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  justify-content: space-evenly;
+  /* border: 1px solid rgb(224, 224, 224); */
+}
+
+#reservation-dates {
+  height: 30%;
+}
+
+.reservation-date-field {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  border-bottom: 1px solid rgb(224, 224, 224);
+  border-right: 1px solid rgb(224, 224, 224);
+
+  height: 80%;
+  width: 50%;
+  padding: 10px;
+
+}
+
+#reservation-banner {
+  height: 70px;
+  /* border: 1px solid chartreuse; */
+  border-bottom: 1px solid rgb(224, 224, 224);
+
+  display: flex;
+  padding: 10px;
+
+  align-items: center;
+}
+
+.reservation-form-container>div {
+  margin-left: 50px;
+
+}
+
+.reservation-date-field>input {
+  width: 100px;
+  border-style: none;
+  color: #447AB9;
+  border-radius: 5px;
+}
+
+.reservation-date-field>input:hover {
+  width: 100px;
+  border: 1px solid #447AB9;
+  cursor: pointer;
+  color: #447AB9
+}
+
+.reservation-form-container>form>div>p {
+  margin-top: 10px;
+}
+
+.reservation-form-container>form>div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.reservation-submit {
+  height: 60px;
+  margin: 10px;
+
+  background-color: #447AB9;
+  /* width: 80px; */
+  /* height: 20px; */
+  color: #FEF265;
+  font-weight: 550;
+  border: 0px;
+  border-radius: 3px;
+  font-size: 14px;
+
+
+}
+
+#reservation-errors {
+  color: crimson;
+  margin-left: 15px;
+}
+
+#under-block {
+  display: flex;
+  flex-direction: row;
+}
+
+#camp-img {
+  height: 60px;
+}
