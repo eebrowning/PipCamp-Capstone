@@ -4,17 +4,24 @@
     /* border: 1px solid brown;/ */
     border: 1px solid rgb(224, 224, 224);
 
-
+    min-height: 800px;
     width: 100%;
 }
 
 #user-details {
     width: 300px;
     /* border: 1px solid red; */
-    border: 1px solid rgb(224, 224, 224);
+    border-right: 1px solid rgb(224, 224, 224);
     list-style: none;
     display: flex;
     flex-direction: column;
+    color: #447AB9;
+    margin-right: 20px;
+}
+
+#account-info {
+    /* border: 1px solid red; */
+    padding: 20px
 }
 
 #user-details li {
@@ -23,6 +30,8 @@
 
 #user-main {
     width: 100%;
+    color: #447AB9;
+
 }
 
 #user-favorites {
@@ -38,7 +47,6 @@
 #user-reservations {
     /* border: 1px solid chartreuse; */
     border: 1px solid rgb(224, 224, 224);
-
     margin: 40px;
     padding: 15px;
 }
