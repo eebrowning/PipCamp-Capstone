@@ -31,18 +31,20 @@ function User() {
   return (
     <div id='user-profile'>
       <ul id='user-details'>
-        <h3>
+        <h3 style={{ padding: '15px', borderBottom: '1px solid whitesmoke' }}>
           Account Info
         </h3>
-        <li>
-          <strong>User Id</strong> {userId}
-        </li>
-        <li>
-          <strong>Username</strong> {user.username}
-        </li>
-        <li>
-          <strong>Email</strong> {user.email}
-        </li>
+        <div id='account-info'>
+          <li>
+            <strong>User Id: </strong> {userId}
+          </li>
+          <li>
+            <strong>Username: </strong> {user.username}
+          </li>
+          <li>
+            <strong>Email: </strong> {user.email}
+          </li>
+        </div>
       </ul>
       <div id='user-main'>
 

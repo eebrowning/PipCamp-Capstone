@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { GetReservationThunk, DeleteReservationThunk } from '../../store/reservation'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 
 import { GetLocationsThunk } from '../../store/location';
 
@@ -34,7 +34,7 @@ function Reservation() {
                 {signedInUserId && reservations && reservations.map(reservation => (
                     <div className='reservationCard' key={reservation.id}>
                         <div key={reservation.id}>
-                            <div>{locations.find(location => location.id === reservation.location_id)?.name}</div>
+                            <Link to={`/locations/${locations.find(location => location.id === reservation.location_id)?.name}`}>{locations.find(location => location.id === reservation.location_id)?.name}</Link>
                             <div>Start Date: {reservation.res_date_start}</div>
                             <div>End Date: {reservation.res_date_end}</div>
                             <div>Reservation Id: {reservation.id}</div>
