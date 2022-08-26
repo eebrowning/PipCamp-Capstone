@@ -24,7 +24,7 @@ function ReservationForm() {
         e.preventDefault();
         const reservation = {
             user_id: userId,
-            location_id: locationId,
+            location_id: +locationId,
             res_date_start: startDate,
             res_date_end: endDate,
 
