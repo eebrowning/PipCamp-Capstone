@@ -127,7 +127,7 @@ function LocationPage() {
     function handleCopy(e) {
         e.preventDefault();
         var Url = window.location.href;
-        console.log(Url, 'URL')
+        // console.log(Url, 'URL')
         navigator.clipboard.writeText(Url)
         setCopy('copied')
     }
@@ -144,7 +144,6 @@ function LocationPage() {
             setScrollDisplay('none')
         }
     });
-
     if (location) return (
         <span id='location-page'>
             {+userId === +location.user_id && (
@@ -193,13 +192,19 @@ function LocationPage() {
 
                     <div id='lower-left'>
 
-                        <div id='review-rec-rate'>
-                            <div id='rec-percent'>
-                                <img className='rec-logo' style={{ height: '20px', width: '20px' }} src='https://www.freepnglogos.com/uploads/thumbs-up-png/thumbs-up-blue-vector-icon-thumb-png-29.png' />
-                                <p>{recRate * 100}%</p>
+                        {recRate >= 0 && (
+                            <div id='review-rec-rate'>
+
+                                <div id='rec-percent'>
+                                    <img className='rec-logo' style={{ height: '20px', width: '20px' }} src='https://www.freepnglogos.com/uploads/thumbs-up-png/thumbs-up-blue-vector-icon-thumb-png-29.png' />
+                                    <p>{recRate * 100}%</p>
+                                </div>
+                                <p>Recommend</p>
                             </div>
-                            <p>Recommend</p>
-                        </div>
+                        )}
+                        {!recRate && (
+                            <p id='rec-none'>No recommendations yet</p>
+                        )}
                         <div id='review-logo-box'>{locationReviews.map(review =>
                             <a className='review-logo-wrapper' href='#review-component'>
                                 <img title={matchUser(usersArr, review.user_id)} className='review-logo' key={review.id} style={{ height: '33px', width: '33px' }} src='https://www.pngmart.com/files/8/Fallout-PNG-Download-Image.png' alt={matchUser(usersArr, review.user_id)} />
@@ -242,13 +247,20 @@ function LocationPage() {
 
                             <div id='lower-left'>
 
-                                <div id='review-rec-rate'>
-                                    <div id='rec-percent'>
-                                        <img className='rec-logo' style={{ height: '20px', width: '20px' }} src='https://www.freepnglogos.com/uploads/thumbs-up-png/thumbs-up-blue-vector-icon-thumb-png-29.png' />
-                                        <p>{recRate * 100}%</p>
+
+                                {recRate >= 0 && (
+                                    <div id='review-rec-rate'>
+
+                                        <div id='rec-percent'>
+                                            <img className='rec-logo' style={{ height: '20px', width: '20px' }} src='https://www.freepnglogos.com/uploads/thumbs-up-png/thumbs-up-blue-vector-icon-thumb-png-29.png' />
+                                            <p>{recRate * 100}%</p>
+                                        </div>
+                                        <p>Recommend</p>
                                     </div>
-                                    <p>Recommend</p>
-                                </div>
+                                )}
+                                {!recRate && (
+                                    <p id='rec-none'>No recommendations yet</p>
+                                )}
                                 <div id='review-logo-box'>{locationReviews.map(review =>
                                     <a className='review-logo-wrapper' href='#review-component'>
                                         <img title={matchUser(usersArr, review.user_id)} className='review-logo' key={review.id} style={{ height: '33px', width: '33px' }} src='https://www.pngmart.com/files/8/Fallout-PNG-Download-Image.png' alt={matchUser(usersArr, review.user_id)} />
