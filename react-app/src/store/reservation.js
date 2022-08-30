@@ -28,7 +28,7 @@ export const GetReservationThunk = (id) => async (dispatch) => {
 
 export const CreateReservationThunk = (reservation) => async (dispatch) => {
 
-    console.log('is this a full reservation: ', reservation)
+    // console.log('is this a full reservation: ', reservation)
     const res = await fetch(`/api/reservations/new/reservation`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

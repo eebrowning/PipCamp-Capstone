@@ -10,7 +10,7 @@ function Reservation() {
     const signedInUserId = useSelector(state => state.session.user?.id)
     const { userId } = useParams()
 
-    console.log()
+    // console.log()
     const reservations = useSelector(state => Object.values(state.reservations).filter(reservation => reservation.user_id = userId))
     const locations = useSelector(state => Object.values(state.locations))
 

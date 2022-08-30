@@ -191,7 +191,7 @@ export function EditLocationForm() {
             if (!showers) setShowers(amenities_array ? amenities_array[5] : '')
 
 
-            if (checkin && checkout) console.log(checkinHour, checkinToTime(checkin), checkinToTime(checkout), 'checkin, checkout')
+            // if (checkin && checkout) console.log(checkinHour, checkinToTime(checkin), checkinToTime(checkout), 'checkin, checkout')
         }
 
     })
@@ -206,7 +206,7 @@ export function EditLocationForm() {
         if (+checkinToTime(checkin) > +checkinToTime(checkout)) {
             // console.log(+checkinToTime(checkin), '<- out.checkin is after checkout! in->', +checkinToTime(checkout))
 
-            console.log(image_2_file, 'file 2 in onSubmit')
+            // console.log(image_2_file, 'file 2 in onSubmit')
 
             const location = {
                 "id": locationId,
@@ -233,7 +233,7 @@ export function EditLocationForm() {
 
 
             const newLocation = await dispatch(EditLocationThunk(locationData))
-            console.log(newLocation, 'newlocation')
+            // console.log(newLocation, 'newlocation')
 
             if (!newLocation?.errors) {
                 history.push(`/locations/${locationId}`)
@@ -244,9 +244,9 @@ export function EditLocationForm() {
             }
         }
         if (+checkinToTime(checkin) <= +checkinToTime(checkout)) { ///update and replace after AWS
-            console.log(+checkinToTime(checkin), '<- out. ERROR: checkin MUST be after checkout! in->', +checkinToTime(checkout))
+            // console.log(+checkinToTime(checkin), '<- out. ERROR: checkin MUST be after checkout! in->', +checkinToTime(checkout))
 
-            console.log(image_1_file, 'file in onSubmit')
+            // console.log(image_1_file, 'file in onSubmit')
 
             const location = {
                 "id": locationId,
@@ -272,7 +272,7 @@ export function EditLocationForm() {
             //     console.log(key, value);
             // });
             const newLocation = await dispatch(EditLocationThunk(locationData))
-            console.log(newLocation, 'newlocation')
+            // console.log(newLocation, 'newlocation')
             if (newLocation?.errors) setErrors([...newLocation.errors])
             //NO TOUCHY
         }
@@ -292,7 +292,7 @@ export function EditLocationForm() {
         }
         // console.log(URL.createObjectURL(file), 'URL,  maaaaang')
         setImage_1_file(file)
-        console.log(file, 'this is the file via updateImage')
+        // console.log(file, 'this is the file via updateImage')
         // setImage_1_url(URL.createObjectURL(file))
     }
     const updateImage2 = (e) => {
@@ -307,7 +307,7 @@ export function EditLocationForm() {
         }
         // console.log(URL.createObjectURL(file), 'URL,  maaaaang')
         setImage_2_file(file)
-        console.log(file, 'this is the file via updateImage2')
+        // console.log(file, 'this is the file via updateImage2')
         // setImage_1_url(URL.createObjectURL(file))
     }
 

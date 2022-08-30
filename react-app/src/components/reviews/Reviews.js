@@ -38,7 +38,7 @@ function Reviews({ locationId }) {
             setUsersArr(responseData.users);
         }
         fetchData();
-        console.log('dispatched to GetReviewsThunk')
+        // console.log('dispatched to GetReviewsThunk')
         dispatch(GetReviewsThunk())
     }, [dispatch])
 
