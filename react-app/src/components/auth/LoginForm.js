@@ -13,7 +13,7 @@ const LoginForm = () => {
   const dispatch = useDispatch();
 
   const state = useSelector(state => state)
-  console.log('>>>>> state;', state)
+  // console.log('>>>>> state;', state)
   useEffect(() => {
     dispatch(GetLocationsThunk());//KEEP: forces state to change for navbar to render 
 
@@ -27,7 +27,7 @@ const LoginForm = () => {
     if (data) {
       setErrors(data);
     }
-    console.log('errors', errors)
+    // console.log('errors', errors)
   };
 
   const updateEmail = (e) => {

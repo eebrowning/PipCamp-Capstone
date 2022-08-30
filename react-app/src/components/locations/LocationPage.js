@@ -22,8 +22,17 @@ function LocationPage() {
     const { locationId } = useParams()
     const favorite = useSelector(state => state.favorites[locationId])
     const [starFill, setStarFill] = useState('noFill');
+    const [copy, setCopy] = useState('not-copied')
     const userId = useSelector(state => state.session.user?.id)
-    console.log(userId, favorite, starFill)
+    // console.log(userId, favorite, starFill)
+
+    //for displaying num of reviews on location banner
+    const reviews = useSelector(state => Object.values(state.reviews))
+    const locationReviews = reviews.filter(review => review.location_id === +locationId)
+    // console.log(locationReviews, 'reviews ')
+    const numRecommends = locationReviews.filter(review => review.recommends === true)
+    // console.log(numRecommends.length / locationReviews.length, 'numRecommends ')
+    const recRate = numRecommends.length / locationReviews.length
 
 
     const location = locations?.find(location => location.id == +locationId)
@@ -72,8 +81,6 @@ function LocationPage() {
 
 
     useEffect(() => {
-        // const navBox = document.getElementById('nav-box');
-        // if (navBox) { navBox.id = 'nav-box-other' }
         async function fetchData() {
             const response = await fetch('/api/users/');
             const responseData = await response.json();
@@ -81,18 +88,14 @@ function LocationPage() {
         }
         fetchData();
 
-        console.log('dispatched to GetLocationDetailThunk')
+        // console.log('dispatched to GetLocationDetailThunk')
         dispatch(GetLocationDetailThunk(locationId))
         if (userId) dispatch(GetFavoritesThunk(userId, locationId))
         dispatch(GetLocationsThunk())
-        window.scrollTo({
-            top: 0,
-            left: 0,
-        });
+
     }, [dispatch])
 
 
-    // console.log('>>>>>>>>>>>>>> usersArr', usersArr)
     const matchUser = (userArr, id) => {//swap user_id for username
         return userArr?.find(user => user.id === id)?.username
     }
@@ -102,7 +105,6 @@ function LocationPage() {
         history.push('/')
 
     }
-
     function handleEdit(e) {
         e.preventDefault()
         dispatch(GetLocationDetailThunk(locationId))
@@ -114,7 +116,6 @@ function LocationPage() {
             user_id: userId,
             location_id: +locationId
         };
-
         if (e.target.innerText === 'Add to Favorites') {
             setStarFill('fill');
             await dispatch(SetFavoriteThunk(fav));
@@ -123,6 +124,26 @@ function LocationPage() {
             await dispatch(DeleteFavoriteThunk(fav));
         }
     };
+    function handleCopy(e) {
+        e.preventDefault();
+        var Url = window.location.href;
+        console.log(Url, 'URL')
+        navigator.clipboard.writeText(Url)
+        setCopy('copied')
+    }
+
+
+    //allows fade-in of location banner after scrolling a certain distance
+    let [scrollDisplay, setScrollDisplay] = useState('none')
+    window.addEventListener('scroll', () => {
+        if (window.scrollY >= 700) {
+            // console.log('at/over 700px')
+            setScrollDisplay('')
+        }
+        else if (window.scrollY < 700) {
+            setScrollDisplay('none')
+        }
+    });
 
     if (location) return (
         <span id='location-page'>
@@ -149,15 +170,7 @@ function LocationPage() {
                 </div>
 
             )}
-            <div id='favorite-button-box'>
-                {userId && (
-                    <button id='favorite-button' onClick={(e) => {
-                        handleFav(e);
-                    }} className={`star-${favorite !== undefined ? 'fill' : 'noFill'}`}>{favorite !== undefined ? "Remove from Favorites" : "Add to Favorites"}
-                    </button>
-                )}
 
-            </div>
             <Images>
                 <img id='main-image' src={location.image_1_url} alt='image 1' />
 
@@ -168,12 +181,101 @@ function LocationPage() {
                     <img id='second-image' src={location.image_2_url} alt="second" />
                 )}
             </Images>
+
+
+            <div id='location-banner-scroll' style={{ display: `${scrollDisplay}` }}>
+                <h1>{location.name}</h1>
+                <p>This listing needs a few more reviews;
+                    please scroll down and provide a recommendation</p>
+
+
+                <div id='lower-location-banner'>
+
+                    <div id='lower-left'>
+
+                        <div id='review-rec-rate'>
+                            <div id='rec-percent'>
+                                <img className='rec-logo' style={{ height: '20px', width: '20px' }} src='https://www.freepnglogos.com/uploads/thumbs-up-png/thumbs-up-blue-vector-icon-thumb-png-29.png' />
+                                <p>{recRate * 100}%</p>
+                            </div>
+                            <p>Recommend</p>
+                        </div>
+                        <div id='review-logo-box'>{locationReviews.map(review =>
+                            <a className='review-logo-wrapper' href='#review-component'>
+                                <img title={matchUser(usersArr, review.user_id)} className='review-logo' key={review.id} style={{ height: '33px', width: '33px' }} src='https://www.pngmart.com/files/8/Fallout-PNG-Download-Image.png' alt={matchUser(usersArr, review.user_id)} />
+                            </a>
+                        )}</div>
+                    </div>
+                    <div id='lower-right'>
+                        <div id='favorite-button-box'>
+                            {userId && (
+                                <button id='favorite-button' onClick={(e) => {
+                                    handleFav(e);
+                                }} className={`star-${favorite !== undefined ? 'fill' : 'noFill'}`}>{favorite !== undefined ? "Remove from Favorites" : "Add to Favorites"}
+                                </button>
+                            )}
+                        </div>
+                        <div id='link-button-box'>
+                            <button onClick={handleCopy} id='link-button' className={'fill'}>
+
+                                {copy === 'not-copied' ? "Copy Link" : "Link Copied"}
+
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+
             <span id='sans-images'>
                 <div id='location-information-box'>
                     <div id='location-banner'>
                         <h1>{location.name}</h1>
                         <p>This listing needs a few more reviews;
                             please scroll down and provide a recommendation</p>
+
+
+                        <div id='lower-location-banner'>
+
+                            <div id='lower-left'>
+
+                                <div id='review-rec-rate'>
+                                    <div id='rec-percent'>
+                                        <img className='rec-logo' style={{ height: '20px', width: '20px' }} src='https://www.freepnglogos.com/uploads/thumbs-up-png/thumbs-up-blue-vector-icon-thumb-png-29.png' />
+                                        <p>{recRate * 100}%</p>
+                                    </div>
+                                    <p>Recommend</p>
+                                </div>
+                                <div id='review-logo-box'>{locationReviews.map(review =>
+                                    <a className='review-logo-wrapper' href='#review-component'>
+                                        <img title={matchUser(usersArr, review.user_id)} className='review-logo' key={review.id} style={{ height: '33px', width: '33px' }} src='https://www.pngmart.com/files/8/Fallout-PNG-Download-Image.png' alt={matchUser(usersArr, review.user_id)} />
+                                    </a>
+                                )}</div>
+                            </div>
+                            <div id='lower-right'>
+                                <div id='favorite-button-box'>
+                                    {userId && (
+                                        <button id='favorite-button' onClick={(e) => {
+                                            handleFav(e);
+                                        }} className={`star-${favorite !== undefined ? 'fill' : 'noFill'}`}>{favorite !== undefined ? "Remove from Favorites" : "Add to Favorites"}
+                                        </button>
+                                    )}
+                                </div>
+                                <div id='link-button-box'>
+                                    <button onClick={handleCopy} id='link-button' className={'fill'}>
+
+                                        {copy === 'not-copied' ? "Copy Link" : "Link Copied"}
+
+                                    </button>
+
+                                </div>
+                            </div>
+                        </div>
+
+
 
                     </div>
 
@@ -244,8 +346,6 @@ function LocationPage() {
                     )}
                 </div>
                 <div id='reservation-box'>
-                    {/* <h3></h3> */}
-                    {/* <img id='reservation-placeholder' src="https://i.imgur.com/9H2OQft.png" /> */}
                     <ReservationForm />
                 </div>
             </span>

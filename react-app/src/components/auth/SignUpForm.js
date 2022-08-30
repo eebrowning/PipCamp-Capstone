@@ -28,7 +28,7 @@ const SignUpForm = () => {
       setErrors([])
       const data = await dispatch(signUp(username, email, password));
       if (data) {
-        console.log(data, 'these should be errors?')
+        // console.log(data, 'these should be errors?')
 
         setErrors([...data])
       }

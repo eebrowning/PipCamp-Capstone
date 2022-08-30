@@ -26,13 +26,13 @@ function EditReviewForm({ locationId, hide, review }) {
             content,
             recommends
         }
-        console.log('>> Submitted location information:', review);
+        // console.log('>> Submitted location information:', review);
         const newReview = await dispatch(EditReviewsThunk(review))
         if (!newReview.length) {
             hide()
         } else {
             setErrors(newReview)
-            console.log('>>> errors in form', errors)
+            // console.log('>>> errors in form', errors)
         }
         return newReview
     }

@@ -166,12 +166,12 @@ function LocationForm() {
         // } else 
         if (+checkoutHour?.split(':')[0] < +checkinHour?.split(':')[0]) {
 
-            let checkinInt = +checkinHour.split(':')[0]
-            let checkoutInt = +checkoutHour.split(':')[0]
-            console.log(checkoutInt, '<- out.checkin is after checkout! in->', checkinInt)
+            // let checkinInt = +checkinHour.split(':')[0]
+            // let checkoutInt = +checkoutHour.split(':')[0]
+            // console.log(checkoutInt, '<- out.checkin is after checkout! in->', checkinInt)
             //////////////
 
-            console.log(image_1_file, 'file in onSubmit')
+            // console.log(image_1_file, 'file in onSubmit')
 
             const location = {
                 "user_id": userId,
@@ -247,7 +247,7 @@ function LocationForm() {
         }
         // console.log(URL.createObjectURL(file), 'URL,  maaaaang')
         setImage_1_file(file)
-        console.log(file, 'this is the file via updateImage')
+        // console.log(file, 'this is the file via updateImage')
         // setImage_1_url(URL.createObjectURL(file))
     }
     const updateImage2 = (e) => {
@@ -262,7 +262,7 @@ function LocationForm() {
         }
         // console.log(URL.createObjectURL(file), 'URL,  maaaaang')
         setImage_2_file(file)
-        console.log(file, 'this is the file via updateImage2')
+        // console.log(file, 'this is the file via updateImage2')
         // setImage_1_url(URL.createObjectURL(file))
     }
 

@@ -21,7 +21,7 @@ const Search = () => {
         }
       })
     }
-    console.log(search)
+    // console.log(search)
     setEnhancedSearch(search)
   }
   return (

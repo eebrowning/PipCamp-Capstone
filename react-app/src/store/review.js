@@ -25,7 +25,7 @@ const deleteReview = (review) => ({
 
 export const GetReviewsThunk = () => async (dispatch) => {
     const response = await fetch('/api/reviews/all');
-    console.log('>>> in GetReviewsThunk')
+    // console.log('>>> in GetReviewsThunk')
     if (response.ok) {
         const data = await response.json()
         dispatch(getReviews(data.reviews))
@@ -34,7 +34,7 @@ export const GetReviewsThunk = () => async (dispatch) => {
 }
 
 export const CreateReviewsThunk = (review) => async (dispatch) => {
-    console.log('>>>', 'in CreateReviewsThunk')
+    // console.log('>>>', 'in CreateReviewsThunk')
     const response = await fetch('/api/reviews/new', {
         headers: { 'content-type': 'application/json' },
         method: 'POST',
@@ -53,7 +53,7 @@ export const CreateReviewsThunk = (review) => async (dispatch) => {
 }
 
 export const EditReviewsThunk = (review) => async (dispatch) => {
-    console.log('>>>> in EditReviewThunk:', review)
+    // console.log('>>>> in EditReviewThunk:', review)
     const response = await fetch(`/api/reviews/${review.id}/edit`, {
         headers: { 'content-type': 'application/json' },
         method: 'PUT',
@@ -72,7 +72,7 @@ export const EditReviewsThunk = (review) => async (dispatch) => {
 }
 
 export const DeleteReviewThunk = (id) => async (dispatch) => {
-    console.log('>>> in DeleteReviewThunk')
+    // console.log('>>> in DeleteReviewThunk')
     const response = await fetch(`/api/reviews/${id}/delete`, {
         headers: { 'content-type': 'application/json' },
         method: 'DELETE',
@@ -93,19 +93,19 @@ const reviewReducer = (state = initialState, action) => {
             return newState
 
         case CREATE_REVIEWS:
-            console.log('>>>>>in CREATE_REVIEWS reducer')
+            // console.log('>>>>>in CREATE_REVIEWS reducer')
 
             newState[action.review.id] = action.review
             return newState;
 
         case EDIT_REVIEWS:
-            console.log('>>>>>in EDIT_REVIEWS reducer')
+            // console.log('>>>>>in EDIT_REVIEWS reducer')
 
             newState[action.review.id] = action.review
             return newState;
 
         case DELETE_REVIEW:
-            console.log('>>>>>in DELETE_REVIEW reducer')
+            // console.log('>>>>>in DELETE_REVIEW reducer')
             delete newState[action.review.id];
             return newState;
 

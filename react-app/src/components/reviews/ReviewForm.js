@@ -26,7 +26,7 @@ function ReviewForm({ locationId, hide }) {
             hide()
         } else {
             await setErrors(newReview)
-            console.log('>>> errors in review form', errors)
+            // console.log('>>> errors in review form', errors)
         }
 
         return newReview

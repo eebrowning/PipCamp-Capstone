@@ -38,7 +38,7 @@ const deleteLocation = (location) => ({
 
 //works!!
 export const GetLocationsThunk = () => async (dispatch) => {
-    console.log('in GetLocationsThunk')
+    // console.log('in GetLocationsThunk')
     const response = await fetch('/all/locations')
     if (response.ok) {
         const data = await response.json()
@@ -61,8 +61,9 @@ export const GetLocationDetailThunk = (id) => async (dispatch) => {
 
 //works!
 export const CreateLocationThunk = (location) => async (dispatch) => {
-    console.log('>>> entered Create Location Thunk <<<')
-    console.log(location, 'location in create location thunk')
+    // console.log('>>> entered Create Location Thunk <<<')
+    // console.log(location, 'location in create location thunk')
+
     // const locationObject = {}
     // for (const pair of location.entries()) {
     //     console.log("location entry: ", `${pair[0]}`, pair[1]);
@@ -77,17 +78,17 @@ export const CreateLocationThunk = (location) => async (dispatch) => {
         body: location
 
     })
-    console.log('response in createloctationthunk', response)
+    // console.log('response in createloctationthunk', response)
 
     if (response.ok) {
         const data = await response.json()
-        console.log('data in createloctationthunk', data)
+        // console.log('data in createloctationthunk', data)
         dispatch(createLocation(data))
         return data
     } else if (response.status < 500) {
         const data = await response.json();
         if (data.errors) {
-            console.log(data.errors, '<<<<< data.errors from CreateLocationThunk')
+            // console.log(data.errors, '<<<<< data.errors from CreateLocationThunk')
             return data;
         }
     }
@@ -97,11 +98,11 @@ export const CreateLocationThunk = (location) => async (dispatch) => {
 export const EditLocationThunk = (location) => async (dispatch) => {
     // console.log([...location.entries()], 'in EditLocationThunk')
 
-    console.log('location in editlocationthunk', location.entries())
+    // console.log('location in editlocationthunk', location.entries())
 
     const locationObject = {}
     for (const pair of location.entries()) {
-        console.log("location entry: ", `${pair[0]}`, pair[1]);
+        // console.log("location entry: ", `${pair[0]}`, pair[1]);
         locationObject[`${pair[0]}`] = pair[1]
     }
 
@@ -118,14 +119,14 @@ export const EditLocationThunk = (location) => async (dispatch) => {
     } else if (response.status < 500) {
         const data = await response.json();
         if (data.errors) {
-            console.log(data.errors, '<<<<< data.errors from EditLocationThunk')
+            // console.log(data.errors, '<<<<< data.errors from EditLocationThunk')
 
             return data;
         }
     } else if (response.status == 500) {
         const data = await response.json();
         if (data.errors) {
-            console.log(data.errors, '<<<<< data.errors from EditLocationThunk')
+            // console.log(data.errors, '<<<<< data.errors from EditLocationThunk')
 
             return data;
         }
@@ -136,7 +137,7 @@ export const EditLocationThunk = (location) => async (dispatch) => {
 
 //works, needs route
 export const DeleteLocationThunk = (id) => async (dispatch) => {
-    console.log('>>> in DeleteLocationThunk <<<')
+    // console.log('>>> in DeleteLocationThunk <<<')
     const response = await fetch(`/api/locations/${id}/delete`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" }
@@ -146,7 +147,7 @@ export const DeleteLocationThunk = (id) => async (dispatch) => {
         dispatch(deleteLocation(data))
         return data
     } else {
-        console.log({ "message": "Unsuccessful" })
+        // console.log({ "message": "Unsuccessful" })
     }
 }
 
@@ -178,7 +179,7 @@ const locationReducer = (state = initialState, action) => {
             return newState;
 
         case GET_LOCATION:
-            console.log('in get_location reducer')
+            // console.log('in get_location reducer')
             let get_loc_state = { ...state }
             // let get_loc_state = {}
 
@@ -190,7 +191,7 @@ const locationReducer = (state = initialState, action) => {
             return newState;
 
         case EDIT_LOCATION:
-            console.log(action.location, "action...EDIT_LOCATION... in locationReducer")
+            // console.log(action.location, "action...EDIT_LOCATION... in locationReducer")
 
             newState[action.location.id] = action.location
             return newState
