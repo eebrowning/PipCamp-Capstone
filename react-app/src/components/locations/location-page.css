@@ -242,6 +242,13 @@
     width: 35%;
     color: #2770c3;
     font-weight: 500;
+    /* font-size: 14px; */
+}
+
+#rec-none {
+    width: 200px;
+    color: #2770c3;
+
 }
 
 #review-logo-box {
