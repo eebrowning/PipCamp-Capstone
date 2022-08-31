@@ -10,6 +10,20 @@ function User() {
   const [user, setUser] = useState({});
   const { userId } = useParams();
   const dispatch = useDispatch();
+  let [showHideFav, setShowHideFav] = useState('none');
+  let [showHideRes, setShowHideRes] = useState('none');
+
+  const handleShowFav = () => {
+    if (showHideFav === 'none') setShowHideFav('')
+    if (showHideRes !== 'none') setShowHideRes('none')
+
+  }
+  const handleShowRes = () => {
+    if (showHideRes === 'none') setShowHideRes('')
+    if (showHideFav !== 'none') setShowHideFav('none')
+  }
+
+
 
   useEffect(() => {
     if (!userId) {
@@ -36,10 +50,10 @@ function User() {
         </h3>
         <div id='account-info'>
           <li>
-            <strong>User Id: </strong> {userId}
+            <strong>Username: </strong> {user.username}
           </li>
           <li>
-            <strong>Username: </strong> {user.username}
+            <strong>User Id: </strong> {userId}
           </li>
           <li>
             <strong>Email: </strong> {user.email}
@@ -47,14 +61,17 @@ function User() {
         </div>
       </ul>
       <div id='user-main'>
+        <div id='profile-nav'>
 
-        <div className=''>
-          <h3>Favorites</h3>
+          <h3 style={{ borderBottom: `${showHideFav !== 'none' ? '3px solid black' : ''}` }} onClick={handleShowFav}>Favorites</h3>
+          <h3 style={{ borderBottom: `${showHideRes !== 'none' ? '3px solid black' : ''}` }} onClick={handleShowRes}>Reservations</h3>
+        </div>
+
+        <div style={{ display: `${showHideFav}`, }}>
           <Favorites id='user-favorites' />
         </div>
 
-        <div className=''>
-          <h3>Reservations</h3>
+        <div style={{ display: `${showHideRes}` }}>
           <Reservation id='user-reservations' />
         </div>
 

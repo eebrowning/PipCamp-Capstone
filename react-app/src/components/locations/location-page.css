@@ -18,16 +18,12 @@
 
 
 .star-fill {
-
     width: 100px;
     height: 50px;
-
     color: #447AB9;
+    /* color: #e3d215; */
     border: 1px solid rgb(224, 224, 224);
     background-color: white;
-
-
-
     font-weight: 500;
 
 }
@@ -35,30 +31,26 @@
 .star-noFill {
     width: 100px;
     height: 50px;
-
-
     color: #447AB9;
     border: 1px solid rgb(224, 224, 224);
     background-color: white;
-
     font-weight: 500;
-
 }
 
 #link-button {
-
     width: 50px;
     height: 50px;
-
     color: #447AB9;
     border: 1px solid rgb(224, 224, 224);
     background-color: white;
-
-
-
     font-weight: 500;
     font-size: 12px;
+}
 
+.star-fill:hover,
+.star-noFill:hover,
+#link-button:hover {
+    border: 1px solid black
 }
 
 #location-page {
@@ -143,7 +135,7 @@
 #location-banner-scroll {
     display: flex;
     flex-direction: column;
-    height: 100px;
+    height: 65px;
     width: 100%;
     border-bottom: 1px solid whitesmoke;
     position: sticky;
@@ -170,11 +162,20 @@
     }
 }
 
+#location-banner-scroll>h1 {
+    font-size: 24px;
+}
+
+#location-banner-scroll>#lower-location-banner {
+    max-height: 30px;
+    max-width: 700px;
+}
+
 #location-banner {
     display: flex;
     justify-content: space-evenly;
     flex-direction: column;
-    height: 190px;
+    height: 170px;
     width: 100%;
     border-bottom: 1px solid whitesmoke;
 
@@ -248,7 +249,6 @@
 #rec-none {
     width: 200px;
     color: #2770c3;
-
 }
 
 #review-logo-box {
@@ -269,17 +269,24 @@
 }
 
 #owner-description {
+    margin-top: 15px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     width: 100%;
+    height: 380px;
+    /* border: 1px solid purple; */
 }
 
 #location-description {
     padding-top: 30px;
     width: 70%;
-    font-size: 14px;
+    font-size: 16px;
     word-spacing: 1.5px;
+    font-weight: 100;
+    /* font-family: Arial, Helvetica, sans-serif; */
+    line-height: 150%;
+    white-space: pre-wrap;
 }
 
 #owner-card {
@@ -356,7 +363,7 @@ label>p {
     height: 350px;
     width: 315px;
     box-shadow: 1px 1px 1px rgb(214, 212, 212);
-    z-index: 1;
+    z-index: 2;
     position: sticky;
     top: 0px;
     background-color: white;
