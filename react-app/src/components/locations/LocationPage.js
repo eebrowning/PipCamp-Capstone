@@ -44,7 +44,7 @@ function LocationPage() {
         'https://i.imgur.com/HXE8yY9.png',
         'https://cdn-icons-png.flaticon.com/512/6917/6917269.png',
         'https://cdn-icons-png.flaticon.com/512/1467/1467267.png']
-    const campsite_details = campsite ? [`${campsite[0]} sites`, `${campsite[1]} sites`, `Up to${campsite[2]} guests per site`, `Up to ${campsite[3]} vehicles`, `${campsite[4] == 'true' ? 'Wheelchair access' : 'Not accessible'}`] : [];
+    const campsite_details = campsite ? [`${campsite[0]} sites`, `${campsite[1]} sites`, `Up to ${campsite[2]} guests per site`, `Up to ${campsite[3]} vehicles`, `${campsite[4] == 'true' ? 'Wheelchair access' : 'Not accessible'}`] : [];
 
     const essential = location?.essential_info.split('-')
     // const essential_labels = ["Fires Allowed", 'Bathrooms Available', "Pets Allowed"]
@@ -184,8 +184,8 @@ function LocationPage() {
 
             <div id='location-banner-scroll' style={{ display: `${scrollDisplay}` }}>
                 <h1>{location.name}</h1>
-                <p>This listing needs a few more reviews;
-                    please scroll down and provide a recommendation</p>
+                {/* <p>This listing needs a few more reviews;
+                    please scroll down and provide a recommendation</p> */}
 
 
                 <div id='lower-location-banner'>
@@ -223,7 +223,7 @@ function LocationPage() {
                         <div id='link-button-box'>
                             <button onClick={handleCopy} id='link-button' className={'fill'}>
 
-                                {copy === 'not-copied' ? "Copy Link" : "Link Copied"}
+                                {copy === 'not-copied' ? (<img style={{ height: '20px', width: '20px' }} src='https://img.icons8.com/ios/344/upload--v1.png' />) : "Link Copied"}
 
                             </button>
 
@@ -279,7 +279,7 @@ function LocationPage() {
                                 <div id='link-button-box'>
                                     <button onClick={handleCopy} id='link-button' className={'fill'}>
 
-                                        {copy === 'not-copied' ? "Copy Link" : "Link Copied"}
+                                        {copy === 'not-copied' ? (<img style={{ height: '20px', width: '20px' }} src='https://img.icons8.com/ios/344/upload--v1.png' />) : "Link Copied"}
 
                                     </button>
 

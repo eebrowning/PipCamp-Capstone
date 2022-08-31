@@ -5,11 +5,12 @@
 #sans-edit {}
 
 #review-form-box {
+    padding-top: 40px;
     display: flex;
     flex-direction: column;
     display: flex;
     /* justify-content: center; */
-    align-items: center;
+    align-items: flex-start;
     /* border: 1px solid red; */
 }
 
