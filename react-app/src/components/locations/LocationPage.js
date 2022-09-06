@@ -197,7 +197,7 @@ function LocationPage() {
 
                                 <div id='rec-percent'>
                                     <img className='rec-logo' style={{ height: '20px', width: '20px' }} src='https://www.freepnglogos.com/uploads/thumbs-up-png/thumbs-up-blue-vector-icon-thumb-png-29.png' />
-                                    <p>{recRate * 100}%</p>
+                                    <p>{Math.round(recRate * 100)}%</p>
                                 </div>
                                 <p>Recommend</p>
                             </div>
@@ -207,7 +207,7 @@ function LocationPage() {
                         )}
                         <div id='review-logo-box'>{locationReviews.map(review =>
                             <a className='review-logo-wrapper' href='#review-component'>
-                                <img title={matchUser(usersArr, review.user_id)} className='review-logo' key={review.id} style={{ height: '33px', width: '33px' }} src='https://www.pngmart.com/files/8/Fallout-PNG-Download-Image.png' alt={matchUser(usersArr, review.user_id)} />
+                                <img fetchpriority='high' title={matchUser(usersArr, review.user_id)} className='review-logo' key={review.id} style={{ height: '33px', width: '33px' }} src='https://www.pngmart.com/files/8/Fallout-PNG-Download-Image.png' alt={matchUser(usersArr, review.user_id)} />
                             </a>
                         )}</div>
                     </div>
@@ -253,7 +253,7 @@ function LocationPage() {
 
                                         <div id='rec-percent'>
                                             <img className='rec-logo' style={{ height: '20px', width: '20px' }} src='https://www.freepnglogos.com/uploads/thumbs-up-png/thumbs-up-blue-vector-icon-thumb-png-29.png' />
-                                            <p>{recRate * 100}%</p>
+                                            <p>{Math.round(recRate * 100)}%</p>
                                         </div>
                                         <p>Recommend</p>
                                     </div>
@@ -263,7 +263,7 @@ function LocationPage() {
                                 )}
                                 <div id='review-logo-box'>{locationReviews.map(review =>
                                     <a className='review-logo-wrapper' href='#review-component'>
-                                        <img title={matchUser(usersArr, review.user_id)} className='review-logo' key={review.id} style={{ height: '33px', width: '33px' }} src='https://www.pngmart.com/files/8/Fallout-PNG-Download-Image.png' alt={matchUser(usersArr, review.user_id)} />
+                                        <img fetchpriority='high' title={matchUser(usersArr, review.user_id)} className='review-logo' key={review.id} style={{ height: '33px', width: '33px' }} src='https://www.pngmart.com/files/8/Fallout-PNG-Download-Image.png' alt={matchUser(usersArr, review.user_id)} />
                                     </a>
                                 )}</div>
                             </div>
