@@ -192,7 +192,7 @@ function LocationPage() {
 
                     <div id='lower-left'>
 
-                        {recRate >= 0 && (
+                        {locationReviews.length > 0 && (
                             <div id='review-rec-rate'>
 
                                 <div id='rec-percent'>
@@ -202,7 +202,7 @@ function LocationPage() {
                                 <p>Recommend</p>
                             </div>
                         )}
-                        {!recRate && (
+                        {locationReviews.length === 0 && (
                             <p id='rec-none'>No recommendations yet</p>
                         )}
                         <div id='review-logo-box'>{locationReviews.map(review =>
@@ -248,7 +248,7 @@ function LocationPage() {
                             <div id='lower-left'>
 
 
-                                {recRate >= 0 && (
+                                {locationReviews.length > 0 && (
                                     <div id='review-rec-rate'>
 
                                         <div id='rec-percent'>
@@ -258,7 +258,7 @@ function LocationPage() {
                                         <p>Recommend</p>
                                     </div>
                                 )}
-                                {!recRate && (
+                                {locationReviews.length === 0 && (
                                     <p id='rec-none'>No recommendations yet</p>
                                 )}
                                 <div id='review-logo-box'>{locationReviews.map(review =>
