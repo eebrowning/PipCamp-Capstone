@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { GetAllFavoritesThunk, DeleteFavoriteThunk } from '../../store/favorite';
 import { Link } from 'react-router-dom';
-
+import './favorites.css'
 const Favorites = () => {
     const dispatch = useDispatch();
 
@@ -17,23 +17,23 @@ const Favorites = () => {
     return (
         <div id='user-favorites'>
 
-            <div className='user-favorites-container'>
-                <div className='userFavoritesCardWrapper'>
-                    {favorites.map(favorite => (
-                        <div key={favorite.id} className='user-favorite-card'>
-                            <Link to={`/locations/${favorite.id}`}>{favorite.name}</Link>
 
-                            <button className="remove-fav" onClick={async () => {
-                                const fav = {
-                                    user_id: userId,
-                                    location_id: favorite.id
-                                }
-                                await dispatch(DeleteFavoriteThunk(fav))
-                            }}>Remove From Favorites</button>
-                        </div>
-                    ))}
-                </div>
+            <div className='favorite-card-box'>
+                {favorites.map(favorite => (
+                    <div key={favorite.id} className='favorite-card'>
+                        <Link to={`/locations/${favorite.id}`}>{favorite.name}</Link>
+
+                        <button className="remove-fav" onClick={async () => {
+                            const fav = {
+                                user_id: userId,
+                                location_id: favorite.id
+                            }
+                            await dispatch(DeleteFavoriteThunk(fav))
+                        }}>Remove From Favorites</button>
+                    </div>
+                ))}
             </div>
+
         </div>
     )
 };

@@ -11,7 +11,7 @@ function User() {
   const { userId } = useParams();
   const dispatch = useDispatch();
   let [showHideFav, setShowHideFav] = useState('none');
-  let [showHideRes, setShowHideRes] = useState('none');
+  let [showHideRes, setShowHideRes] = useState('');
 
   const handleShowFav = () => {
     if (showHideFav === 'none') setShowHideFav('')
@@ -63,17 +63,17 @@ function User() {
       <div id='user-main'>
         <div id='profile-nav'>
 
-          <h3 style={{ borderBottom: `${showHideFav !== 'none' ? '3px solid black' : ''}` }} onClick={handleShowFav}>Favorites</h3>
           <h3 style={{ borderBottom: `${showHideRes !== 'none' ? '3px solid black' : ''}` }} onClick={handleShowRes}>Reservations</h3>
-        </div>
-
-        <div style={{ display: `${showHideFav}`, }}>
-          <Favorites id='user-favorites' />
+          <h3 style={{ borderBottom: `${showHideFav !== 'none' ? '3px solid black' : ''}` }} onClick={handleShowFav}>Favorites</h3>
         </div>
 
         <div style={{ display: `${showHideRes}` }}>
           <Reservation id='user-reservations' />
         </div>
+        <div style={{ display: `${showHideFav}`, }}>
+          <Favorites id='user-favorites' />
+        </div>
+
 
       </div>
     </div>

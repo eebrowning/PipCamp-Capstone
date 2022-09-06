@@ -1,0 +1,12 @@
+.reservation-card-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    /* border: 1px solid red; */
+    height: 100%;
+    min-height: 400px;
+}
+
+.reservation-card {
+    margin: 10px;
+}

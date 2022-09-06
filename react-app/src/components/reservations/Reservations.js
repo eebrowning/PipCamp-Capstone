@@ -4,7 +4,7 @@ import { GetReservationThunk, DeleteReservationThunk } from '../../store/reserva
 import { Link, useParams } from 'react-router-dom'
 
 import { GetLocationsThunk } from '../../store/location';
-
+import './reservations.css'
 function Reservation() {
     const dispatch = useDispatch()
     const signedInUserId = useSelector(state => state.session.user?.id)
@@ -30,11 +30,14 @@ function Reservation() {
     return (
         <div id='user-reservations'>
 
-            <div className='UDReservationCardContainer'>
+            <div className='reservation-card-box'>
                 {signedInUserId && reservations && reservations.map(reservation => (
-                    <div className='reservationCard' key={reservation.id}>
+                    <div className='reservation-card' key={reservation.id}>
                         <div key={reservation.id}>
-                            <Link to={`/locations/${locations.find(location => location.id === reservation.location_id)?.name}`}>{locations.find(location => location.id === reservation.location_id)?.name}</Link>
+                            <Link to={`/locations/${locations.find(location => location.id === reservation.location_id)?.id}`}>{locations.find(location => location.id === reservation.location_id)?.name}</Link>
+                            {new Date(reservation.res_date_start) < Date.now() && (
+                                <h4 style={{ color: 'crimson' }}>EXPIRED RESERVATION</h4>
+                            )}
                             <div>Start Date: {reservation.res_date_start}</div>
                             <div>End Date: {reservation.res_date_end}</div>
                             <div>Reservation Id: {reservation.id}</div>
