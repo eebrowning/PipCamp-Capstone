@@ -68,15 +68,10 @@ function LocationForm() {
         // errorsMain: Name, Image, Description
         let arr = []
         if (!name) { arr.push("Please enter a name."); };
-        // if (!image_1_url) { arr.push("Please enter an image URL."); };
-        // if (!image_2_url) {
-        //     // enter a default second image here, as second is optional
-        // };
+
         if (description.length < 10) { arr.push('Please provide a description over 10 characters.'); };
         setErrorsMain(arr);
-        // setErrors([...errors, ...arr])
 
-        // errorsCamp: shelter, sites, guests, vehicles, accessible
         arr = []
         if (!shelter) { arr.push("Select Shelter Type."); };
         if (sites <= 0) { arr.push("Sites must be a positive integer."); };
@@ -141,37 +136,7 @@ function LocationForm() {
         setErrors([])
         validateForm();
 
-        // if (+checkoutHour?.split(':')[0] >= 0 + checkinHour?.split(':')[0]) {//if checkin is before checkout, alter submission to throw backend error, frontend error will render as well.
-        //     let checkinInt = +checkinHour.split(':')[0]
-        //     let checkoutInt = +checkoutHour.split(':')[0]
-        //     console.log(checkoutInt, '<- out. ERROR: checkin MUST be after checkout! in->', checkinInt)
-
-
-        //     const location = {
-        //         user_id: userId,
-        //         name,
-        //         image_1_url,
-        //         image_2_url,
-        //         description,
-        //         campsite_info: camp_info_string,
-        //         essential_info: essential_info_string,
-        //         amenities_info: amenities_info_string,
-        //         details_info: '---'
-        //     }
-
-        //     //NO TOUCHY
-        //     const newLocation = await dispatch(CreateLocationThunk(location))
-        //     if (newLocation?.errors) setErrors([...newLocation.errors])
-        //     console.log(errors)
-        // } else 
         if (+checkoutHour?.split(':')[0] < +checkinHour?.split(':')[0]) {
-
-            // let checkinInt = +checkinHour.split(':')[0]
-            // let checkoutInt = +checkoutHour.split(':')[0]
-            // console.log(checkoutInt, '<- out.checkin is after checkout! in->', checkinInt)
-            //////////////
-
-            // console.log(image_1_file, 'file in onSubmit')
 
             const location = {
                 "user_id": userId,
@@ -193,17 +158,7 @@ function LocationForm() {
                 // console.log('looping through location object', data, location[data])
                 locationData.append(`${data}`, location[data])
             }
-            // const location = {
-            //     user_id: userId,
-            //     name,
-            //     image_1_url,
-            //     image_2_url,
-            //     description,
-            //     campsite_info: camp_info_string,
-            //     essential_info: essential_info_string,
-            //     amenities_info: amenities_info_string,
-            //     details_info: details_info_string
-            // }
+
             const newLocation = await dispatch(CreateLocationThunk(locationData))
             if (!newLocation?.errors) {
                 history.push(`/locations/${newLocation.id}`)
@@ -245,10 +200,9 @@ function LocationForm() {
             setErrors(typeError)
             return;
         }
-        // console.log(URL.createObjectURL(file), 'URL,  maaaaang')
+
         setImage_1_file(file)
-        // console.log(file, 'this is the file via updateImage')
-        // setImage_1_url(URL.createObjectURL(file))
+
     }
     const updateImage2 = (e) => {
         const file = e.target.files[0];
@@ -260,16 +214,14 @@ function LocationForm() {
             setErrors(typeError)
             return;
         }
-        // console.log(URL.createObjectURL(file), 'URL,  maaaaang')
+
         setImage_2_file(file)
-        // console.log(file, 'this is the file via updateImage2')
-        // setImage_1_url(URL.createObjectURL(file))
+
     }
 
 
     useEffect(() => {
-        dispatch(GetLocationsThunk());//KEEP: forces state to change for navbar to render 
-
+        dispatch(GetLocationsThunk());//KEEP: forces state to change for navbar to render correctly
     }, [])
 
     return (

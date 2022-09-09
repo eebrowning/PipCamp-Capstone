@@ -26,27 +26,20 @@ function EditReviewForm({ locationId, hide, review }) {
             content,
             recommends
         }
-        // console.log('>> Submitted location information:', review);
+
         const newReview = await dispatch(EditReviewsThunk(review))
         if (!newReview.length) {
             hide()
         } else {
             setErrors(newReview)
-            // console.log('>>> errors in form', errors)
         }
         return newReview
     }
 
     useEffect(() => { //persists autofilled form, can be cleaned up of conditionals in setThing invocations
-        // console.log(location, '<<<<< is this anything?')
 
         if (review) {
-
             if (!recommends) setRecommends(review.recommends)
-
-            // if (!description) setDescription(location.description)
-
-
         }
     })
 
