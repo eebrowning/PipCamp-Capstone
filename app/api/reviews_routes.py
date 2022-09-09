@@ -24,7 +24,7 @@ def get_reviews():
     return {'reviews': all_reviews}
 
 
-#POST review --should be able to mix get and post, but I'm too foggy right now
+#POST review 
 @reviews_routes.route('/new', methods=['POST'])
 def create_review():
     form = ReviewForm()

@@ -264,7 +264,7 @@ def seed_locations():
     )
     demo22 = Location(
     user_id=2, 
-    name='Hangman\s Alley', 
+    name='Hangman\'s Alley', 
     image_1_url = 'http://oyster.ignimgs.com/mediawiki/apis.ign.com/fallout-4/8/8d/Fallout_Hangman_Loc.jpg',
     image_2_url = '',
     campsite_info = 'Tent-1-2-3-true',

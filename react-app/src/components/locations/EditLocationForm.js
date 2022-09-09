@@ -124,11 +124,10 @@ export function EditLocationForm() {
         //Details errors: arrival, checkin, checkout, minNights
         arr = []
         if (!arrival) { arr.push("Select Arrival.") };
-        // if (checkin <= checkout) { arr.push('Check-Out must be before Check-In') }
+
         if (!checkin) { arr.push("Enter Earliest Check-In.") };
         if (!checkout) { arr.push('Enter Latest Check-Out.'); };
-        // let checkinInt = +checkinHour.split(':')[0]
-        // let checkoutInt = +checkoutHour.split(':')[0]
+
         if (checkin && +checkinToTime(checkout) >= +checkinToTime(checkin)) { arr.push('Checkout must occur at least an hour before Checkin: times occur on the same date') }
 
         if (!minNights) { arr.push('Select Minimum Nights.'); };
@@ -152,10 +151,10 @@ export function EditLocationForm() {
     }, [])
 
     useEffect(async () => { //persists autofilled form, can be cleaned up of conditionals in setThing invocations
-        // console.log(location, '<<<<< is this anything?')
+
         if (location) {
             if (!name) setName(location['name'])
-            // if (!image_1_url) setImage_1_url(location.image_1_url)
+
             if (!image_2_url && image_2_url !== '') setImage_2_url(location.image_2_url)
             if (!description) setDescription(location.description)
 
@@ -171,7 +170,7 @@ export function EditLocationForm() {
 
             if (!arrival) setArrival(details_array ? details_array[0] : '')
             if (!checkin) setCheckin(details_array ? details_array[1] : '')
-            // if(!checkinHour) setCheckinHour(details_array ? details_array[1] : '') 
+
             if (!checkout) setCheckout(details_array ? details_array[2] : '')
 
 
@@ -191,7 +190,6 @@ export function EditLocationForm() {
             if (!showers) setShowers(amenities_array ? amenities_array[5] : '')
 
 
-            // if (checkin && checkout) console.log(checkinHour, checkinToTime(checkin), checkinToTime(checkout), 'checkin, checkout')
         }
 
     })
@@ -201,12 +199,9 @@ export function EditLocationForm() {
         setErrors([])
         validateForm();
         e.preventDefault();
-        // console.log(checkin, checkout, 'checkin, checkout')
-        // console.log(checkinToTime(checkin), checkinToTime(checkout), 'checkin, checkout')
-        if (+checkinToTime(checkin) > +checkinToTime(checkout)) {
-            // console.log(+checkinToTime(checkin), '<- out.checkin is after checkout! in->', +checkinToTime(checkout))
 
-            // console.log(image_2_file, 'file 2 in onSubmit')
+        if (+checkinToTime(checkin) > +checkinToTime(checkout)) {
+
 
             const location = {
                 "id": locationId,
@@ -244,9 +239,7 @@ export function EditLocationForm() {
             }
         }
         if (+checkinToTime(checkin) <= +checkinToTime(checkout)) { ///update and replace after AWS
-            // console.log(+checkinToTime(checkin), '<- out. ERROR: checkin MUST be after checkout! in->', +checkinToTime(checkout))
 
-            // console.log(image_1_file, 'file in onSubmit')
 
             const location = {
                 "id": locationId,
@@ -265,16 +258,14 @@ export function EditLocationForm() {
             locationData.append('locationId', locationId)
             locationData.append('image_1_file', image_1_file)
             for (let data in location) {
-                // console.log('looping through location object', data, location[data])
+
                 locationData.append(`${data}`, location[data])
             }
-            // locationData.forEach(function (value, key) {
-            //     console.log(key, value);
-            // });
+
             const newLocation = await dispatch(EditLocationThunk(locationData))
-            // console.log(newLocation, 'newlocation')
+
             if (newLocation?.errors) setErrors([...newLocation.errors])
-            //NO TOUCHY
+
         }
 
     }
@@ -290,10 +281,9 @@ export function EditLocationForm() {
             setErrors(typeError)
             return;
         }
-        // console.log(URL.createObjectURL(file), 'URL,  maaaaang')
+
         setImage_1_file(file)
-        // console.log(file, 'this is the file via updateImage')
-        // setImage_1_url(URL.createObjectURL(file))
+
     }
     const updateImage2 = (e) => {
         const file = e.target.files[0];
@@ -305,10 +295,9 @@ export function EditLocationForm() {
             setErrors(typeError)
             return;
         }
-        // console.log(URL.createObjectURL(file), 'URL,  maaaaang')
+
         setImage_2_file(file)
-        // console.log(file, 'this is the file via updateImage2')
-        // setImage_1_url(URL.createObjectURL(file))
+
     }
 
 

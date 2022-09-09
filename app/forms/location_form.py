@@ -75,11 +75,6 @@ def validate_details_info_values(form, d):
     elif data[len(data)-1] and (int(data[len(data)-1]) < 1): 
             raise ValidationError('Detail Info: Minimum stay 1 day')
 
-# def validate_details_info_values_plus(form, d):
-#     data= form.data['details_info'].split('-')
-#     # print(">>>>>>>>>>>", data[len(data)-1],'<<<<<<<<<<<<<<<<')
-#     if data[len(data)-1] and (int(data[len(data)-1]) < 1): 
-#             raise ValidationError('Detail Info: Minimum stay 1 day')
 
 
 def validate_main_image(form, d):
