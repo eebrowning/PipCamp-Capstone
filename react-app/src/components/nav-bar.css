@@ -40,7 +40,7 @@
 
 
 #nav-ul {
-    max-width: 1300px;
+    /* max-width: 1300px; */
     color: #447AB9;
     align-items: center;
     height: 70px;
@@ -61,6 +61,7 @@
     justify-content: baseline;
     width: 160px;
     padding-left: 10px;
+    padding-right: 35px
 }
 
 #logo {
@@ -78,15 +79,17 @@
 }
 
 .show-search {
-    border: .5px solid lightgray;
+    border: 1.5px solid rgb(231, 229, 229);
     border-radius: 50px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-direction: row;
-    width: 325px;
-    padding: 5px;
+    width: 310px;
+    /* padding: 5px; */
     list-style: none;
+    height: 45px;
+    overflow-y: hidden;
 }
 
 #random-wrapper {
@@ -108,8 +111,9 @@
 #left-nav-span {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    width: 45%;
+    justify-content: flex-start;
+    /* width: 45%; */
+    overflow-x: hidden;
     margin: 0;
     padding-top: 0;
     padding-bottom: 0;

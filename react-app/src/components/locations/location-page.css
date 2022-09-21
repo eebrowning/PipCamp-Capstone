@@ -56,6 +56,7 @@
 #location-page {
     display: flex;
     justify-content: center;
+    align-items: center;
     flex-direction: column;
     min-height: 1400px;
 }
@@ -66,8 +67,9 @@
     display: flex;
     flex-direction: row;
     /* align-items: flex-start; */
-    justify-content: space-evenly;
+    /* justify-content: space-evenly; */
     height: 475px;
+
 }
 
 
@@ -149,7 +151,8 @@
     z-index: 2;
     animation: fadein 0.3s linear 1;
 
-    max-width: 675px;
+    max-width: 100%;
+    /* max-width: 675px; */
 }
 
 @keyframes fadein {
@@ -164,11 +167,17 @@
 
 #location-banner-scroll>h1 {
     font-size: 24px;
+    margin-left: 5%;
+
+
 }
 
 #location-banner-scroll>#lower-location-banner {
     max-height: 30px;
     max-width: 700px;
+    margin-left: 5%;
+
+
 }
 
 #location-banner {

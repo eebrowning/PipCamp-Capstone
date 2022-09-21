@@ -3,7 +3,11 @@
     flex-direction: row;
     width: 100%;
     position: relative;
+    /* justify-content: center; */
+    max-width: 1500px;
+
 }
+
 
 
 #images-box-inner {
